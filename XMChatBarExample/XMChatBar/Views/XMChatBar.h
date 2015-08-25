@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, XMFunctionViewShowType){
 @property (weak, nonatomic) id<XMChatBarDelegate> delegate;
 
 /**
- *  结束输入文字状态状态
+ *  结束输入状态
  */
 - (void)endInputing;
 

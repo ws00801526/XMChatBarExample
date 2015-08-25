@@ -74,13 +74,6 @@
         make.bottom.equalTo(self.mas_bottom).with.offset(-4);
     }];
 
-//    [self.voiceRecordButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self.textView.mas_right);
-//        make.right.equalTo(self.textView.mas_left);
-//        make.top.equalTo(self.textView.mas_top);
-//        make.bottom.equalTo(self.textView.mas_bottom);
-//    }];
-    
 }
 
 #pragma mark - UITextViewDelegate
