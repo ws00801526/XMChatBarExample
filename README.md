@@ -5,7 +5,18 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片,�
 
 
 ------
-#####1. 相关类说明,介绍
+
+####1. 截图
+
+![](xmchatbar.gif)
+
+![](1.png)
+
+
+![](2.png)
+
+
+####2. 相关类说明,介绍
 
 你可以实例化一个XMChatBar 添加到你想要的View上,参考demo中实例即可,pod工程github没有上传,你可以下载demo后 执行`pod install` 或者 `pod install --verbose --no-repo-update`安装即可
 
@@ -28,7 +39,7 @@ XMFaceManager  | 表情管理,可以获取所有的表情名称,以及对应图�
 [XMProgressHUD]  | 录音HUD
 
 
-####2. 使用到的第三方类库
+####3. 使用到的第三方类库
 
 第三方库 | 说明
 ----- | -----
@@ -38,6 +49,6 @@ VoiceLib | 一款第三方录音类库,使用方便
 AsyncDisplayKit | PonyChatUI需要的 第三方类库
 
 
-####3. 感谢
+####4. 感谢
 感谢[UUChatTableView](https://github.com/ZhipingYang/UUChatTableView),[PonyChatUI](https://github.com/PonyGroup/PonyChatUIV2)  这是一个学习过程中写的,如果有什么问题,可以[问我](https://github.com/ws00801526/XMChatBarExample/issues),或者发送我的邮箱3057600441@qq.com
 本示例中用到的图片来自QQ,微信,请尊重版权
