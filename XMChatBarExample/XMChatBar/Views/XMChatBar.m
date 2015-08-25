@@ -25,8 +25,8 @@
 
 @property (strong, nonatomic) UIButton *faceButton; /**< 表情按钮 */
 @property (strong, nonatomic) UIButton *moreButton; /**< 更多按钮 */
-@property (weak, nonatomic) XMChatFaceView *faceView; /**< 当前活跃的底部view,用来指向faceView */
-@property (weak, nonatomic) XMChatMoreView *moreView; /**< 当前活跃的底部view,用来指向moreView */
+@property (strong, nonatomic) XMChatFaceView *faceView; /**< 当前活跃的底部view,用来指向faceView */
+@property (strong, nonatomic) XMChatMoreView *moreView; /**< 当前活跃的底部view,用来指向moreView */
 
 @property (strong, nonatomic) UITextView *textView;
 
@@ -386,9 +386,8 @@
 
 - (void)showFaceView:(BOOL)show{
     if (show) {
-        XMChatFaceView *faceView = [[XMChatFaceView alloc] initWithFrame:CGRectMake(0, self.screenHeight , self.frame.size.width, kFunctionViewHeight)];
-        faceView.delegate = self;
-        [self.superview addSubview:self.faceView = faceView];
+       
+        [self.superview addSubview:self.faceView];
         [UIView animateWithDuration:.3 animations:^{
             [self.faceView setFrame:CGRectMake(0, self.screenHeight - kFunctionViewHeight, self.frame.size.width, kFunctionViewHeight)];
         } completion:nil];
@@ -407,10 +406,8 @@
  */
 - (void)showMoreView:(BOOL)show{
     if (show) {
-        XMChatMoreView *moreView = [[XMChatMoreView alloc] initWithFrame:CGRectMake(0, self.screenHeight , self.frame.size.width, kFunctionViewHeight)];
-        moreView.delegate = self;
-        moreView.dataSource = self;
-        [self.superview addSubview:self.moreView = moreView];
+ 
+        [self.superview addSubview:self.moreView];
         [UIView animateWithDuration:.3 animations:^{
             [self.moreView setFrame:CGRectMake(0, self.screenHeight - kFunctionViewHeight, self.frame.size.width, kFunctionViewHeight)];
         } completion:nil];
@@ -424,6 +421,7 @@
 }
 
 - (void)showVoiceView:(BOOL)show{
+    self.voiceRecordButton.selected = show;
     self.voiceRecordButton.hidden = !show;
 }
 
@@ -470,6 +468,25 @@
 }
 
 #pragma mark - Getters
+
+- (XMChatFaceView *)faceView{
+    if (!_faceView) {
+        _faceView = [[XMChatFaceView alloc] initWithFrame:CGRectMake(0, self.screenHeight , self.frame.size.width, kFunctionViewHeight)];
+        _faceView.delegate = self;
+        _faceView.backgroundColor = self.backgroundColor;
+    }
+    return _faceView;
+}
+
+- (XMChatMoreView *)moreView{
+    if (!_moreView) {
+        _moreView = [[XMChatMoreView alloc] initWithFrame:CGRectMake(0, self.screenHeight , self.frame.size.width, kFunctionViewHeight)];
+        _moreView.delegate = self;
+        _moreView.dataSource = self;
+        _moreView.backgroundColor = self.backgroundColor;
+    }
+    return _moreView;
+}
 
 - (UITextView *)textView{
     if (!_textView) {
@@ -541,7 +558,12 @@
 }
 
 - (CGFloat)bottomHeight{
-    return MAX(self.keyboardFrame.size.height, MAX(self.faceView.frame.size.height, self.moreView.frame.size.height));
+    
+    if (self.faceView.superview || self.moreView.superview) {
+        return MAX(self.keyboardFrame.size.height, MAX(self.faceView.frame.size.height, self.moreView.frame.size.height));
+    }else{
+        return MAX(self.keyboardFrame.size.height, CGFLOAT_MIN);
+    }
 }
 
 - (UIViewController *)rootViewController{
