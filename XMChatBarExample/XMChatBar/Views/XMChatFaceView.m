@@ -14,14 +14,70 @@
 #import "XMChatFaceView.h"
 #import "XMFaceManager.h"
 
+/**
+ *  预览表情显示的View
+ */
+@interface XMFacePreviewView : UIView
+
+@property (weak, nonatomic) UIImageView *faceImageView /**< 展示face表情的 */;
+@property (weak, nonatomic) UIImageView *backgroundImageView /**< 默认背景 */;
+
+@end
+
+@implementation XMFacePreviewView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if ([super initWithFrame:frame]) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup{
+    
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"preview_background"]];
+    [self addSubview:self.backgroundImageView = backgroundImageView];
+    
+    UIImageView *faceImageView = [[UIImageView alloc] init];
+    [self addSubview:self.faceImageView = faceImageView];
+    
+    self.bounds = self.backgroundImageView.bounds;
+}
+
+/**
+ *  修改faceImageView显示的图片
+ *
+ *  @param image 需要显示的表情图片
+ */
+- (void)setFaceImage:(UIImage *)image{
+    if (self.faceImageView.image == image) {
+        return;
+    }
+    [self.faceImageView setImage:image];
+    [self.faceImageView sizeToFit];
+    self.faceImageView.center = self.backgroundImageView.center;
+    [UIView animateWithDuration:.3 animations:^{
+        self.faceImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.3, 1.3);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.2 animations:^{
+            self.faceImageView.transform = CGAffineTransformIdentity;
+        }];
+    }];
+}
+
+@end
+
+
 @interface XMChatFaceView ()<UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIPageControl *pageControl;
+@property (strong, nonatomic) XMFacePreviewView *facePreviewView;
 
 @property (strong, nonatomic) NSMutableArray *sendFaces; /**< 已选的faces */
 
 @property (assign, nonatomic, readonly) NSUInteger maxPerLine; /**< 每行显示的表情数量 */
+
 
 
 @end
@@ -53,6 +109,10 @@
     [self setupFaces];
     
     self.userInteractionEnabled = YES;
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    [self.scrollView addGestureRecognizer:longPress];
+    
 }
 
 - (void)setupFaces{
@@ -93,9 +153,9 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [imageView addGestureRecognizer:tap];
     
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longPress.minimumPressDuration = .3f;
-    [imageView addGestureRecognizer:longPress];
+//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+//    longPress.minimumPressDuration = .3f;
+//    [imageView addGestureRecognizer:longPress];
     
     return imageView;
 }
@@ -111,9 +171,35 @@
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
-    if (longPress.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"this is long tap");
+    CGPoint touchPoint = [longPress locationInView:self];
+    UIImageView *touchFaceView = [self faceViewWitnInPoint:touchPoint];
+    if (longPress.state == UIGestureRecognizerStateBegan) {
+        [self.facePreviewView setCenter:CGPointMake(touchPoint.x, touchPoint.y - 15)];
+        [self.facePreviewView setFaceImage:touchFaceView.image];
+        [self addSubview:self.facePreviewView];
+    }else if (longPress.state == UIGestureRecognizerStateChanged){
+        [self.facePreviewView setCenter:CGPointMake(touchPoint.x, touchPoint.y - 15)];
+        [self.facePreviewView setFaceImage:touchFaceView.image];
+    }else if (longPress.state == UIGestureRecognizerStateEnded) {
+        [self.facePreviewView removeFromSuperview];
     }
+}
+
+
+/**
+ *  根据点击位置获取点击的imageView
+ *
+ *  @param point 点击的位置
+ *
+ *  @return 被点击的imageView
+ */
+- (UIImageView *)faceViewWitnInPoint:(CGPoint)point{
+    for (UIImageView *imageView in self.scrollView.subviews) {
+        if (CGRectContainsPoint(imageView.frame, CGPointMake(self.pageControl.currentPage * self.frame.size.width + point.x, point.y))) {
+            return imageView;
+        }
+    }
+    return nil;
 }
 
 #pragma mark - Getters
@@ -136,6 +222,13 @@
         _pageControl.hidesForSinglePage = YES;
     }
     return _pageControl;
+}
+
+- (XMFacePreviewView *)facePreviewView{
+    if (!_facePreviewView) {
+        _facePreviewView = [[XMFacePreviewView alloc] initWithFrame:CGRectZero];
+    }
+    return _facePreviewView;
 }
 
 - (NSUInteger)maxPerLine{
