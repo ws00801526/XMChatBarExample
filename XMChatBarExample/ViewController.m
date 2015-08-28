@@ -63,46 +63,6 @@
     [self.core.messageManager didReceiveMessageItem:systemMessageItem];
 }
 
-- (void)receiveTextMessage {
-    PCUTextMessageEntity *textMessageItem = [[PCUTextMessageEntity alloc] init];
-    textMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
-    textMessageItem.messageText = [NSString stringWithFormat:@"这只是一堆用来测试的文字，谢谢！Post:%@",
-                                   [[NSDate date] description]];
-    textMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
-    textMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
-    [self.core.messageManager didReceiveMessageItem:textMessageItem];
-}
-
-- (void)receivePreviousTextMessage {
-    PCUTextMessageEntity *textMessageItem = [[PCUTextMessageEntity alloc] init];
-    textMessageItem.messageOrder = -[[NSDate date] timeIntervalSince1970];
-    textMessageItem.messageText = [NSString stringWithFormat:@"这段文字来自很多年前，谢谢！Post:%@",
-                                   [[NSDate date] description]];
-    textMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
-    textMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
-    [self.core.messageManager didReceiveMessageItem:textMessageItem];
-}
-
-- (void)receiveImageMessage {
-    PCUImageMessageEntity *imageMessageItem = [[PCUImageMessageEntity alloc] init];
-    imageMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
-    imageMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
-    imageMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
-    imageMessageItem.imageURLString = @"http://ww1.sinaimg.cn/mw1024/4923db2bjw1etpf22s9mbj20xr1o0e82.jpg";
-    imageMessageItem.imageSize = CGSizeMake(1024, 1820);
-    [self.core.messageManager didReceiveMessageItem:imageMessageItem];
-}
-
-- (void)receiveVoiceMessage {
-    PCUVoiceMessageEntity *voiceMessageItem = [[PCUVoiceMessageEntity alloc] init];
-    voiceMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
-    voiceMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
-    voiceMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
-    voiceMessageItem.voiceURLString = @"";
-    voiceMessageItem.voiceDuration = arc4random() % 60;
-    [self.core.messageManager didReceiveMessageItem:voiceMessageItem];
-}
-
 #pragma mark - PCUDelegate
 
 - (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem {
