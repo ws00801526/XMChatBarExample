@@ -54,17 +54,20 @@
     [super updateConstraints];
     [self.voiceButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(10);
-        make.top.equalTo(self.mas_top).with.offset(8).with.priorityHigh();
+        make.top.equalTo(self.mas_top).with.offset(8);
+        make.width.equalTo(self.voiceButton.mas_height);
     }];
     
     [self.moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).with.offset(-10);
-        make.top.equalTo(self.mas_top).with.offset(8).with.priorityHigh();
+        make.top.equalTo(self.mas_top).with.offset(8);
+        make.width.equalTo(self.moreButton.mas_height);
     }];
     
     [self.faceButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.moreButton.mas_left).with.offset(-10);
-        make.top.equalTo(self.mas_top).with.offset(8).with.priorityHigh();
+        make.top.equalTo(self.mas_top).with.offset(8);
+        make.width.equalTo(self.faceButton.mas_height);
     }];
     
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -73,7 +76,6 @@
         make.top.equalTo(self.mas_top).with.offset(4);
         make.bottom.equalTo(self.mas_bottom).with.offset(-4);
     }];
-
 }
 
 #pragma mark - UITextViewDelegate
@@ -253,12 +255,14 @@
 }
 
 - (void)setup{
+    
     self.MP3 = [[Mp3Recorder alloc] initWithDelegate:self];
     [self addSubview:self.voiceButton];
     [self addSubview:self.moreButton];
     [self addSubview:self.faceButton];
     [self addSubview:self.textView];
     [self.textView addSubview:self.voiceRecordButton];
+    [self textViewDidChange:self.textView];
     
     UIImageView *topLine = [[UIImageView alloc] init];
     topLine.backgroundColor = [UIColor colorWithRed:184/255.0f green:184/255.0f blue:184/255.0f alpha:1.0f];
@@ -277,6 +281,9 @@
     
     self.backgroundColor = [UIColor colorWithRed:235/255.0f green:236/255.0f blue:238/255.0f alpha:1.0f];
     [self updateConstraintsIfNeeded];
+    
+    //FIX 修复首次初始化页面 页面显示不正确 textView不显示bug
+    [self layoutIfNeeded];
 }
 
 /**
@@ -495,7 +502,7 @@
         _textView.delegate = self;
         _textView.layer.cornerRadius = 4.0f;
         _textView.layer.borderColor = [UIColor colorWithRed:204.0/255.0f green:204.0/255.0f blue:204.0/255.0f alpha:1.0f].CGColor;
-        _textView.returnKeyType = UIReturnKeyDone;
+        _textView.returnKeyType = UIReturnKeySend;
         _textView.layer.borderWidth = .5f;
         _textView.layer.masksToBounds = YES;
     }
@@ -509,6 +516,7 @@
         [_voiceButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_voice_normal"] forState:UIControlStateNormal];
         [_voiceButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_input_normal"] forState:UIControlStateSelected];
         [_voiceButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_voiceButton sizeToFit];
     }
     return _voiceButton;
 }
@@ -538,6 +546,7 @@
         [_moreButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_picture_normal"] forState:UIControlStateNormal];
         [_moreButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_input_normal"] forState:UIControlStateSelected];
         [_moreButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_moreButton sizeToFit];
     }
     return _moreButton;
 }
@@ -549,6 +558,7 @@
         [_faceButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_picture_normal"] forState:UIControlStateNormal];
         [_faceButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_input_normal"] forState:UIControlStateSelected];
         [_faceButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_faceButton sizeToFit];
     }
     return _faceButton;
 }

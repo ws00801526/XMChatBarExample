@@ -74,9 +74,7 @@
 @property (strong, nonatomic) UIPageControl *pageControl;
 @property (strong, nonatomic) XMFacePreviewView *facePreviewView;
 
-@property (strong, nonatomic) NSMutableArray *sendFaces; /**< 已选的faces */
-
-@property (assign, nonatomic, readonly) NSUInteger maxPerLine; /**< 每行显示的表情数量 */
+@property (assign, nonatomic, readonly) NSUInteger maxPerLine; /**< 每行显示的表情数量,6,6plus可能相应多显示 */
 
 
 
@@ -100,8 +98,6 @@
 #pragma mark - Private Methods
 
 - (void)setup{
-    
-    self.sendFaces = [NSMutableArray array];
     
     [self addSubview:self.scrollView];
     [self addSubview:self.pageControl];
@@ -164,7 +160,6 @@
 - (void)handleTap:(UITapGestureRecognizer *)tap{
     NSLog(@"click is %ld  name is %@",tap.view.tag,[XMFaceManager faceNameWithFaceImageName:[NSString stringWithFormat:@"%ld",tap.view.tag]]);
     NSString *faceName = [XMFaceManager faceNameWithFaceImageName:[NSString stringWithFormat:@"%ld",tap.view.tag]];
-    [self.sendFaces addObject:faceName];
     if (self.delegate && [self.delegate respondsToSelector:@selector(faceViewSendFace:)]) {
         [self.delegate faceViewSendFace:faceName];
     }
@@ -194,6 +189,16 @@
  *  @return 被点击的imageView
  */
 - (UIImageView *)faceViewWitnInPoint:(CGPoint)point{
+    
+//    NSUInteger page = self.pageControl.currentPage;
+//    NSUInteger faceNumberPerPage = 3 * (self.maxPerLine + 1);
+//    int currentFaceIndex = page * faceNumberPerPage;
+//    for (int i = currentFaceIndex; i < faceNumberPerPage * page; i ++ ) {
+//        UIImageView *imageView = self.scrollView.subviews[i];
+//        if (CGRectContainsPoint(imageView.frame, CGPointMake(self.pageControl.currentPage * self.frame.size.width + point.x, point.y))) {
+//            return imageView;
+//        }
+//    }
     for (UIImageView *imageView in self.scrollView.subviews) {
         if (CGRectContainsPoint(imageView.frame, CGPointMake(self.pageControl.currentPage * self.frame.size.width + point.x, point.y))) {
             return imageView;

@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [[XMAVAudioPlayer sharedInstance] setDelegate:self];
     self.core = [[PCUCore alloc] init];
@@ -42,10 +43,6 @@
     
     
     [self receiveSystemMessage];
-//    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
-//    [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
-//    [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(receivePreviousTextMessage) userInfo:nil repeats:YES];
-//    [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
