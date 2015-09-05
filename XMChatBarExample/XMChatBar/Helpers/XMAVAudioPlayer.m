@@ -11,8 +11,6 @@
 @interface XMAVAudioPlayer ()<AVAudioPlayerDelegate>
 
 @property (nonatomic ,strong)  AVAudioPlayer *player; /**< 音频播放 */
-@property (weak, nonatomic) PCUVoiceMessageEntity *voiceMessage;
-@property (weak, nonatomic) id<PCUVoiceStatus> voiceStatus;
 
 @end
 
@@ -29,17 +27,6 @@
 
 
 #pragma mark - Public Methods
-
-- (void)playSongWithVoiceMessage:(PCUVoiceMessageEntity *)voiceMessage playStatus:(id<PCUVoiceStatus>)playStatus{
-    [self stopSound];
-    self.voiceMessage = voiceMessage;
-    self.voiceStatus = playStatus;
-    if (voiceMessage.voiceData) {
-        [self playSongWithData:voiceMessage.voiceData];
-    }else{
-        [self playSongWithUrl:voiceMessage.voiceURLString];
-    }
-}
 
 -(void)playSongWithUrl:(NSString *)songUrl
 {
@@ -74,9 +61,7 @@
     _player.delegate = self;
     [_player play];
     [self.delegate audioPlayerBeginPlay];
-    
-    //!!!更改playStatus
-    [self.voiceStatus setPlay];
+ 
 }
 
 -(void)setupPlaySound{
@@ -98,11 +83,6 @@
     if (_player && _player.isPlaying) {
         [_player stop];
         _player = nil;
-    }
-    if (self.voiceMessage && self.voiceStatus) {
-        [self.voiceStatus setPause];
-        self.voiceStatus = nil;
-        self.voiceMessage = nil;
     }
 }
 

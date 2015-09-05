@@ -152,6 +152,10 @@
     [self.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [self.rootViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - XMLocationControllerDelegate
 
 - (void)cancelLocation{
@@ -159,8 +163,10 @@
 }
 
 - (void)sendLocation:(CLPlacemark *)placemark{
-    NSLog(@"this is location will be send :%@",placemark.name);
     [self cancelLocation];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBar:sendLocation:locationText:)]) {
+        [self.delegate chatBar:self sendLocation:placemark.location.coordinate locationText:placemark.name];
+    }
 }
 
 #pragma mark - MP3RecordedDelegate
@@ -267,7 +273,6 @@
     [self addSubview:self.faceButton];
     [self addSubview:self.textView];
     [self.textView addSubview:self.voiceRecordButton];
-    [self textViewDidChange:self.textView];
     
     UIImageView *topLine = [[UIImageView alloc] init];
     topLine.backgroundColor = [UIColor colorWithRed:184/255.0f green:184/255.0f blue:184/255.0f alpha:1.0f];
@@ -280,7 +285,6 @@
         make.height.mas_equalTo(@.5f);
     }];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
@@ -362,9 +366,6 @@
             break;
     }
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
-        [self.delegate chatBarFrameDidChange:self];
-    }
 }
 
 - (void)buttonAction:(UIButton *)button{
@@ -579,6 +580,7 @@
     }else{
         return MAX(self.keyboardFrame.size.height, CGFLOAT_MIN);
     }
+    
 }
 
 - (UIViewController *)rootViewController{
@@ -591,6 +593,9 @@
     [UIView animateWithDuration:.3 animations:^{
         [super setFrame:frame];
     }];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
+        [self.delegate chatBarFrameDidChange:self];
+    }
 }
 
 @end

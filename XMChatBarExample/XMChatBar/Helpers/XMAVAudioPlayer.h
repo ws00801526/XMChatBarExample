@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "PCUVoiceMessageEntity.h"
 
 @protocol XMAVAudioPlayerDelegate <NSObject>
 
@@ -22,8 +21,6 @@
 @property (nonatomic, assign)id <XMAVAudioPlayerDelegate>delegate;
 + (XMAVAudioPlayer *)sharedInstance;
 
-
-- (void)playSongWithVoiceMessage:(PCUVoiceMessageEntity *)voiceMessage playStatus:(id<PCUVoiceStatus>)playStatus;
 - (void)playSongWithUrl:(NSString *)songUrl;
 - (void)playSongWithData:(NSData *)songData;
 

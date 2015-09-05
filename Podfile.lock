@@ -1,15 +1,10 @@
 PODS:
-  - AsyncDisplayKit (1.2.3):
-    - AsyncDisplayKit/ASDealloc2MainObject (= 1.2.3)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.2.3)
   - Masonry (0.6.2)
 
 DEPENDENCIES:
-  - AsyncDisplayKit
   - Masonry
 
 SPEC CHECKSUMS:
-  AsyncDisplayKit: 5c8f38225f7478e39c48196cec0dd0d2ac3455ed
   Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
 
 COCOAPODS: 0.37.2
