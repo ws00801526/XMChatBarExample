@@ -169,11 +169,11 @@
     CGPoint touchPoint = [longPress locationInView:self];
     UIImageView *touchFaceView = [self faceViewWitnInPoint:touchPoint];
     if (longPress.state == UIGestureRecognizerStateBegan) {
-        [self.facePreviewView setCenter:CGPointMake(touchPoint.x, touchPoint.y - 15)];
+        [self.facePreviewView setCenter:CGPointMake(touchPoint.x, touchPoint.y - 40)];
         [self.facePreviewView setFaceImage:touchFaceView.image];
         [self addSubview:self.facePreviewView];
     }else if (longPress.state == UIGestureRecognizerStateChanged){
-        [self.facePreviewView setCenter:CGPointMake(touchPoint.x, touchPoint.y - 15)];
+        [self.facePreviewView setCenter:CGPointMake(touchPoint.x, touchPoint.y - 40)];
         [self.facePreviewView setFaceImage:touchFaceView.image];
     }else if (longPress.state == UIGestureRecognizerStateEnded) {
         [self.facePreviewView removeFromSuperview];
