@@ -56,3 +56,11 @@ AsyncDisplayKit | PonyChatUI需要的 第三方类库
 ####4. 感谢
 感谢[UUChatTableView](https://github.com/ZhipingYang/UUChatTableView),[PonyChatUI](https://github.com/PonyGroup/PonyChatUIV2)  这是一个学习过程中写的,如果有什么问题,可以[问我](https://github.com/ws00801526/XMChatBarExample/issues),或者发送我的邮箱3057600441@qq.com
 本示例中用到的图片来自QQ,微信,请尊重版权
+
+
+####5. 更新
+
+#####V1.1
+1. 去除了PonyChatUI的依赖,因为该类库依赖于AsyncDisplayKit,本人不太熟悉,所以重新参照PonyChatUI重新写了个ChatViewController
+2. 加入了pods 工程,因为不少小伙伴下载后缺少pods工程无法打开,这次特地一起上传了上来
+3. 使用方法请参考,ChatViewController,也可以直接使用,没有继承下拉加载更多消息
