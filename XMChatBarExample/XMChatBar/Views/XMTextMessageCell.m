@@ -26,32 +26,21 @@
 
 - (void)updateConstraints{
     [super updateConstraints];
+        
+    [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.messageContentView);
+        make.width.lessThanOrEqualTo(@(self.textMaxWidth));
+    }];
     
-    if (self.message.messageOwner == XMMessageOwnerTypeSelf) {
-        [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.avatarImageView.mas_left).with.offset(-4);
-            make.top.equalTo(self.contentView.mas_top).with.offset(0);
-            make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-8);
-            make.width.lessThanOrEqualTo(@(self.textMaxWidth));
-        }];
-    }else if (self.message.messageOwner == XMMessageOwnerTypeOther){
-        [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.avatarImageView.mas_right).with.offset(4);
-            make.top.equalTo(self.contentView.mas_top).with.offset(0);
-            make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-8);
-            make.width.lessThanOrEqualTo(@(self.textMaxWidth));
-        }];
-    }
     [self.messageTextLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.messageBackgroundImageView).with.insets(UIEdgeInsetsMake(8, 12, 8, 12));
     }];
-    
 }
 
 - (void)setup{
     [super setup];
-    [self.contentView addSubview:self.messageBackgroundImageView];
-    [self.contentView addSubview:self.messageTextLabel];
+    [self.messageContentView addSubview:self.messageBackgroundImageView];
+    [self.messageContentView addSubview:self.messageTextLabel];
 }
 
 #pragma mark - Setters

@@ -41,8 +41,6 @@
 		93DD25C71B99D5BD00001A46 /* XMSystemMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DD25BF1B99D5BD00001A46 /* XMSystemMessageCell.m */; };
 		93DD25C81B99D5BD00001A46 /* XMTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DD25C11B99D5BD00001A46 /* XMTextMessageCell.m */; };
 		93DD25C91B99D5BD00001A46 /* XMVoiceMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DD25C31B99D5BD00001A46 /* XMVoiceMessageCell.m */; };
-		93DD25CC1B99D60A00001A46 /* test_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 93DD25CA1B99D60A00001A46 /* test_send.png */; };
-		93DD25CD1B99D60A00001A46 /* test_send2.png in Resources */ = {isa = PBXBuildFile; fileRef = 93DD25CB1B99D60A00001A46 /* test_send2.png */; };
 		93DD25D11B99D63400001A46 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DD25D01B99D63400001A46 /* UITableView+FDTemplateLayoutCell.m */; };
 /* End PBXBuildFile section */
 
@@ -122,8 +120,6 @@
 		93DD25C11B99D5BD00001A46 /* XMTextMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMTextMessageCell.m; sourceTree = "<group>"; };
 		93DD25C21B99D5BD00001A46 /* XMVoiceMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMVoiceMessageCell.h; sourceTree = "<group>"; };
 		93DD25C31B99D5BD00001A46 /* XMVoiceMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMVoiceMessageCell.m; sourceTree = "<group>"; };
-		93DD25CA1B99D60A00001A46 /* test_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_send.png; sourceTree = "<group>"; };
-		93DD25CB1B99D60A00001A46 /* test_send2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_send2.png; sourceTree = "<group>"; };
 		93DD25CF1B99D63400001A46 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
 		93DD25D01B99D63400001A46 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		9F9385FC96BE12AEFE8854F5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,8 +190,6 @@
 				93D5A4621B8187500085D863 /* AppDelegate.m */,
 				933E5A401B954C19008EEBA8 /* RootViewController.h */,
 				933E5A411B954C19008EEBA8 /* RootViewController.m */,
-				93DD25CA1B99D60A00001A46 /* test_send.png */,
-				93DD25CB1B99D60A00001A46 /* test_send2.png */,
 				93D5A4671B8187500085D863 /* Main.storyboard */,
 				93D5A46A1B8187500085D863 /* Images.xcassets */,
 				93D5A46C1B8187500085D863 /* LaunchScreen.xib */,
@@ -452,10 +446,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				93D5A4691B8187500085D863 /* Main.storyboard in Resources */,
-				93DD25CC1B99D60A00001A46 /* test_send.png in Resources */,
 				93D5A46E1B8187500085D863 /* LaunchScreen.xib in Resources */,
 				930A80D41B8C058D000959D4 /* face.plist in Resources */,
-				93DD25CD1B99D60A00001A46 /* test_send2.png in Resources */,
 				93D5A46B1B8187500085D863 /* Images.xcassets in Resources */,
 				93D5A5EF1B81B0C00085D863 /* chatBar.xcassets in Resources */,
 			);

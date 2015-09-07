@@ -28,7 +28,7 @@
  *
  *  @return 所有的表情图片名称
  */
-+ (NSArray *)allFaces;
++ (NSArray *)emojiFaces;
 
 /**
  *  根据表情名称获取图片名称

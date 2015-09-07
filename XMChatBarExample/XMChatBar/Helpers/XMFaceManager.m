@@ -10,7 +10,7 @@
 
 @interface XMFaceManager ()
 
-@property (strong, nonatomic) NSMutableArray *faceArrays;
+@property (strong, nonatomic) NSMutableArray *emojiFaceArrays;
 @end
 
 @implementation XMFaceManager
@@ -18,13 +18,13 @@
 
 - (instancetype)init{
     if (self = [super init]) {
-        _faceArrays = [NSMutableArray array];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:[XMFaceManager documentFacePath]]) {
-            NSArray *array = [NSArray arrayWithContentsOfFile:[XMFaceManager defaultFacePath]];
-            [array writeToFile:[XMFaceManager documentFacePath] atomically:YES];
+        _emojiFaceArrays = [NSMutableArray array];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[XMFaceManager documentEmojiFacePath]]) {
+            NSArray *array = [NSArray arrayWithContentsOfFile:[XMFaceManager defaultEmojiFacePath]];
+            [array writeToFile:[XMFaceManager documentEmojiFacePath] atomically:YES];
         }
-        NSArray *faceArray = [NSArray arrayWithContentsOfFile:[XMFaceManager documentFacePath]];
-        [_faceArrays addObjectsFromArray:faceArray];
+        NSArray *faceArray = [NSArray arrayWithContentsOfFile:[XMFaceManager documentEmojiFacePath]];
+        [_emojiFaceArrays addObjectsFromArray:faceArray];
     }
     return self;
 }
@@ -41,20 +41,20 @@
     return shareInstance;
 }
 
-+ (NSArray *)allFaces{
-    return [[XMFaceManager shareInstance] faceArrays];
++ (NSArray *)emojiFaces{
+    return [[XMFaceManager shareInstance] emojiFaceArrays];
 }
 
-+ (NSString *)defaultFacePath{
++ (NSString *)defaultEmojiFacePath{
     return [[NSBundle mainBundle] pathForResource:@"face" ofType:@"plist"];
 }
 
-+ (NSString *)documentFacePath{
++ (NSString *)documentEmojiFacePath{
     return [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"face.plist"];
 }
 
 + (NSString *)faceImageNameWithFaceName:(NSString *)faceName{
-    for (NSDictionary *faceDict in [[XMFaceManager shareInstance] faceArrays]) {
+    for (NSDictionary *faceDict in [[XMFaceManager shareInstance] emojiFaceArrays]) {
         if ([faceDict[kFaceNameKey] isEqualToString:faceName]) {
             return faceDict[kFaceIDKey];
             break;
@@ -65,7 +65,7 @@
 
 + (NSString *)faceNameWithFaceImageName:(NSString *)faceImageName{
 
-    for (NSDictionary *faceDict in [[XMFaceManager shareInstance] faceArrays]) {
+    for (NSDictionary *faceDict in [[XMFaceManager shareInstance] emojiFaceArrays]) {
         if ([faceDict[kFaceIDKey] integerValue] == [faceImageName integerValue]) {
             return faceDict[kFaceNameKey];
             break;
@@ -99,7 +99,7 @@
         //获取原字符串中对应的值
         NSString *subStr = [text substringWithRange:range];
         
-        for (NSDictionary *dict in [[XMFaceManager shareInstance] faceArrays]) {
+        for (NSDictionary *dict in [[XMFaceManager shareInstance] emojiFaceArrays]) {
             if ([dict[kFaceNameKey]  isEqualToString:subStr]) {
                 //face[i][@"png"]就是我们要加载的图片
                 //新建文字附件来存放我们的图片,iOS7才新加的对象

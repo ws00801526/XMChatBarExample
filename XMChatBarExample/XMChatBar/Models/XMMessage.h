@@ -18,6 +18,15 @@ typedef NS_ENUM(NSUInteger, XMMessageOwnerType){
     XMMessageOwnerTypeOther /**< 接收到的他人消息 */,
 };
 
+
+/**
+ *  消息聊天类型
+ */
+typedef NS_ENUM(NSUInteger, XMMessageChatType){
+    XMMessageChatSingle = 0 /**< 单人聊天,不显示nickname */,
+    XMMessageChatGroup /**< 群组聊天,显示nickname */,
+};
+
 /**
  *  消息类型
  */
@@ -47,6 +56,7 @@ typedef NS_ENUM(NSUInteger, XMMessageReadState) {
 };
 
 
+
 @class XMSystemMessage,XMTextMessage,XMImageMessage,XMLocationMessage,XMVoiceMessage;
 @interface XMMessage : NSObject
 
@@ -55,6 +65,7 @@ typedef NS_ENUM(NSUInteger, XMMessageReadState) {
 @property (assign, nonatomic) XMMessageType messageType /**< 消息类型 */;
 @property (assign, nonatomic) XMMessageSendState messageSendState /**< 消息状态 */;
 @property (assign, nonatomic) XMMessageReadState messageReadState /**< 消息状态 */;
+@property (assign, nonatomic) XMMessageChatType messageChatType /**< 聊天类型 */;
 
 @property (assign, nonatomic) NSTimeInterval messageTime /**< 消息发送时间 */;
 

@@ -54,7 +54,7 @@ typedef NS_ENUM(NSUInteger, XMFunctionViewShowType){
  *
  *  @param chatBar 
  */
-- (void)chatBarFrameDidChange:(XMChatBar *)chatBar;
+- (void)chatBarFrameDidChange:(XMChatBar *)chatBar frame:(CGRect)frame;
 
 
 /**

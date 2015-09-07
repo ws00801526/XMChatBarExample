@@ -42,6 +42,8 @@
     self.chatBar.delegate = self;
     [self.view addSubview:self.chatBar];
     
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+//    [self.view addGestureRecognizer:tap];
     
     self.dataArray = [NSMutableArray array];
  
@@ -106,35 +108,45 @@
 
 - (void)chatBar:(XMChatBar *)chatBar sendMessage:(NSString *)message{
     XMTextMessage *textMessage = [XMMessage textMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"messageText":message}];
+    textMessage.messageChatType = rand() % 2;
     [self.dataArray addObject:textMessage];
     [self.tableView reloadData];
+    [self scrollToBottom];
 }
 
 - (void)chatBar:(XMChatBar *)chatBar sendVoice:(NSData *)voiceData seconds:(NSTimeInterval)seconds{
     XMVoiceMessage *voiceMessage = [XMMessage voiceMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"voiceData":voiceData,@"voiceSeconds":@(seconds)}];
+    voiceMessage.messageChatType = rand() % 2;
     [self.dataArray addObject:voiceMessage];
     [self.tableView reloadData];
+    [self scrollToBottom];
 }
 
 - (void)chatBar:(XMChatBar *)chatBar sendPictures:(NSArray *)pictures{
     
     XMImageMessage *imageMessage = [XMMessage imageMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"image":pictures[0]}];
+    imageMessage.messageChatType = rand() % 2;
     [self.dataArray addObject:imageMessage];
     [self.tableView reloadData];
+    [self scrollToBottom];
 }
 
 - (void)chatBar:(XMChatBar *)chatBar sendLocation:(CLLocationCoordinate2D)locationCoordinate locationText:(NSString *)locationText{
     XMLocationMessage *locationMessage = [XMMessage locationMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"address":locationText,@"lat":@(locationCoordinate.latitude),@"lng":@(locationCoordinate.longitude)}];
+    locationMessage.messageChatType = rand() % 2;
     [self.dataArray addObject:locationMessage];
     [self.tableView reloadData];
+    [self scrollToBottom];
 }
 
-- (void)chatBarFrameDidChange:(XMChatBar *)chatBar{
+- (void)chatBarFrameDidChange:(XMChatBar *)chatBar frame:(CGRect)frame{
+    if (frame.origin.y == self.tableView.frame.size.height) {
+        return;
+    }
     [UIView animateWithDuration:.3f animations:^{
-        [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, chatBar.frame.origin.y)];
-    } completion:^(BOOL finished) {
-        [self scrollToBottom];
-    }];
+        [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, frame.origin.y)];
+    } completion:nil];
+    [self scrollToBottom];
 }
 
 #pragma mark - XMAVAudioPlayerDelegate
@@ -152,6 +164,10 @@
 }
 
 #pragma mark - Private Methods
+
+- (void)handleTap:(UITapGestureRecognizer *)tap{
+    [self.chatBar endInputing];
+}
 
 - (void)loadData{
 
@@ -180,7 +196,7 @@
                 break;
             case 2:
             {
-                XMImageMessage *imageMessage = [XMMessage imageMessage:@{@"messageTime":@(firstMessageTime),@"messageOwner":@(i%2==0 ? XMMessageOwnerTypeSelf : XMMessageOwnerTypeOther),@"image":[UIImage imageNamed:@"test_send"]}];
+                XMImageMessage *imageMessage = [XMMessage imageMessage:@{@"messageTime":@(firstMessageTime),@"messageOwner":@(i%2==0 ? XMMessageOwnerTypeSelf : XMMessageOwnerTypeOther),@"image":[UIImage imageNamed:@"chat_bar_face_highlight"]}];
                 [self.dataArray addObject:imageMessage];
             }
                 break;
@@ -213,20 +229,8 @@
 
 - (void)scrollToBottom {
     
-//    NSUInteger sectionCount = [self.tableView numberOfSections];
-//    if (sectionCount) {
-//        
-//        NSUInteger rowCount = [self.tableView numberOfRowsInSection:0];
-//        if (rowCount) {
-//            
-//            NSUInteger ii[2] = {0, rowCount - 1};
-//            NSIndexPath* indexPath = [NSIndexPath indexPathWithIndexes:ii length:2];
-//            [self.tableView scrollToRowAtIndexPath:indexPath
-//                                  atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-//        }
-//    }
-//    
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+
 }
 
 #pragma mark - Getters
@@ -259,10 +263,7 @@
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
     
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap)];
-//        [_tableView addGestureRecognizer:tap];
     }
     return _tableView;
 }

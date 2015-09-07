@@ -167,9 +167,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatBar:sendLocation:locationText:)]) {
         [self.delegate chatBar:self sendLocation:placemark.location.coordinate locationText:placemark.name];
     }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
-        [self.delegate chatBarFrameDidChange:self];
-    }
 }
 
 #pragma mark - MP3RecordedDelegate
@@ -486,9 +483,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatBar:sendVoice:seconds:)]) {
         [self.delegate chatBar:self sendVoice:voiceData seconds:seconds];
     }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
-        [self.delegate chatBarFrameDidChange:self];
-    }
 }
 
 /**
@@ -499,9 +493,6 @@
 - (void)sendImageMessage:(UIImage *)image{
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatBar:sendPictures:)]) {
         [self.delegate chatBar:self sendPictures:@[image]];
-    }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
-        [self.delegate chatBarFrameDidChange:self];
     }
 }
 
@@ -574,7 +565,7 @@
     if (!_moreButton) {
         _moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _moreButton.tag = XMFunctionViewShowMore;
-        [_moreButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_picture_normal"] forState:UIControlStateNormal];
+        [_moreButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_more_normal"] forState:UIControlStateNormal];
         [_moreButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_input_normal"] forState:UIControlStateSelected];
         [_moreButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [_moreButton sizeToFit];
@@ -586,7 +577,7 @@
     if (!_faceButton) {
         _faceButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _faceButton.tag = XMFunctionViewShowFace;
-        [_faceButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_picture_normal"] forState:UIControlStateNormal];
+        [_faceButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_face_normal"] forState:UIControlStateNormal];
         [_faceButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_input_normal"] forState:UIControlStateSelected];
         [_faceButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [_faceButton sizeToFit];
@@ -615,13 +606,13 @@
 #pragma mark - Getters
 
 - (void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
     [UIView animateWithDuration:.3 animations:^{
         [super setFrame:frame];
-    }completion:^(BOOL finished) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
-            [self.delegate chatBarFrameDidChange:self];
-        }
-    }];
+    }completion:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:frame:)]) {
+        [self.delegate chatBarFrameDidChange:self frame:frame];
+    }
 }
 
 @end

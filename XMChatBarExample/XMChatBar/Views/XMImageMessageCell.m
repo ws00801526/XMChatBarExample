@@ -35,25 +35,19 @@
 - (void)updateConstraints{
     [super updateConstraints];
     
-    if (self.message.messageOwner == XMMessageOwnerTypeSelf) {
+    
+    [self.messageMaskImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.messageContentView.mas_top);
+        make.bottom.equalTo(self.messageContentView.mas_bottom);
+        make.height.lessThanOrEqualTo(@200);
+        make.width.lessThanOrEqualTo(@150);
+        if (self.message.messageOwner == XMMessageOwnerTypeSelf) {
+            make.right.equalTo(self.messageContentView.mas_right);
+        }else{
+            make.left.equalTo(self.messageContentView.mas_left);
+        }
         
-        [self.messageMaskImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView.mas_top).with.offset(8);
-            make.right.equalTo(self.avatarImageView.mas_left).with.offset(-8);
-            make.height.lessThanOrEqualTo(@200);
-            make.width.lessThanOrEqualTo(@150);
-            make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-8);
-        }];
-        
-    }else if (self.message.messageOwner == XMMessageOwnerTypeOther){
-        [self.messageMaskImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView.mas_top).with.offset(8);
-            make.left.equalTo(self.avatarImageView.mas_right).with.offset(8);
-            make.width.lessThanOrEqualTo(@150);
-            make.height.lessThanOrEqualTo(@200);
-            make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-8);
-        }];
-    }
+    }];
     
     [self.messageImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.messageMaskImageView);
@@ -63,8 +57,10 @@
 
 - (void)setup{
     [super setup];
-    [self.contentView addSubview:self.messageImageView];
-    [self.contentView addSubview:self.messageMaskImageView];
+    
+    [self.messageContentView addSubview:self.messageImageView];
+    [self.messageContentView addSubview:self.messageMaskImageView];
+    
 }
 
 - (void)setMessage:(XMMessage *)message{
@@ -88,9 +84,7 @@
     [super setMessage:message];
 }
 
-
 #pragma mark - Getters
-
 
 - (UIImageView *)messageImageView{
     if (!_messageImageView) {
@@ -105,6 +99,5 @@
     }
     return _messageMaskImageView;
 }
-
 
 @end

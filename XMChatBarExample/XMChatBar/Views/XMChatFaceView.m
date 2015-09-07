@@ -114,7 +114,7 @@
     //计算每一页最多显示多少个表情 (每行显示数量)*3 - 1(删除按钮)
     NSInteger pageItemCount = (self.maxPerLine + 1) * 3 - 1;
     
-    NSMutableArray *allFaces = [NSMutableArray arrayWithArray:[XMFaceManager allFaces]];
+    NSMutableArray *allFaces = [NSMutableArray arrayWithArray:[XMFaceManager emojiFaces]];
     NSUInteger pageCount = [allFaces count] % pageItemCount == 0 ? [allFaces count] / pageItemCount : ([allFaces count] / pageItemCount) + 1;
     
     self.pageControl.numberOfPages = pageCount;

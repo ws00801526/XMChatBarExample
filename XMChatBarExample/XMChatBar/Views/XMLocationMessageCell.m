@@ -10,7 +10,7 @@
 
 @interface XMLocationMessageCell ()
 
-@property (strong, nonatomic) UIView *messageContentView;
+@property (strong, nonatomic) UIView *locationMessageContentView;
 @property (weak, nonatomic) UIImageView *locationImageView;
 @property (weak, nonatomic) UILabel *tipsLabel;
 @property (weak, nonatomic) UILabel *addressLabel;
@@ -24,30 +24,35 @@
 - (void)setup{
     [super setup];
     
-    [self.contentView addSubview:self.messageBackgroundImageView];
-    [self.contentView addSubview:self.messageContentView];
+    [self.messageContentView addSubview:self.messageBackgroundImageView];
+    [self.messageContentView addSubview:self.locationMessageContentView];
+    
 }
 
 - (void)updateConstraints{
     [super updateConstraints];
     
-    if (self.message.messageOwner == XMMessageOwnerTypeOther) {
-        [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView.mas_top);
-            make.bottom.equalTo(self.contentView.mas_bottom);
-            make.left.equalTo(self.avatarImageView.mas_right).with.offset(8);
-            make.width.lessThanOrEqualTo(@200);
-        }];
-    }else if (self.message.messageOwner == XMMessageOwnerTypeSelf){
-        [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView.mas_top);
-            make.bottom.equalTo(self.contentView.mas_bottom);
-            make.right.equalTo(self.avatarImageView.mas_left).with.offset(-8);
-            make.width.lessThanOrEqualTo(@200);
-        }];
-    }
+    [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.messageContentView);
+    }];
     
-    [self.messageContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//    if (self.message.messageOwner == XMMessageOwnerTypeOther) {
+//        [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.contentView.mas_top);
+//            make.bottom.equalTo(self.contentView.mas_bottom);
+//            make.left.equalTo(self.avatarImageView.mas_right).with.offset(8);
+//            make.width.lessThanOrEqualTo(@200);
+//        }];
+//    }else if (self.message.messageOwner == XMMessageOwnerTypeSelf){
+//        [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.contentView.mas_top);
+//            make.bottom.equalTo(self.contentView.mas_bottom);
+//            make.right.equalTo(self.avatarImageView.mas_left).with.offset(-8);
+//            make.width.lessThanOrEqualTo(@200);
+//        }];
+//    }
+    
+    [self.locationMessageContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.messageBackgroundImageView).with.insets(UIEdgeInsetsMake(8, 8, 8, 8));
         make.width.greaterThanOrEqualTo(@150);
     }];
@@ -62,21 +67,21 @@
 
 #pragma mark - Getters
 
-- (UIView *)messageContentView{
-    if (!_messageContentView) {
-        _messageContentView = [[UIView alloc] init];
-        _messageContentView.layer.cornerRadius = 6.0f;
-        _messageContentView.layer.masksToBounds = YES;
+- (UIView *)locationMessageContentView{
+    if (!_locationMessageContentView) {
+        _locationMessageContentView = [[UIView alloc] init];
+        _locationMessageContentView.layer.cornerRadius = 6.0f;
+        _locationMessageContentView.layer.masksToBounds = YES;
         
         UIImageView *imageView = [[UIImageView alloc] init];
         [imageView setImage:[UIImage imageNamed:@"location"]];
-        [_messageContentView addSubview:self.locationImageView = imageView];
+        [_locationMessageContentView addSubview:self.locationImageView = imageView];
         
         UILabel *tipsLabel = [[UILabel alloc] init];
         tipsLabel.font = [UIFont systemFontOfSize:14.0f];
         tipsLabel.textColor = [UIColor darkTextColor];
         tipsLabel.text = @"位置分享";
-        [_messageContentView addSubview:self.tipsLabel = tipsLabel];
+        [_locationMessageContentView addSubview:self.tipsLabel = tipsLabel];
         
         
         UILabel *addressLabel = [[UILabel alloc] init];
@@ -85,15 +90,15 @@
         addressLabel.numberOfLines = 3;
         addressLabel.lineBreakMode = NSLineBreakByWordWrapping;
         addressLabel.preferredMaxLayoutWidth = 100;
-        [_messageContentView addSubview:self.addressLabel = addressLabel];
+        [_locationMessageContentView addSubview:self.addressLabel = addressLabel];
         
         {
             [imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.width.equalTo(imageView.mas_height);
-                make.left.equalTo(_messageContentView.mas_left).with.offset(8);
-                make.centerY.equalTo(_messageContentView.mas_centerY);
-                make.top.equalTo(_messageContentView.mas_top);
-                make.bottom.equalTo(_messageContentView.mas_bottom);
+                make.left.equalTo(_locationMessageContentView.mas_left).with.offset(8);
+                make.centerY.equalTo(_locationMessageContentView.mas_centerY);
+                make.top.equalTo(_locationMessageContentView.mas_top);
+                make.bottom.equalTo(_locationMessageContentView.mas_bottom);
             }];
             
             [tipsLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -104,12 +109,12 @@
             [addressLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(tipsLabel.mas_bottom).with.offset(2);
                 make.left.equalTo(imageView.mas_right).with.offset(8);
-                make.right.equalTo(_messageContentView.mas_right).with.offset(-8).with.priorityHigh();
+                make.right.equalTo(_locationMessageContentView.mas_right).with.offset(-8).with.priorityHigh();
             }];
             
         }
     }
-    return _messageContentView;
+    return _locationMessageContentView;
 }
 
 @end

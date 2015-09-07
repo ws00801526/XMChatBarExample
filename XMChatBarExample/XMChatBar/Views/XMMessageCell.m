@@ -55,6 +55,8 @@
 
 - (void)setup{
     [self.contentView addSubview:self.avatarImageView];
+    [self.contentView addSubview:self.messageNickNameLabel];
+    [self.contentView addSubview:self.messageContentView];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
@@ -62,6 +64,44 @@
 
 - (void)updateConstraints{
     [super updateConstraints];
+    if (self.message.messageChatType == XMMessageChatSingle) {
+        self.messageNickNameLabel.hidden = YES;
+        [self.messageNickNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.avatarImageView.mas_top).with.offset(-8);
+            make.width.equalTo(@0);
+            make.height.equalTo(@0);
+            if (self.message.messageOwner == XMMessageOwnerTypeSelf) {
+                make.right.equalTo(self.avatarImageView.mas_left).with.offset(-8);
+            }else{
+                make.left.equalTo(self.avatarImageView.mas_right).with.offset(8);
+            }
+        }];
+    }else if (self.message.messageChatType == XMMessageChatGroup){
+        self.messageNickNameLabel.hidden = NO;
+        [self.messageNickNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.avatarImageView.mas_top).with.offset(-4);
+            make.width.lessThanOrEqualTo(@200);
+            make.height.equalTo(@10);
+            if (self.message.messageOwner == XMMessageOwnerTypeSelf) {
+                make.right.equalTo(self.avatarImageView.mas_left).with.offset(-8);
+            }else{
+                make.left.equalTo(self.avatarImageView.mas_right).with.offset(8);
+            }
+        }];
+    }
+    
+    [self.messageContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.messageNickNameLabel.mas_bottom);
+        make.bottom.equalTo(self.contentView.mas_bottom);
+        if (self.message.messageOwner == XMMessageOwnerTypeSelf) {
+            make.right.equalTo(self.avatarImageView.mas_left).with.offset(-8);
+        }else{
+            make.left.equalTo(self.avatarImageView.mas_right).with.offset(8);
+        }
+    }];
+    
+    
+    
     self.avatarImageView.hidden = NO;
     if (self.message.messageOwner == XMMessageOwnerTypeOther) {
         [self.avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -71,6 +111,7 @@
             make.height.mas_equalTo(@kAvatarSize).with.priorityHigh();
             make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-8).priorityMedium();
         }];
+ 
     }else if (self.message.messageOwner == XMMessageOwnerTypeSelf){
         [self.avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView.mas_right).with.offset(-10);
@@ -117,7 +158,7 @@
     }
     
     [self updateConstraints];
-//    [self layoutIfNeeded];
+
 }
 
 #pragma mark - Getters
@@ -139,5 +180,21 @@
     return _messageBackgroundImageView;
 }
 
+- (UILabel *)messageNickNameLabel{
+    if (!_messageNickNameLabel) {
+        _messageNickNameLabel = [[UILabel alloc] init];
+        _messageNickNameLabel.font = [UIFont systemFontOfSize:10.0f];
+        _messageNickNameLabel.textColor = [UIColor darkGrayColor];
+        _messageNickNameLabel.text = @"测试昵称";
+    }
+    return _messageNickNameLabel;
+}
+
+- (UIView *)messageContentView{
+    if (!_messageContentView) {
+        _messageContentView = [[UIView alloc] init];
+    }
+    return _messageContentView;
+}
 
 @end

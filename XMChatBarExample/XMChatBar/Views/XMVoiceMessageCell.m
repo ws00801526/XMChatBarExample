@@ -54,23 +54,28 @@
     [super setup];
     self.isVoicePlaying = NO;
     [self.messageBackgroundImageView addSubview:self.voiceStateImageView];
-    [self.contentView addSubview:self.messageBackgroundImageView];
-    [self.contentView addSubview:self.voiceSecondsLabel];
-    [self.contentView addSubview:self.voiceReadStateImageView];
+    
+    [self.messageContentView addSubview:self.messageBackgroundImageView];
+    [self.messageContentView addSubview:self.voiceSecondsLabel];
+    [self.messageContentView addSubview:self.voiceReadStateImageView];
+    
+//    [self.contentView addSubview:self.messageBackgroundImageView];
+//    [self.contentView addSubview:self.voiceSecondsLabel];
+//    [self.contentView addSubview:self.voiceReadStateImageView];
     
 }
 
 - (void)updateConstraints{
     [super updateConstraints];
-//    NSLog(@"self.avatarimageview :%@",self.avatarImageView);
-//    NSLog(@"self.messageBackgroundImageview :%@",self.messageBackgroundImageView);
+
+    CGFloat width = ([(XMVoiceMessage *)self.message voiceSeconds]/3 + 1) * 80;
+    [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.messageContentView);
+        make.width.mas_equalTo(width);
+        make.width.lessThanOrEqualTo(@210);
+    }];
+    
     if (self.message.messageOwner == XMMessageOwnerTypeSelf) {
-        [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.avatarImageView.mas_top).with.offset(-4);
-            make.bottom.equalTo(self.avatarImageView.mas_bottom).with.offset(8);
-            make.right.equalTo(self.avatarImageView.mas_left).with.offset(-8);
-            make.width.equalTo(@80);
-        }];
         
         [self.voiceStateImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.messageBackgroundImageView.mas_centerY);
@@ -78,24 +83,18 @@
         }];
         
         [self.voiceSecondsLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.avatarImageView.mas_bottom);
+            make.bottom.equalTo(self.messageBackgroundImageView.mas_bottom).with.offset(-4);
             make.right.equalTo(self.messageBackgroundImageView.mas_left).with.offset(-4);
         }];
         
         [self.voiceReadStateImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.avatarImageView.mas_top).with.offset(4);
+            make.top.equalTo(self.messageBackgroundImageView.mas_top).with.offset(4);
             make.right.equalTo(self.messageBackgroundImageView.mas_left).with.offset(-4);
             make.width.equalTo(@8);
             make.height.equalTo(@8);
         }];
         
     }else if (self.message.messageOwner == XMMessageOwnerTypeOther) {
-        [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.avatarImageView.mas_top).with.offset(-4);
-            make.bottom.equalTo(self.avatarImageView.mas_bottom).with.offset(8);
-            make.left.equalTo(self.avatarImageView.mas_right).with.offset(8);
-            make.width.equalTo(@80);
-        }];
         
         [self.voiceStateImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.messageBackgroundImageView.mas_centerY);
@@ -103,12 +102,12 @@
         }];
         
         [self.voiceSecondsLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.avatarImageView.mas_bottom);
+            make.bottom.equalTo(self.messageBackgroundImageView.mas_bottom).with.offset(-4);
             make.left.equalTo(self.messageBackgroundImageView.mas_right).with.offset(4);
         }];
         
         [self.voiceReadStateImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.avatarImageView.mas_top).with.offset(4);
+            make.top.equalTo(self.messageBackgroundImageView.mas_top).with.offset(4);
             make.left.equalTo(self.messageBackgroundImageView.mas_right).with.offset(4);
             make.width.equalTo(@8);
             make.height.equalTo(@8);
