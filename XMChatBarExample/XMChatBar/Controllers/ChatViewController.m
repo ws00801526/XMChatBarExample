@@ -107,34 +107,34 @@
 - (void)chatBar:(XMChatBar *)chatBar sendMessage:(NSString *)message{
     XMTextMessage *textMessage = [XMMessage textMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"messageText":message}];
     [self.dataArray addObject:textMessage];
-    [self tableViewReload:YES];
+    [self.tableView reloadData];
 }
 
 - (void)chatBar:(XMChatBar *)chatBar sendVoice:(NSData *)voiceData seconds:(NSTimeInterval)seconds{
     XMVoiceMessage *voiceMessage = [XMMessage voiceMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"voiceData":voiceData,@"voiceSeconds":@(seconds)}];
     [self.dataArray addObject:voiceMessage];
-    [self tableViewReload:YES];
+    [self.tableView reloadData];
 }
 
 - (void)chatBar:(XMChatBar *)chatBar sendPictures:(NSArray *)pictures{
     
     XMImageMessage *imageMessage = [XMMessage imageMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"image":pictures[0]}];
     [self.dataArray addObject:imageMessage];
-    [self tableViewReload:YES];
+    [self.tableView reloadData];
 }
 
 - (void)chatBar:(XMChatBar *)chatBar sendLocation:(CLLocationCoordinate2D)locationCoordinate locationText:(NSString *)locationText{
     XMLocationMessage *locationMessage = [XMMessage locationMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"address":locationText,@"lat":@(locationCoordinate.latitude),@"lng":@(locationCoordinate.longitude)}];
     [self.dataArray addObject:locationMessage];
-    [self tableViewReload:YES];
+    [self.tableView reloadData];
 }
 
 - (void)chatBarFrameDidChange:(XMChatBar *)chatBar{
     [UIView animateWithDuration:.3f animations:^{
         [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, chatBar.frame.origin.y)];
+    } completion:^(BOOL finished) {
+        [self scrollToBottom];
     }];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-    [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1) animated:NO];
 }
 
 #pragma mark - XMAVAudioPlayerDelegate
@@ -195,7 +195,7 @@
         }
     }
     
-    
+    //进行时间排序
     [self.dataArray sortUsingComparator:^NSComparisonResult(XMMessage *obj1, XMMessage  *obj2) {
         if (obj1.messageTime > obj2.messageTime) {
             return NSOrderedAscending;
@@ -205,16 +205,28 @@
             return NSOrderedDescending;
         }
     }];
-    
-    [self tableViewReload:YES];
+
+    [self.tableView reloadData];
+    [self scrollToBottom];
 }
 
-- (void)tableViewReload:(BOOL)scrollBottom{
-    [self.tableView reloadData];
-    if (scrollBottom) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1) animated:NO];
-    }
+
+- (void)scrollToBottom {
+    
+//    NSUInteger sectionCount = [self.tableView numberOfSections];
+//    if (sectionCount) {
+//        
+//        NSUInteger rowCount = [self.tableView numberOfRowsInSection:0];
+//        if (rowCount) {
+//            
+//            NSUInteger ii[2] = {0, rowCount - 1};
+//            NSIndexPath* indexPath = [NSIndexPath indexPathWithIndexes:ii length:2];
+//            [self.tableView scrollToRowAtIndexPath:indexPath
+//                                  atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+//        }
+//    }
+//    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
 #pragma mark - Getters
@@ -247,7 +259,12 @@
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+    
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap)];
+//        [_tableView addGestureRecognizer:tap];
     }
     return _tableView;
 }
+
 @end
