@@ -6,11 +6,6 @@
 //  Copyright (c) 2015年 xmfraker. All rights reserved.
 //
 
-
-#define kFaceWidth 28   //默认表情宽度 
-#define kLeftPadding 10 //表情距离左右边框间距
-#define kFacePadding 6  //表情之间间距
-
 #import "XMChatFaceView.h"
 #import "XMFaceManager.h"
 
@@ -74,9 +69,11 @@
 @property (strong, nonatomic) UIPageControl *pageControl;
 @property (strong, nonatomic) XMFacePreviewView *facePreviewView;
 
-@property (assign, nonatomic, readonly) NSUInteger maxPerLine; /**< 每行显示的表情数量,6,6plus可能相应多显示 */
+@property (strong, nonatomic) UIView *bottomView;
+@property (weak, nonatomic) UIButton *sendButton;
 
-
+@property (assign, nonatomic, readonly) NSUInteger maxPerLine; /**< 每行显示的表情数量,6,6plus可能相应多显示  默认emoji5s显示7个 最近表情显示4个  gif表情显示4个 */
+@property (assign, nonatomic, readonly) NSUInteger maxLine; /**< 每页显示的行数 默认emoji3行  最近表情2行  gif表情2行 */
 
 @end
 
@@ -101,8 +98,9 @@
     
     [self addSubview:self.scrollView];
     [self addSubview:self.pageControl];
+    [self addSubview:self.bottomView];
     
-    [self setupFaces];
+    [self setupEmojiFaces];
     
     self.userInteractionEnabled = YES;
     
@@ -111,14 +109,30 @@
     
 }
 
-- (void)setupFaces{
+- (void)setupEmojiFaces{
+    
+    //计算每一页最多显示多少个表情 (每行显示数量)*3 - 1(删除按钮)
+    NSInteger pageItemCount = (self.maxPerLine + 1) * 3 - 1;
+    
+    NSMutableArray *allFaces = [NSMutableArray arrayWithArray:[XMFaceManager allFaces]];
+    NSUInteger pageCount = [allFaces count] % pageItemCount == 0 ? [allFaces count] / pageItemCount : ([allFaces count] / pageItemCount) + 1;
+    
+    self.pageControl.numberOfPages = pageCount;
+    
+    for (int i = 0; i < pageCount; i++) {
+        if (pageCount - 1 == i) {
+            [allFaces addObject:@{@"face_id":@"999",@"face_name":@"删除"}];
+        }else{
+            [allFaces insertObject:@{@"face_id":@"999",@"face_name":@"删除"} atIndex:(i + 1) * pageItemCount + i];
+        }
+    }
     
     NSUInteger maxPerLine = self.maxPerLine;
     NSUInteger line = 0;   //行数
     NSUInteger column = 0; //列数
     NSUInteger page = 0;   //页数
     CGFloat itemWidth = (self.frame.size.width - 20) / 7;
-    for (NSDictionary *faceDict in [XMFaceManager allFaces]) {
+    for (NSDictionary *faceDict in allFaces) {
         if (column > maxPerLine) {
             line ++ ;
             column = 0;
@@ -137,7 +151,6 @@
         column ++ ;
     }
     [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width * (page + 1), self.scrollView.frame.size.height)];
-    self.pageControl.numberOfPages = page + 1;
 }
 
 
@@ -148,11 +161,7 @@
     imageView.contentMode = UIViewContentModeCenter;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [imageView addGestureRecognizer:tap];
-    
-//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-//    longPress.minimumPressDuration = .3f;
-//    [imageView addGestureRecognizer:longPress];
-    
+
     return imageView;
 }
 
@@ -160,6 +169,9 @@
 - (void)handleTap:(UITapGestureRecognizer *)tap{
     NSLog(@"click is %ld  name is %@",tap.view.tag,[XMFaceManager faceNameWithFaceImageName:[NSString stringWithFormat:@"%ld",tap.view.tag]]);
     NSString *faceName = [XMFaceManager faceNameWithFaceImageName:[NSString stringWithFormat:@"%ld",tap.view.tag]];
+    if (tap.view.tag == 999) {
+        faceName = @"[删除]";
+    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(faceViewSendFace:)]) {
         [self.delegate faceViewSendFace:faceName];
     }
@@ -189,16 +201,7 @@
  *  @return 被点击的imageView
  */
 - (UIImageView *)faceViewWitnInPoint:(CGPoint)point{
-    
-//    NSUInteger page = self.pageControl.currentPage;
-//    NSUInteger faceNumberPerPage = 3 * (self.maxPerLine + 1);
-//    int currentFaceIndex = page * faceNumberPerPage;
-//    for (int i = currentFaceIndex; i < faceNumberPerPage * page; i ++ ) {
-//        UIImageView *imageView = self.scrollView.subviews[i];
-//        if (CGRectContainsPoint(imageView.frame, CGPointMake(self.pageControl.currentPage * self.frame.size.width + point.x, point.y))) {
-//            return imageView;
-//        }
-//    }
+
     for (UIImageView *imageView in self.scrollView.subviews) {
         if (CGRectContainsPoint(imageView.frame, CGPointMake(self.pageControl.currentPage * self.frame.size.width + point.x, point.y))) {
             return imageView;
@@ -207,6 +210,12 @@
     return nil;
 }
 
+
+- (void)sendAction:(UIButton *)button{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(faceViewSendFace:)]) {
+        [self.delegate faceViewSendFace:@"发送"];
+    }
+}
 #pragma mark - Getters
 
 - (UIScrollView *)scrollView{
@@ -236,8 +245,37 @@
     return _facePreviewView;
 }
 
+- (UIView *)bottomView{
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 40, self.frame.size.width, 40)];
+        
+        UIImageView *topLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width - 70, 1.0f)];
+        topLine.backgroundColor = [UIColor lightGrayColor];
+        [_bottomView addSubview:topLine];
+        
+        UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 70, 0, 70, 40)];
+        sendButton.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:70.0f/255.0f blue:1.0f alpha:1.0f];
+        [sendButton setTitle:@"发送" forState:UIControlStateNormal];
+        [sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [sendButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_bottomView addSubview:self.sendButton = sendButton];
+    }
+    return _bottomView;
+}
+
 - (NSUInteger)maxPerLine{
     return 6;
 }
+
+- (NSUInteger)maxLine{
+    if (self.faceViewType == XMShowEmojiFace) {
+        return 3;
+    }else if (self.faceViewType == XMShowRecentFace || self.faceViewType == XMShowGifFace){
+        return 2;
+    }
+    return 0;
+}
+
 @end
     

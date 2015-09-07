@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, XMShowFaceViewType) {
+    XMShowEmojiFace = 0,
+    XMShowRecentFace,
+    XMShowGifFace,
+};
 
 @protocol XMChatFaceViewDelegate <NSObject>
 
@@ -18,6 +23,6 @@
 @interface XMChatFaceView : UIView
 
 @property (weak, nonatomic) id<XMChatFaceViewDelegate> delegate;
-
+@property (assign, nonatomic) XMShowFaceViewType faceViewType;
 
 @end
