@@ -21,8 +21,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
-    if (self.messageDelegate && [self.messageDelegate respondsToSelector:@selector(XMImageMessageTapped:)]) {
-        [self.messageDelegate XMImageMessageTapped:(XMImageMessage *)self.message];
+    UITouch *touch = [touches allObjects][0];
+    CGPoint touchPoint = [touch locationInView:self.contentView];
+    if (CGRectContainsPoint(self.messageMaskImageView.frame, touchPoint)) {
+        if (self.messageDelegate && [self.messageDelegate respondsToSelector:@selector(XMImageMessageTapped:)]) {
+            [self.messageDelegate XMImageMessageTapped:(XMImageMessage *)self.message];
+        }
     }
 }
 

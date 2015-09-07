@@ -87,7 +87,11 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
-    self.messageBackgroundImageView.highlighted = YES;
+    UITouch *touch = [touches allObjects][0];
+    CGPoint touchPoint = [touch locationInView:self.contentView];
+    if (CGRectContainsPoint(self.messageBackgroundImageView.frame, touchPoint)) {
+        self.messageBackgroundImageView.highlighted = YES;
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{

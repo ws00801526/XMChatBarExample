@@ -49,6 +49,7 @@
     
     [self.messageContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.messageBackgroundImageView).with.insets(UIEdgeInsetsMake(8, 8, 8, 8));
+        make.width.greaterThanOrEqualTo(@150);
     }];
 }
 

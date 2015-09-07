@@ -167,6 +167,9 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatBar:sendLocation:locationText:)]) {
         [self.delegate chatBar:self sendLocation:placemark.location.coordinate locationText:placemark.name];
     }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
+        [self.delegate chatBarFrameDidChange:self];
+    }
 }
 
 #pragma mark - MP3RecordedDelegate
@@ -243,8 +246,24 @@
 #pragma mark - XMChatFaceViewDelegate
 
 - (void)faceViewSendFace:(NSString *)faceName{
-    self.textView.text = [self.textView.text stringByAppendingString:faceName];
-    [self textViewDidChange:self.textView];
+    if ([faceName isEqualToString:@"[删除]"]) {
+        [self textView:self.textView shouldChangeTextInRange:NSMakeRange(self.textView.text.length - 1, 1) replacementText:@""];
+    }else if ([faceName isEqualToString:@"发送"]){
+        NSString *text = self.textView.text;
+        if (!text || text.length == 0) {
+            return;
+        }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(chatBar:sendMessage:)]) {
+            [self.delegate chatBar:self sendMessage:text];
+        }
+        self.inputText = @"";
+        self.textView.text = @"";
+        [self setFrame:CGRectMake(0, self.screenHeight - self.bottomHeight - kMinHeight, self.frame.size.width, kMinHeight)];
+        [self showViewWithType:XMFunctionViewShowFace];
+    }else{
+        self.textView.text = [self.textView.text stringByAppendingString:faceName];
+        [self textViewDidChange:self.textView];
+    }
 }
 
 #pragma mark - Public Methods
@@ -467,6 +486,9 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatBar:sendVoice:seconds:)]) {
         [self.delegate chatBar:self sendVoice:voiceData seconds:seconds];
     }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
+        [self.delegate chatBarFrameDidChange:self];
+    }
 }
 
 /**
@@ -477,6 +499,9 @@
 - (void)sendImageMessage:(UIImage *)image{
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatBar:sendPictures:)]) {
         [self.delegate chatBar:self sendPictures:@[image]];
+    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
+        [self.delegate chatBarFrameDidChange:self];
     }
 }
 
@@ -592,10 +617,11 @@
 - (void)setFrame:(CGRect)frame{
     [UIView animateWithDuration:.3 animations:^{
         [super setFrame:frame];
+    }completion:^(BOOL finished) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
+            [self.delegate chatBarFrameDidChange:self];
+        }
     }];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:)]) {
-        [self.delegate chatBarFrameDidChange:self];
-    }
 }
 
 @end
