@@ -28,6 +28,7 @@
 @interface XMMessageCell : UITableViewCell
 
 @property (strong, nonatomic) XMMessage *message;
+
 @property (strong, nonatomic) UIImageView *avatarImageView /**< 显示发送者头像 system 没有头像 */;
 @property (strong, nonatomic) UIImageView *messageBackgroundImageView /**< 消息背景,location,text,voice时有 */;
 @property (strong, nonatomic) UIImageView *messageSendStateImageView /**< 显示发送状态消息状态 */;

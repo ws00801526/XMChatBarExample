@@ -10,6 +10,8 @@
 		1E41107B437AC461E1CFFE95 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FDE2D94D720DCF73A5354BB /* libPods.a */; };
 		930A80D41B8C058D000959D4 /* face.plist in Resources */ = {isa = PBXBuildFile; fileRef = 930A80D31B8C058D000959D4 /* face.plist */; };
 		930A80D71B8C1052000959D4 /* XMFaceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 930A80D61B8C1052000959D4 /* XMFaceManager.m */; };
+		9321FAE41B9D8D0F00921194 /* test_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 9321FAE21B9D8D0F00921194 /* test_send.png */; };
+		9321FAE51B9D8D0F00921194 /* test_send2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9321FAE31B9D8D0F00921194 /* test_send2.png */; };
 		932CFBEA1B870C5100D9C4AE /* XMChatFaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 932CFBE91B870C5100D9C4AE /* XMChatFaceView.m */; };
 		933E5A421B954C19008EEBA8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933E5A411B954C19008EEBA8 /* RootViewController.m */; };
 		93D1B37E1B82D5AE00CA602D /* XMChatMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D1B37D1B82D5AE00CA602D /* XMChatMoreView.m */; };
@@ -60,6 +62,8 @@
 		930A80D31B8C058D000959D4 /* face.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = face.plist; sourceTree = "<group>"; };
 		930A80D51B8C1052000959D4 /* XMFaceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMFaceManager.h; sourceTree = "<group>"; };
 		930A80D61B8C1052000959D4 /* XMFaceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMFaceManager.m; sourceTree = "<group>"; };
+		9321FAE21B9D8D0F00921194 /* test_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_send.png; sourceTree = "<group>"; };
+		9321FAE31B9D8D0F00921194 /* test_send2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_send2.png; sourceTree = "<group>"; };
 		932CFBE81B870C5100D9C4AE /* XMChatFaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMChatFaceView.h; sourceTree = "<group>"; };
 		932CFBE91B870C5100D9C4AE /* XMChatFaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMChatFaceView.m; sourceTree = "<group>"; };
 		933E5A401B954C19008EEBA8 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -188,6 +192,8 @@
 				93D5A4831B8187630085D863 /* XMChatBar */,
 				93D5A4611B8187500085D863 /* AppDelegate.h */,
 				93D5A4621B8187500085D863 /* AppDelegate.m */,
+				9321FAE21B9D8D0F00921194 /* test_send.png */,
+				9321FAE31B9D8D0F00921194 /* test_send2.png */,
 				933E5A401B954C19008EEBA8 /* RootViewController.h */,
 				933E5A411B954C19008EEBA8 /* RootViewController.m */,
 				93D5A4671B8187500085D863 /* Main.storyboard */,
@@ -445,11 +451,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9321FAE51B9D8D0F00921194 /* test_send2.png in Resources */,
 				93D5A4691B8187500085D863 /* Main.storyboard in Resources */,
 				93D5A46E1B8187500085D863 /* LaunchScreen.xib in Resources */,
 				930A80D41B8C058D000959D4 /* face.plist in Resources */,
 				93D5A46B1B8187500085D863 /* Images.xcassets in Resources */,
 				93D5A5EF1B81B0C00085D863 /* chatBar.xcassets in Resources */,
+				9321FAE41B9D8D0F00921194 /* test_send.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
