@@ -35,18 +35,20 @@
 - (void)updateConstraints{
     [super updateConstraints];
     
+    XMImageMessage *imageMessage = (XMImageMessage *)self.message;
     
     [self.messageMaskImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.messageContentView.mas_top);
-        make.bottom.equalTo(self.messageContentView.mas_bottom);
-        make.height.lessThanOrEqualTo(@200);
-        make.width.lessThanOrEqualTo(@150);
+        make.bottom.equalTo(self.messageContentView.mas_bottom).priorityHigh();
+        make.height.mas_lessThanOrEqualTo(imageMessage.imageSize.height);
+        make.width.mas_lessThanOrEqualTo(imageMessage.imageSize.width);
+//        make.height.lessThanOrEqualTo(imageMessage.imageSize.height);
+//        make.width.lessThanOrEqualTo(imageMessage.imageSize.width);
         if (self.message.messageOwner == XMMessageOwnerTypeSelf) {
             make.right.equalTo(self.messageContentView.mas_right);
         }else{
             make.left.equalTo(self.messageContentView.mas_left);
         }
-        
     }];
     
     [self.messageImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
