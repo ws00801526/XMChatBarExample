@@ -36,22 +36,6 @@
         make.edges.equalTo(self.messageContentView);
     }];
     
-//    if (self.message.messageOwner == XMMessageOwnerTypeOther) {
-//        [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.contentView.mas_top);
-//            make.bottom.equalTo(self.contentView.mas_bottom);
-//            make.left.equalTo(self.avatarImageView.mas_right).with.offset(8);
-//            make.width.lessThanOrEqualTo(@200);
-//        }];
-//    }else if (self.message.messageOwner == XMMessageOwnerTypeSelf){
-//        [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.contentView.mas_top);
-//            make.bottom.equalTo(self.contentView.mas_bottom);
-//            make.right.equalTo(self.avatarImageView.mas_left).with.offset(-8);
-//            make.width.lessThanOrEqualTo(@200);
-//        }];
-//    }
-    
     [self.locationMessageContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.messageBackgroundImageView).with.insets(UIEdgeInsetsMake(8, 8, 8, 8));
         make.width.greaterThanOrEqualTo(@150);

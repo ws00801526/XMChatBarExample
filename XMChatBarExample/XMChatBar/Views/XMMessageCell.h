@@ -30,16 +30,22 @@
 @property (strong, nonatomic) XMMessage *message;
 
 @property (strong, nonatomic) UIImageView *avatarImageView /**< 显示发送者头像 system 没有头像 */;
+
 @property (strong, nonatomic) UIImageView *messageBackgroundImageView /**< 消息背景,location,text,voice时有 */;
-@property (strong, nonatomic) UIImageView *messageSendStateImageView /**< 显示发送状态消息状态 */;
-@property (strong, nonatomic) UILabel *messageNickNameLabel /**< 显示发送者昵称 */;
+
 @property (strong, nonatomic) UIView *messageContentView /**< 消息内容view */;
 
-@property (weak, nonatomic) id<XMMessageDelegate> messageDelegate;
+@property (strong, nonatomic) UIImageView *messageSendStateImageView /**< 显示发送状态消息状态 */;
+@property (strong, nonatomic) UILabel *messageNickNameLabel /**< 显示发送者昵称 */;
 
-- (instancetype)initWithMessage:(XMMessage *)message;
+@property (weak, nonatomic) id<XMMessageDelegate> messageDelegate /**< 消息代理事件 */;
+
+
+#pragma mark -  Public Methods
 
 - (void)setup;
+
+#pragma mark - Class Methods
 
 + (NSString *)cellIndetifyForMessage:(XMMessage *)message;
 

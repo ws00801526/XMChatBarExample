@@ -22,7 +22,7 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
     UITouch *touch = [touches allObjects][0];
-    CGPoint touchPoint = [touch locationInView:self.contentView];
+    CGPoint touchPoint = [touch locationInView:self.messageContentView];
     if (CGRectContainsPoint(self.messageMaskImageView.frame, touchPoint)) {
         if (self.messageDelegate && [self.messageDelegate respondsToSelector:@selector(XMImageMessageTapped:)]) {
             [self.messageDelegate XMImageMessageTapped:(XMImageMessage *)self.message];
@@ -42,8 +42,6 @@
         make.bottom.equalTo(self.messageContentView.mas_bottom).priorityHigh();
         make.height.mas_lessThanOrEqualTo(imageMessage.imageSize.height);
         make.width.mas_lessThanOrEqualTo(imageMessage.imageSize.width);
-//        make.height.lessThanOrEqualTo(imageMessage.imageSize.height);
-//        make.width.lessThanOrEqualTo(imageMessage.imageSize.width);
         if (self.message.messageOwner == XMMessageOwnerTypeSelf) {
             make.right.equalTo(self.messageContentView.mas_right);
         }else{

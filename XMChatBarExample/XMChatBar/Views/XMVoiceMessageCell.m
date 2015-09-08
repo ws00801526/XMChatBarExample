@@ -43,8 +43,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
-    if (self.messageDelegate && [self.messageDelegate respondsToSelector:@selector(XMVoiceMessageTapped:voiceStatus:)]) {
-        [self.messageDelegate XMVoiceMessageTapped:(XMVoiceMessage *)self.message voiceStatus:self];
+    UITouch *touch = [touches allObjects][0];
+    CGPoint touchPoint = [touch locationInView:self.contentView];
+    if (CGRectContainsPoint(self.messageContentView.frame, touchPoint)) {
+        if (self.messageDelegate && [self.messageDelegate respondsToSelector:@selector(XMVoiceMessageTapped:voiceStatus:)]) {
+            [self.messageDelegate XMVoiceMessageTapped:(XMVoiceMessage *)self.message voiceStatus:self];
+        }
     }
 }
 
@@ -58,21 +62,16 @@
     [self.messageContentView addSubview:self.messageBackgroundImageView];
     [self.messageContentView addSubview:self.voiceSecondsLabel];
     [self.messageContentView addSubview:self.voiceReadStateImageView];
-    
-//    [self.contentView addSubview:self.messageBackgroundImageView];
-//    [self.contentView addSubview:self.voiceSecondsLabel];
-//    [self.contentView addSubview:self.voiceReadStateImageView];
-    
+
 }
 
 - (void)updateConstraints{
     [super updateConstraints];
 
-    CGFloat width = ([(XMVoiceMessage *)self.message voiceSeconds]/3 + 1) * 80;
+    CGFloat width = MIN(([(XMVoiceMessage *)self.message voiceSeconds]/3 + 1) * 80, 190);
     [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.messageContentView);
         make.width.mas_equalTo(width);
-        make.width.lessThanOrEqualTo(@210);
     }];
     
     if (self.message.messageOwner == XMMessageOwnerTypeSelf) {

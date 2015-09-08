@@ -35,17 +35,6 @@
     return @"XMMessageCell";
 }
 
-
-- (instancetype)initWithMessage:(XMMessage *)message{
-    self = [super init];
-    if (self) {
-        [super setSelectionStyle:UITableViewCellSelectionStyleNone];
-        self.message = message;
-        [self setup];
-    }
-    return self;
-}
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if ([super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setup];
@@ -130,7 +119,7 @@
     [super touchesBegan:touches withEvent:event];
     UITouch *touch = [touches allObjects][0];
     CGPoint touchPoint = [touch locationInView:self.contentView];
-    if (CGRectContainsPoint(self.messageBackgroundImageView.frame, touchPoint)) {
+    if (CGRectContainsPoint(self.messageContentView.frame, touchPoint)) {
         self.messageBackgroundImageView.highlighted = YES;
     }
 }
@@ -143,6 +132,19 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
     self.messageBackgroundImageView.highlighted = NO;
+    UITouch *touch = [touches allObjects][0];
+    CGPoint touchPoint = [touch locationInView:self.contentView];
+    if (CGRectContainsPoint(self.avatarImageView.frame, touchPoint) || CGRectContainsPoint(self.messageNickNameLabel.frame, touchPoint)) {
+        if (self.messageDelegate && [self.messageDelegate respondsToSelector:@selector(XMMessageAvatarTapped:)]) {
+            [self.messageDelegate XMMessageAvatarTapped:self.message];
+        }
+    }else if (CGRectContainsPoint(self.messageContentView.frame, touchPoint)){
+        
+    }else{
+        if (self.messageDelegate && [self.messageDelegate respondsToSelector:@selector(XMMessageBankTapped:)]) {
+            [self.messageDelegate XMMessageBankTapped:self.message];
+        }
+    }
 }
 
 #pragma mark - Setters

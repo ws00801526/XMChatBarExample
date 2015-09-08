@@ -58,7 +58,7 @@
 #pragma mark - Getters
 
 
-- (UILabel *)messageTextLabel{
+- (UILabel *)messageTextLabel {
     if (!_messageTextLabel) {
         _messageTextLabel = [[UILabel alloc] init];
         _messageTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -72,6 +72,11 @@
 - (NSDictionary *)textStyle {
     UIFont *font = [UIFont systemFontOfSize:14.0f];
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+//    if (self.message.messageText.length > 20) {
+//        style.alignment = self.message.messageOwner == XMMessageOwnerTypeSelf ? NSTextAlignmentRight : NSTextAlignmentLeft;
+//    }else{
+//    }
+    style.alignment = NSTextAlignmentCenter;
     style.paragraphSpacing = 0.25 * font.lineHeight;
     style.hyphenationFactor = 1.0;
     return @{NSFontAttributeName: font,

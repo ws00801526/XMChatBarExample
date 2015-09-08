@@ -65,7 +65,8 @@ typedef NS_ENUM(NSUInteger, XMMessageReadState) {
 @property (assign, nonatomic) XMMessageType messageType /**< 消息类型 */;
 @property (assign, nonatomic) XMMessageSendState messageSendState /**< 消息状态 */;
 @property (assign, nonatomic) XMMessageReadState messageReadState /**< 消息状态 */;
-@property (assign, nonatomic) XMMessageChatType messageChatType /**< 聊天类型 */;
+
+@property (assign, nonatomic) XMMessageChatType messageChatType /**< 聊天类型,单人聊天信息,群组聊天信息 */;
 
 @property (assign, nonatomic) NSTimeInterval messageTime /**< 消息发送时间 */;
 
@@ -168,7 +169,33 @@ typedef NS_ENUM(NSUInteger, XMMessageReadState) {
 
 @protocol XMMessageDelegate <NSObject>
 
+/**
+ *  图片消息被点击
+ *
+ *  @param imageMessage 被点击的图片消息
+ */
 - (void)XMImageMessageTapped:(XMImageMessage *)imageMessage;
+
+/**
+ *  语音消息呗点击
+ *
+ *  @param voiceMessage 被点击的语音消息
+ *  @param voiceStatus  语音消息时长
+ */
 - (void)XMVoiceMessageTapped:(XMVoiceMessage *)voiceMessage voiceStatus:(id<XMVoiceMessageStatus>)voiceStatus;
+
+/**
+ *  头像被点击了
+ *
+ *  @param message 被点击的消息
+ */
+- (void)XMMessageAvatarTapped:(XMMessage *)message;
+
+/**
+ *  空白区域被点击了
+ *
+ *  @param message 被点击的消息
+ */
+- (void)XMMessageBankTapped:(XMMessage *)message;
 
 @end

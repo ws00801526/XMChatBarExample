@@ -7,7 +7,7 @@
         <!--Item 2-->
         <scene sceneID="PgL-Ef-i8n">
             <objects>
-                <viewController id="WMV-fe-r59" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="WMV-fe-r59" customClass="RootViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cxG-jo-aQm"/>
                         <viewControllerLayoutGuide type="bottom" id="Wim-tc-Udy"/>
