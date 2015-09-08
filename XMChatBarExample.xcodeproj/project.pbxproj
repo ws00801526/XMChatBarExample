@@ -23,8 +23,6 @@
 		9335E22D1B9EBD89000F4D99 /* XMSystemMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E1F51B9EBD89000F4D99 /* XMSystemMessage.m */; };
 		9335E22E1B9EBD89000F4D99 /* XMTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E1F71B9EBD89000F4D99 /* XMTextMessage.m */; };
 		9335E22F1B9EBD89000F4D99 /* XMVoiceMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E1F91B9EBD89000F4D99 /* XMVoiceMessage.m */; };
-		9335E2301B9EBD89000F4D99 /* PonyChatUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9335E2001B9EBD89000F4D99 /* PonyChatUI.xcassets */; };
-		9335E2311B9EBD89000F4D99 /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E2031B9EBD89000F4D99 /* SwipeView.m */; };
 		9335E2321B9EBD89000F4D99 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9335E2061B9EBD89000F4D99 /* libmp3lame.a */; };
 		9335E2331B9EBD89000F4D99 /* Mp3Recorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E2081B9EBD89000F4D99 /* Mp3Recorder.m */; };
 		9335E2341B9EBD89000F4D99 /* XMLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E20B1B9EBD89000F4D99 /* XMLocationManager.m */; };
@@ -87,9 +85,6 @@
 		9335E1F71B9EBD89000F4D99 /* XMTextMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMTextMessage.m; sourceTree = "<group>"; };
 		9335E1F81B9EBD89000F4D99 /* XMVoiceMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMVoiceMessage.h; sourceTree = "<group>"; };
 		9335E1F91B9EBD89000F4D99 /* XMVoiceMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMVoiceMessage.m; sourceTree = "<group>"; };
-		9335E2001B9EBD89000F4D99 /* PonyChatUI.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PonyChatUI.xcassets; sourceTree = "<group>"; };
-		9335E2021B9EBD89000F4D99 /* SwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeView.h; sourceTree = "<group>"; };
-		9335E2031B9EBD89000F4D99 /* SwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeView.m; sourceTree = "<group>"; };
 		9335E2051B9EBD89000F4D99 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		9335E2061B9EBD89000F4D99 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		9335E2071B9EBD89000F4D99 /* Mp3Recorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mp3Recorder.h; sourceTree = "<group>"; };
@@ -239,61 +234,10 @@
 		9335E1FA1B9EBD89000F4D99 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				9335E1FB1B9EBD89000F4D99 /* PonyChatUI */,
-				9335E2011B9EBD89000F4D99 /* SwipeView */,
 				9335E2041B9EBD89000F4D99 /* VoiceLib */,
 				9335E2091B9EBD89000F4D99 /* XMLocationManager */,
 			);
 			path = Vendors;
-			sourceTree = "<group>";
-		};
-		9335E1FB1B9EBD89000F4D99 /* PonyChatUI */ = {
-			isa = PBXGroup;
-			children = (
-				9335E1FC1B9EBD89000F4D99 /* Classes */,
-				9335E1FF1B9EBD89000F4D99 /* Resources */,
-			);
-			path = PonyChatUI;
-			sourceTree = "<group>";
-		};
-		9335E1FC1B9EBD89000F4D99 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				9335E1FD1B9EBD89000F4D99 /* Applicaton Logic */,
-				9335E1FE1B9EBD89000F4D99 /* User Interface */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		9335E1FD1B9EBD89000F4D99 /* Applicaton Logic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Applicaton Logic";
-			sourceTree = "<group>";
-		};
-		9335E1FE1B9EBD89000F4D99 /* User Interface */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "User Interface";
-			sourceTree = "<group>";
-		};
-		9335E1FF1B9EBD89000F4D99 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				9335E2001B9EBD89000F4D99 /* PonyChatUI.xcassets */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		9335E2011B9EBD89000F4D99 /* SwipeView */ = {
-			isa = PBXGroup;
-			children = (
-				9335E2021B9EBD89000F4D99 /* SwipeView.h */,
-				9335E2031B9EBD89000F4D99 /* SwipeView.m */,
-			);
-			path = SwipeView;
 			sourceTree = "<group>";
 		};
 		9335E2041B9EBD89000F4D99 /* VoiceLib */ = {
@@ -494,7 +438,6 @@
 				9321FAE51B9D8D0F00921194 /* test_send2.png in Resources */,
 				93D5A4691B8187500085D863 /* Main.storyboard in Resources */,
 				93D5A46E1B8187500085D863 /* LaunchScreen.xib in Resources */,
-				9335E2301B9EBD89000F4D99 /* PonyChatUI.xcassets in Resources */,
 				9335E2271B9EBD89000F4D99 /* face.plist in Resources */,
 				93D5A46B1B8187500085D863 /* Images.xcassets in Resources */,
 				9321FAE41B9D8D0F00921194 /* test_send.png in Resources */,
@@ -564,7 +507,6 @@
 				9335E22A1B9EBD89000F4D99 /* XMImageMessage.m in Sources */,
 				9335E23C1B9EBD89000F4D99 /* XMProgressHUD.m in Sources */,
 				9335E2371B9EBD89000F4D99 /* XMChatMoreItem.m in Sources */,
-				9335E2311B9EBD89000F4D99 /* SwipeView.m in Sources */,
 				9335E22F1B9EBD89000F4D99 /* XMVoiceMessage.m in Sources */,
 				9335E22C1B9EBD89000F4D99 /* XMMessage.m in Sources */,
 				9335E2381B9EBD89000F4D99 /* XMChatMoreView.m in Sources */,
@@ -703,11 +645,11 @@
 			baseConfigurationReference = 9F9385FC96BE12AEFE8854F5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = XMChatBarExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/XMChatBarExample/XMChatBar/Vendors/VoiceLib",
 					"$(PROJECT_DIR)/XMChatBar/Vendors/VoiceLib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -720,11 +662,11 @@
 			baseConfigurationReference = 327D40C22EA158C7EF8FA026 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = XMChatBarExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/XMChatBarExample/XMChatBar/Vendors/VoiceLib",
 					"$(PROJECT_DIR)/XMChatBar/Vendors/VoiceLib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
