@@ -18,6 +18,8 @@
 #import "XMAVAudioPlayer.h"
 
 #import "UITableView+FDTemplateLayoutCell.h"
+
+
 @interface ChatViewController ()<XMMessageDelegate,XMChatBarDelegate,XMAVAudioPlayerDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *tableView;
@@ -42,14 +44,14 @@
     self.chatBar.delegate = self;
     [self.view addSubview:self.chatBar];
     
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-//    [self.view addGestureRecognizer:tap];
-    
     self.dataArray = [NSMutableArray array];
- 
+
     [self loadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -81,6 +83,15 @@
 
 #pragma mark - XMMessageDelegate
 
+- (void)XMMessageBankTapped:(XMMessage *)message{
+    NSLog(@"点击了空白区域");
+    [self.chatBar endInputing];
+}
+
+- (void)XMMessageAvatarTapped:(XMMessage *)message{
+    NSLog(@"点击了头像");
+}
+
 - (void)XMImageMessageTapped:(XMImageMessage *)imageMessage{
     NSLog(@"you tap imageMessage you can show imageBrowser");
 }
@@ -110,7 +121,9 @@
     XMTextMessage *textMessage = [XMMessage textMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"messageText":message}];
     textMessage.messageChatType = rand() % 2;
     [self.dataArray addObject:textMessage];
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
     [self scrollToBottom];
 }
 
@@ -118,7 +131,9 @@
     XMVoiceMessage *voiceMessage = [XMMessage voiceMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"voiceData":voiceData,@"voiceSeconds":@(seconds)}];
     voiceMessage.messageChatType = rand() % 2;
     [self.dataArray addObject:voiceMessage];
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
     [self scrollToBottom];
 }
 
@@ -127,15 +142,20 @@
     XMImageMessage *imageMessage = [XMMessage imageMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"image":pictures[0]}];
     imageMessage.messageChatType = rand() % 2;
     [self.dataArray addObject:imageMessage];
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
     [self scrollToBottom];
 }
 
 - (void)chatBar:(XMChatBar *)chatBar sendLocation:(CLLocationCoordinate2D)locationCoordinate locationText:(NSString *)locationText{
     XMLocationMessage *locationMessage = [XMMessage locationMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"address":locationText,@"lat":@(locationCoordinate.latitude),@"lng":@(locationCoordinate.longitude)}];
     locationMessage.messageChatType = rand() % 2;
+    
     [self.dataArray addObject:locationMessage];
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
     [self scrollToBottom];
 }
 
@@ -145,8 +165,8 @@
     }
     [UIView animateWithDuration:.3f animations:^{
         [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, frame.origin.y)];
+        [self scrollToBottom];
     } completion:nil];
-    [self scrollToBottom];
 }
 
 #pragma mark - XMAVAudioPlayerDelegate
@@ -164,10 +184,6 @@
 }
 
 #pragma mark - Private Methods
-
-- (void)handleTap:(UITapGestureRecognizer *)tap{
-    [self.chatBar endInputing];
-}
 
 - (void)loadData{
 
@@ -259,11 +275,12 @@
         [_tableView registerClass:[XMImageMessageCell class] forCellReuseIdentifier:@"XMImageMessageCell"];
         [_tableView registerClass:[XMLocationMessageCell class] forCellReuseIdentifier:@"XMLocationMessageCell"];
         [_tableView registerClass:[XMVoiceMessageCell class] forCellReuseIdentifier:@"XMVoiceMessageCell"];
-        _tableView.estimatedRowHeight = 80;
+        //!!!设置少了会导致首次进入页面tableView计算不准高度,无法滑动到最后一行的bug,所以此处设置了300  但不清楚是否会导致其他bug
+        _tableView.estimatedRowHeight = 300;
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+
     }
     return _tableView;
 }
