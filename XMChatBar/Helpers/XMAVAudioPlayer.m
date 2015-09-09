@@ -47,6 +47,7 @@
 }
 
 -(void)playSoundWithData:(NSData *)soundData{
+    
     if (_player) {
         [_player stop];
         _player.delegate = nil;

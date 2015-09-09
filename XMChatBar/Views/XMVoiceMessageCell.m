@@ -15,7 +15,6 @@
 @property (strong, nonatomic) UIImageView *voiceReadStateImageView /**< 显示voice是否已读 */;
 @property (strong, nonatomic) UIImageView *voiceStateImageView;
 @property (strong, nonatomic) UILabel *voiceSecondsLabel;
-@property (strong, nonatomic) dispatch_source_t timer;
 @property (assign, nonatomic) BOOL isVoicePlaying;
 
 @end
@@ -133,36 +132,36 @@
 #pragma mark - Private Methods
 
 - (void)startPlayingAnimation{
-
     __weak __typeof(&*self) wself = self;
     dispatch_queue_t queue = dispatch_get_global_queue  (DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     __block NSUInteger currentFrame = 0;
-    dispatch_source_set_timer(self.timer,dispatch_walltime(NULL, 0),.5*NSEC_PER_SEC, 0); //每秒执行
-    dispatch_source_set_event_handler(self.timer, ^{
+    dispatch_source_set_timer(timer,dispatch_walltime(NULL, 0),.5*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(timer, ^{
             dispatch_sync(dispatch_get_main_queue(), ^{
-                if (currentFrame < 1 || currentFrame > 3) {
-                    currentFrame = 1;
+                if (!wself.isVoicePlaying) {
+                    dispatch_source_cancel(timer);
+                }else{
+                    if (currentFrame < 1 || currentFrame > 3) {
+                        currentFrame = 1;
+                    }
+                    if (wself.message.messageOwner == XMMessageOwnerTypeSelf) {
+                        wself.voiceStateImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"message_voice_sender_playing_%ld",currentFrame]];
+                    }
+                    else if (wself.message.messageOwner == XMMessageOwnerTypeOther) {
+                        wself.voiceStateImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"message_voice_receiver_playing_%ld",currentFrame]];
+                    }
+                    currentFrame++;
                 }
-                if (wself.message.messageOwner == XMMessageOwnerTypeSelf) {
-                    wself.voiceStateImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"message_voice_sender_playing_%ld",currentFrame]];
-                }
-                else if (wself.message.messageOwner == XMMessageOwnerTypeOther) {
-                    wself.voiceStateImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"message_voice_receiver_playing_%ld",currentFrame]];
-                }
-                currentFrame++;
+                
             });
     });
-    dispatch_resume(self.timer);
+    dispatch_resume(timer);
 
 }
 
 - (void)stopPlayingAnimation {
     if (self.isVoicePlaying) {
-        if (self.timer) {
-            dispatch_source_cancel(self.timer);
-            self.timer = nil;
-        }
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.message.messageOwner == XMMessageOwnerTypeOther) {
                 [self.voiceStateImageView setImage:[UIImage imageNamed:@"message_voice_receiver_normal"]];

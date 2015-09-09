@@ -10,10 +10,10 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/ws00801526/XMChatBarExample.git", :tag => s.version }
   s.source_files = "XMChatBar/**/*.{h,m}"
-  s.frameworks   = "UIKit", "MapKit", 'Foundation'
+  s.ios.frameworks   = "UIKit", "MapKit", "Foundation"
+  s.compiler_flags = '-DOS_OBJECT_USE_OBJC=0', '-Wno-format'
   s.requires_arc = true
-  s.preserve_paths = 'XMChatBar/Vendors/VoiceLib/*.a'
-  s.xcconfig     = { 'LIBRARY_SEARCH_PATHS' => 'XMChatBar/Vendors/VoiceLib' }
+  s.vendored_libraries = 'XMChatBar/Vendors/VoiceLib/libmp3lame.a'
   s.dependency "Masonry"  
 
 end
