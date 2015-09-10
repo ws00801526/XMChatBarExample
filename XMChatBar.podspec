@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
-  s.name         = "XMChatBarExample"
+  s.name         = "XMChatBar"
   s.version      = "1.2.1"
   s.summary      = "模仿微信聊天输入框"
   s.description  = "模仿微信,QQ聊天输入框,共同学习,如果您发现什么bug或者有什么问题,可以联系我"
@@ -13,5 +13,6 @@ Pod::Spec.new do |s|
   s.ios.frameworks   = "UIKit", "MapKit", "Foundation"
   s.requires_arc = true
   s.ios.vendored_library = 'XMChatBar/Vendors/VoiceLib/libmp3lame.a'
+  s.resources = ["XMChatBar/chatBar.xcassets", "XMChatBar/face.plist"]
   s.dependency "Masonry"
 end

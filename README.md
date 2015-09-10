@@ -64,3 +64,7 @@ AsyncDisplayKit | PonyChatUI需要的 第三方类库
 1. 去除了PonyChatUI的依赖,因为该类库依赖于AsyncDisplayKit,本人不太熟悉,所以重新参照PonyChatUI重新写了个ChatViewController
 2. 加入了pods 工程,因为不少小伙伴下载后缺少pods工程无法打开,这次特地一起上传了上来
 3. 使用方法请参考,ChatViewController,也可以直接使用,没有继承下拉加载更多消息
+
+#####V1.2.1
+增加pod使用方法
+pod XMChatBar
