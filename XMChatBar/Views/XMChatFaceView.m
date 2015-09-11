@@ -72,8 +72,12 @@
 @property (strong, nonatomic) UIView *bottomView;
 @property (weak, nonatomic) UIButton *sendButton;
 
+@property (weak, nonatomic) UIButton *recentButton /**< 显示最近表情的button */;
+@property (weak, nonatomic) UIButton *emojiButton /**< 显示emoji表情Button */;
+
 @property (assign, nonatomic, readonly) NSUInteger maxPerLine; /**< 每行显示的表情数量,6,6plus可能相应多显示  默认emoji5s显示7个 最近表情显示4个  gif表情显示4个 */
 @property (assign, nonatomic, readonly) NSUInteger maxLine; /**< 每页显示的行数 默认emoji3行  最近表情2行  gif表情2行 */
+@property (assign, nonatomic) NSUInteger facePage /**< 当前显示的facePage */;
 
 @end
 
@@ -90,6 +94,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self.pageControl setCurrentPage:scrollView.contentOffset.x / scrollView.frame.size.width];
+    self.facePage = self.pageControl.currentPage;
 }
 
 #pragma mark - Private Methods
@@ -109,16 +114,74 @@
     
 }
 
+- (void)resetScrollView{
+    [self.recentButton setSelected:self.faceViewType == XMShowRecentFace];
+    [self.emojiButton setSelected:self.faceViewType == XMShowEmojiFace];
+    [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.scrollView setContentSize:CGSizeZero];
+    [self.pageControl setNumberOfPages:0];
+}
+
+- (void)setupFaceView{
+    [self resetScrollView];
+    if (self.faceViewType == XMShowEmojiFace) {
+        [self setupEmojiFaces];
+    }else if (self.faceViewType == XMShowRecentFace){
+        [self setupRecentFaces];
+    }
+}
+
+/**
+ *  初始化最近使用的表情view
+ */
+- (void)setupRecentFaces{
+
+    
+    NSMutableArray *recentFaces = [NSMutableArray arrayWithArray:[XMFaceManager recentFaces]];
+    NSUInteger line = 0;
+    NSUInteger column = 0;
+    CGFloat itemWidth = (self.frame.size.width - 20) / 4;
+    for (NSDictionary *faceDict in recentFaces) {
+        if (column >= 4) {
+            column = 0;
+            line ++ ;
+        }
+        if (line >= 2) {
+            break;
+        }
+        //计算每一个图片的起始X位置 10(左边距) + 第几列*itemWidth + 第几页*一页的宽度
+        CGFloat startX = 10 + column * itemWidth;
+        //计算每一个图片的起始Y位置  第几行*每行高度
+        CGFloat startY = line * itemWidth;
+        
+        UIImageView *imageView = [self faceImageViewWithID:faceDict[kFaceIDKey]];
+        [imageView setFrame:CGRectMake(startX, startY, itemWidth, itemWidth)];
+        [self.scrollView addSubview:imageView];
+        column ++ ;
+    }
+}
+
+/**
+ *  初始化所有的emoji表情
+ */
 - (void)setupEmojiFaces{
     
+
+    [self resetScrollView];
+
     //计算每一页最多显示多少个表情 (每行显示数量)*3 - 1(删除按钮)
-    NSInteger pageItemCount = (self.maxPerLine + 1) * 3 - 1;
+    NSInteger pageItemCount = (self.maxPerLine + 1) * self.maxLine - 1;
     
+    //获取所有的face表情dict包含face_id,face_name两个key-value
     NSMutableArray *allFaces = [NSMutableArray arrayWithArray:[XMFaceManager emojiFaces]];
+    
+    //计算页数
     NSUInteger pageCount = [allFaces count] % pageItemCount == 0 ? [allFaces count] / pageItemCount : ([allFaces count] / pageItemCount) + 1;
     
+    //配置pageControl的页数
     self.pageControl.numberOfPages = pageCount;
     
+    //循环,给每一页末尾加上一个delete图片,如果是最后一页直接在最后一个加上delete图片
     for (int i = 0; i < pageCount; i++) {
         if (pageCount - 1 == i) {
             [allFaces addObject:@{@"face_id":@"999",@"face_name":@"删除"}];
@@ -127,22 +190,30 @@
         }
     }
     
+    //循环添加所有的imageView
     NSUInteger maxPerLine = self.maxPerLine;
     NSUInteger line = 0;   //行数
     NSUInteger column = 0; //列数
     NSUInteger page = 0;   //页数
-    CGFloat itemWidth = (self.frame.size.width - 20) / 7;
+    //每一行从0开始 显示maxPerLine+1个图片 计算每一个图片的宽度
+    CGFloat itemWidth = (self.frame.size.width - 20) / (self.maxPerLine + 1);
+    
     for (NSDictionary *faceDict in allFaces) {
+        
+        //判断是否超过每一行显示的最大数量,是则换行
         if (column > maxPerLine) {
             line ++ ;
             column = 0;
         }
+        //判断是否超过每一行显示的最大数量,是则换下一页
         if (line > 2) {
             line = 0;
             column = 0;
             page ++ ;
         }
+        //计算每一个图片的起始X位置 10(左边距) + 第几列*itemWidth + 第几页*一页的宽度
         CGFloat startX = 10 + column * itemWidth + page * self.frame.size.width;
+        //计算每一个图片的起始Y位置  第几行*每行高度
         CGFloat startY = line * itemWidth;
 
         UIImageView *imageView = [self faceImageViewWithID:faceDict[kFaceIDKey]];
@@ -150,15 +221,36 @@
         [self.scrollView addSubview:imageView];
         column ++ ;
     }
+    //重新配置下scrollView的contentSize
     [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width * (page + 1), self.scrollView.frame.size.height)];
+    [self.scrollView setContentOffset:CGPointMake(self.facePage * self.frame.size.width, 0)];
+    self.pageControl.currentPage = self.facePage;
 }
 
-
+/**
+ *  根据faceID获取一个imageView实例
+ *
+ *  @param faceID faceID
+ *
+ *  @return
+ */
 - (UIImageView *)faceImageViewWithID:(NSString *)faceID{
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:faceID]];
+    
+    NSString *faceImageName = @"";
+    if ([faceID integerValue] < 10) {
+        faceImageName = [NSString stringWithFormat:@"00%ld",[faceID integerValue]];
+    }else if ([faceID integerValue] < 100){
+        faceImageName = [NSString stringWithFormat:@"0%ld",[faceID integerValue]];
+    }else{
+        faceImageName = faceID;
+    }
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:faceImageName]];
     imageView.userInteractionEnabled = YES;
     imageView.tag = [faceID integerValue];
     imageView.contentMode = UIViewContentModeCenter;
+    
+    //添加图片的点击手势
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [imageView addGestureRecognizer:tap];
 
@@ -166,17 +258,27 @@
 }
 
 
+/**
+ *  处理每个图片对应的点击手势
+ *  特殊处理下tag=999  这是一个删除图片
+ *  @param tap
+ */
 - (void)handleTap:(UITapGestureRecognizer *)tap{
-    NSLog(@"click is %ld  name is %@",tap.view.tag,[XMFaceManager faceNameWithFaceImageName:[NSString stringWithFormat:@"%ld",tap.view.tag]]);
     NSString *faceName = [XMFaceManager faceNameWithFaceImageName:[NSString stringWithFormat:@"%ld",tap.view.tag]];
     if (tap.view.tag == 999) {
         faceName = @"[删除]";
     }
     if (self.delegate && [self.delegate respondsToSelector:@selector(faceViewSendFace:)]) {
         [self.delegate faceViewSendFace:faceName];
+        [XMFaceManager saveRecentFace:@{@"face_id":[NSString stringWithFormat:@"%ld",tap.view.tag],@"face_name":faceName}];
     }
 }
 
+/**
+ *  处理scrollView的长按手势
+ *
+ *  @param longPress
+ */
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
     CGPoint touchPoint = [longPress locationInView:self];
     UIImageView *touchFaceView = [self faceViewWitnInPoint:touchPoint];
@@ -210,12 +312,17 @@
     return nil;
 }
 
-
 - (void)sendAction:(UIButton *)button{
     if (self.delegate && [self.delegate respondsToSelector:@selector(faceViewSendFace:)]) {
         [self.delegate faceViewSendFace:@"发送"];
     }
 }
+
+- (void)changeFaceType:(UIButton *)button{
+    self.faceViewType = button.tag;
+    [self setupFaceView];
+}
+
 #pragma mark - Getters
 
 - (UIScrollView *)scrollView{
@@ -260,6 +367,28 @@
         [sendButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [_bottomView addSubview:self.sendButton = sendButton];
+        
+        
+        UIButton *recentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [recentButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_recent_normal"] forState:UIControlStateNormal];
+        [recentButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_recent_highlight"] forState:UIControlStateHighlighted];
+        [recentButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_recent_highlight"] forState:UIControlStateSelected];
+        recentButton.tag = XMShowRecentFace;
+        [recentButton addTarget:self action:@selector(changeFaceType:) forControlEvents:UIControlEventTouchUpInside];
+        [recentButton sizeToFit];
+        [_bottomView addSubview:self.recentButton = recentButton];
+        [recentButton setFrame:CGRectMake(0, _bottomView.frame.size.height/2-recentButton.frame.size.height/2, recentButton.frame.size.width, recentButton.frame.size.height)];
+        
+        UIButton *emojiButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [emojiButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_emoji_normal"] forState:UIControlStateNormal];
+        [emojiButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_emoji_highlight"] forState:UIControlStateHighlighted];
+        [emojiButton setBackgroundImage:[UIImage imageNamed:@"chat_bar_emoji_highlight"] forState:UIControlStateSelected];
+        emojiButton.tag = XMShowEmojiFace;
+        [emojiButton addTarget:self action:@selector(changeFaceType:) forControlEvents:UIControlEventTouchUpInside];
+        [emojiButton sizeToFit];
+        [_bottomView addSubview:self.emojiButton = emojiButton];
+        [emojiButton setFrame:CGRectMake(recentButton.frame.size.width, _bottomView.frame.size.height/2-emojiButton.frame.size.height/2, emojiButton.frame.size.width, emojiButton.frame.size.height)];
+        
     }
     return _bottomView;
 }

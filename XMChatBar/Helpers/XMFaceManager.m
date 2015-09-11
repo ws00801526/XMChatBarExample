@@ -11,6 +11,7 @@
 @interface XMFaceManager ()
 
 @property (strong, nonatomic) NSMutableArray *emojiFaceArrays;
+@property (strong, nonatomic) NSMutableArray *recentFaceArrays;
 @end
 
 @implementation XMFaceManager
@@ -25,6 +26,15 @@
         }
         NSArray *faceArray = [NSArray arrayWithContentsOfFile:[XMFaceManager documentEmojiFacePath]];
         [_emojiFaceArrays addObjectsFromArray:faceArray];
+        
+        
+        NSArray *recentArrays = [[NSUserDefaults standardUserDefaults] arrayForKey:@"recentFaceArrays"];
+        if (recentArrays) {
+            _recentFaceArrays = [NSMutableArray arrayWithArray:recentArrays];
+        }else{
+            _recentFaceArrays = [NSMutableArray array];
+        }
+        
     }
     return self;
 }
@@ -41,9 +51,13 @@
     return shareInstance;
 }
 
+
+#pragma mark - Emoji相关表情处理方法
+
 + (NSArray *)emojiFaces{
     return [[XMFaceManager shareInstance] emojiFaceArrays];
 }
+
 
 + (NSString *)defaultEmojiFacePath{
     return [[NSBundle mainBundle] pathForResource:@"face" ofType:@"plist"];
@@ -128,6 +142,34 @@
         [attributeString replaceCharactersInRange:range withAttributedString:imageArray[i][@"image"]];
     }
     return attributeString;
+}
+
+
+
+#pragma mark - 最近使用表情相关方法
+/**
+ *  获取最近使用的表情图片
+ *
+ *  @return
+ */
++ (NSArray *)recentFaces{
+    return [[XMFaceManager shareInstance] recentFaceArrays];
+}
+
+
++ (BOOL)saveRecentFace:(NSDictionary *)recentDict{
+    for (NSDictionary *dict in [[XMFaceManager shareInstance] recentFaceArrays]) {
+        if ([dict[@"face_id"] integerValue] == [recentDict[@"face_id"] integerValue]) {
+            NSLog(@"已经存在");
+            return NO;
+        }
+    }
+    [[[XMFaceManager shareInstance] recentFaceArrays] insertObject:recentDict atIndex:0];
+    if ([[XMFaceManager shareInstance] recentFaceArrays].count > 8) {
+        [[[XMFaceManager shareInstance] recentFaceArrays] removeLastObject];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:[[XMFaceManager shareInstance] recentFaceArrays] forKey:@"recentFaceArrays"];
+    return YES;
 }
 
 @end
