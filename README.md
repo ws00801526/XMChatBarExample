@@ -68,3 +68,8 @@ AsyncDisplayKit | PonyChatUI需要的 第三方类库
 #####V1.2.1
 增加pod使用方法
 pod XMChatBar
+
+#####V1.2.2
+1. 修复一个头像拉伸的bug
+2. 增加了一个ChatListController ,demo测试,可以让大家参考下
+3. ChatViewController 分成了XMChatTypeSingle,XMChatTypeGroup两种,默认XMChatTypeSingle
