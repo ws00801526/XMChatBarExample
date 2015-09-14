@@ -10,4 +10,16 @@
 
 @implementation UIImageView (XMWebImage)
 
+- (void)setImageWithUrlString:(NSString *)urlString{
+    if (!urlString) {
+        return;
+    }
+    dispatch_async(dispatch_queue_create("pic", nil), ^{
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.image = [UIImage imageWithData:data];
+        });
+    });
+}
+
 @end

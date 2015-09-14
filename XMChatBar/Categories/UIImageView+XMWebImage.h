@@ -10,4 +10,6 @@
 
 @interface UIImageView (XMWebImage)
 
+- (void)setImageWithUrlString:(NSString *)urlString;
+
 @end
