@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "XMChatBar"
-  s.version      = "1.2.1"
+  s.version      = "1.2.2"
   s.summary      = "模仿微信聊天输入框"
   s.description  = "模仿微信,QQ聊天输入框,共同学习,如果您发现什么bug或者有什么问题,可以联系我"
   s.homepage     = "https://github.com/ws00801526/XMChatBarExample"
