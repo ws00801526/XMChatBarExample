@@ -12,8 +12,8 @@
 
 @interface ChatViewController : UIViewController
 
-@property (copy, nonatomic) NSString *chatterName;
-@property (copy, nonatomic) NSString *chatterThumb;
+@property (copy, nonatomic) NSString *chatterName /**< 正在聊天的用户昵称 */;
+@property (copy, nonatomic) NSString *chatterThumb /**< 正在聊天的用户头像 */;
 
 - (instancetype)initWithChatType:(XMMessageChatType)messageChatType;
 

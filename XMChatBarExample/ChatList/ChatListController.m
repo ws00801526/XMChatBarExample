@@ -62,17 +62,6 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self registerNotifications];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self unregisterNotifications];
-}
-
-
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -111,24 +100,7 @@
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-
-
-    }
-    
-}
-
 #pragma mark - Private Methods
-
--(void)registerNotifications{
-    [self unregisterNotifications];
-}
-
--(void)unregisterNotifications{
-    
-}
 
 - (void)loadDatas{
     self.dataArray = [NSMutableArray array];

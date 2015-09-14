@@ -311,12 +311,12 @@
 		9340DA061B9FFF4A00EE227F /* XMChatView */ = {
 			isa = PBXGroup;
 			children = (
+				9335E2191B9EBD89000F4D99 /* XMMessageCell.h */,
+				9335E21A1B9EBD89000F4D99 /* XMMessageCell.m */,
 				9335E2151B9EBD89000F4D99 /* XMImageMessageCell.h */,
 				9335E2161B9EBD89000F4D99 /* XMImageMessageCell.m */,
 				9335E2171B9EBD89000F4D99 /* XMLocationMessageCell.h */,
 				9335E2181B9EBD89000F4D99 /* XMLocationMessageCell.m */,
-				9335E2191B9EBD89000F4D99 /* XMMessageCell.h */,
-				9335E21A1B9EBD89000F4D99 /* XMMessageCell.m */,
 				9335E21D1B9EBD89000F4D99 /* XMSystemMessageCell.h */,
 				9335E21E1B9EBD89000F4D99 /* XMSystemMessageCell.m */,
 				9335E21F1B9EBD89000F4D99 /* XMTextMessageCell.h */,
