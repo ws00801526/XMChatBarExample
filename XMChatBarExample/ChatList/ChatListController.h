@@ -6,12 +6,12 @@
 //  Copyright (c) 2015年 shscce. All rights reserved.
 //
 
-#import "BaseHideTabBarController.h"
 
+#import <UIKit/UIKit.h>
 
 /**
  *  显示用户的会话列表
  */
-@interface ChatListController : BaseHideTabBarController
+@interface ChatListController : UIViewController
 
 @end

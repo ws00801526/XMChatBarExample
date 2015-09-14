@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "XMMessage.h"
+
 @interface ChatViewController : UIViewController
+
+@property (copy, nonatomic) NSString *chatterName;
+@property (copy, nonatomic) NSString *chatterThumb;
+
+- (instancetype)initWithChatType:(XMMessageChatType)messageChatType;
 
 @end

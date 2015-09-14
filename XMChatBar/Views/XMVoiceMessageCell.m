@@ -70,7 +70,7 @@
     CGFloat width = MIN(([(XMVoiceMessage *)self.message voiceSeconds]/3 + 1) * 80, 190);
     [self.messageBackgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.messageContentView);
-        make.width.mas_equalTo(width);
+        make.width.equalTo(@(width));
     }];
     
     if (self.message.messageOwner == XMMessageOwnerTypeSelf) {

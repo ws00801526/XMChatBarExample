@@ -29,45 +29,45 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated{
     [super setSelected:selected animated:animated];
-    self.unreadLabel.backgroundColor = RGB(233, 10, 1);
+    self.unreadLabel.backgroundColor = [UIColor colorWithRed:233/255.0f green:10/255.0f blue:1/255.0f alpha:1.0f];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
-    self.unreadLabel.backgroundColor = RGB(233, 10, 1);
+    self.unreadLabel.backgroundColor = [UIColor colorWithRed:233/255.0f green:10/255.0f blue:1/255.0f alpha:1.0f];
 }
 
 - (void)updateConstraints{
     [super updateConstraints];
     
-    [self.headImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.left).with.offset(12);
-        make.width.equalTo(40);
-        make.height.equalTo(40);
-        make.centerY.equalTo(self.contentView.centerY);
+    [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).with.offset(12);
+        make.width.equalTo(@40);
+        make.height.equalTo(@40);
+        make.centerY.equalTo(self.contentView.mas_centerY);
     }];
     
-    [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.headImageView.right).with.offset(8);
-        make.top.equalTo(self.headImageView.top).with.offset(2);
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.headImageView.mas_right).with.offset(8);
+        make.top.equalTo(self.headImageView.mas_top).with.offset(2);
     }];
     
-    [self.lastMessageLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.headImageView.right).with.offset(8);
-        make.right.equalTo(self.contentView.right).with.offset(-8);
-        make.bottom.equalTo(self.headImageView.bottom).with.offset(-2);
+    [self.lastMessageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.headImageView.mas_right).with.offset(8);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-8);
+        make.bottom.equalTo(self.headImageView.mas_bottom).with.offset(-2);
     }];
     
-    [self.timeLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView.right).with.offset(-8);
-        make.centerY.equalTo(self.titleLabel.centerY);
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView.mas_right).with.offset(-8);
+        make.centerY.equalTo(self.titleLabel.mas_centerY);
     }];
     
-    [self.unreadLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView.right).with.offset(-8);
-        make.centerY.equalTo(self.lastMessageLabel.centerY);
+    [self.unreadLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView.mas_right).with.offset(-8);
+        make.centerY.equalTo(self.lastMessageLabel.mas_centerY);
         make.width.mas_greaterThanOrEqualTo(@20);
-        make.height.equalTo(15);
+        make.height.equalTo(@15);
     }];
     
 }
@@ -105,18 +105,18 @@
     unreadLabel.textAlignment = NSTextAlignmentCenter;
     unreadLabel.layer.cornerRadius = 7.5f;
     unreadLabel.layer.masksToBounds = YES;
-    unreadLabel.backgroundColor = RGB(233, 10, 1);
+    unreadLabel.backgroundColor = [UIColor colorWithRed:233/255.0f green:10/255.0f blue:1/255.0f alpha:1.0f];
     unreadLabel.text = @"10";
     [self.contentView addSubview:self.unreadLabel = unreadLabel];
     
     
     UIImageView *lineImageView = [[UIImageView alloc] init];
-    lineImageView.backgroundColor = RGB(234, 234, 234);
+    lineImageView.backgroundColor = [UIColor colorWithRed:234/255.0f green:234/255.0f blue:234/255.0f alpha:1.0f];
     [self.contentView addSubview:lineImageView];
-    [lineImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLabel.left);
-        make.right.equalTo(self.right);
-        make.bottom.equalTo(self.bottom);
+    [lineImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLabel.mas_left);
+        make.right.equalTo(self.mas_right);
+        make.bottom.equalTo(self.mas_bottom);
         make.height.mas_equalTo(.5);
     }];
     

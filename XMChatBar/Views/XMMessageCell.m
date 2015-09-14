@@ -13,6 +13,10 @@
 #import "XMLocationMessage.h"
 #import "XMVoiceMessage.h"
 
+
+//!!! test
+#import "UIImageView+XMWebImage.h"
+
 @interface XMMessageCell    ()
 
 @end
@@ -89,25 +93,23 @@
         }
     }];
     
-    
-    
     self.avatarImageView.hidden = NO;
     if (self.message.messageOwner == XMMessageOwnerTypeOther) {
         [self.avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView.mas_left).with.offset(10);
             make.top.equalTo(self.contentView.mas_top).with.offset(8);
-            make.width.mas_equalTo(@kAvatarSize).with.priorityHigh();
-            make.height.mas_equalTo(@kAvatarSize).with.priorityHigh();
             make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-8).priorityMedium();
+            make.width.equalTo(@kAvatarSize);
+            make.height.equalTo(@kAvatarSize);
         }];
  
     }else if (self.message.messageOwner == XMMessageOwnerTypeSelf){
         [self.avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView.mas_right).with.offset(-10);
             make.top.equalTo(self.contentView.mas_top).with.offset(8);
-            make.width.mas_equalTo(@kAvatarSize).with.priorityHigh();
-            make.height.mas_equalTo(@kAvatarSize).with.priorityHigh();
             make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-8).priorityMedium();
+            make.width.equalTo(@kAvatarSize);
+            make.height.equalTo(@kAvatarSize);
         }];
     }else{
         self.avatarImageView.hidden = YES;
@@ -158,9 +160,10 @@
         [self.messageBackgroundImageView setImage:[[UIImage imageNamed:@"message_receiver_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch]];
         self.messageBackgroundImageView.highlightedImage = [[UIImage imageNamed:@"message_receiver_background_highlight"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
     }
-    
+    self.messageNickNameLabel.text = message.senderNickName;
+    [self.avatarImageView setImageWithUrlString:message
+         .senderAvatarThumb];
     [self updateConstraints];
-
 }
 
 #pragma mark - Getters
@@ -170,6 +173,7 @@
         _avatarImageView = [[UIImageView alloc] init];
         _avatarImageView.backgroundColor = [UIColor yellowColor];
         _avatarImageView.layer.cornerRadius = kAvatarCornerRadius;
+        _avatarImageView.layer.masksToBounds = YES;
     }
     return _avatarImageView;
 }

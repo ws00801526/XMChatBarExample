@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1E41107B437AC461E1CFFE95 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FDE2D94D720DCF73A5354BB /* libPods.a */; };
+		9305B1051BA6555600E0C96D /* UIImageView+XMWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305B1041BA6555600E0C96D /* UIImageView+XMWebImage.m */; };
+		9305B10D1BA6578D00E0C96D /* ChatListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305B1081BA6578D00E0C96D /* ChatListCell.m */; };
+		9305B10E1BA6578D00E0C96D /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305B10A1BA6578D00E0C96D /* ChatListController.m */; };
 		9321FAE41B9D8D0F00921194 /* test_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 9321FAE21B9D8D0F00921194 /* test_send.png */; };
 		9321FAE51B9D8D0F00921194 /* test_send2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9321FAE31B9D8D0F00921194 /* test_send2.png */; };
 		9335E2231B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E1E01B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m */; };
@@ -59,6 +62,12 @@
 /* Begin PBXFileReference section */
 		327D40C22EA158C7EF8FA026 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		5FDE2D94D720DCF73A5354BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9305B1031BA6555600E0C96D /* UIImageView+XMWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+XMWebImage.h"; sourceTree = "<group>"; };
+		9305B1041BA6555600E0C96D /* UIImageView+XMWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+XMWebImage.m"; sourceTree = "<group>"; };
+		9305B1071BA6578D00E0C96D /* ChatListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListCell.h; sourceTree = "<group>"; };
+		9305B1081BA6578D00E0C96D /* ChatListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListCell.m; sourceTree = "<group>"; };
+		9305B1091BA6578D00E0C96D /* ChatListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListController.h; sourceTree = "<group>"; };
+		9305B10A1BA6578D00E0C96D /* ChatListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListController.m; sourceTree = "<group>"; };
 		9321FAE21B9D8D0F00921194 /* test_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_send.png; sourceTree = "<group>"; };
 		9321FAE31B9D8D0F00921194 /* test_send2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_send2.png; sourceTree = "<group>"; };
 		9335E1DF1B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
@@ -166,6 +175,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9305B1061BA6578D00E0C96D /* ChatList */ = {
+			isa = PBXGroup;
+			children = (
+				9305B1071BA6578D00E0C96D /* ChatListCell.h */,
+				9305B1081BA6578D00E0C96D /* ChatListCell.m */,
+				9305B1091BA6578D00E0C96D /* ChatListController.h */,
+				9305B10A1BA6578D00E0C96D /* ChatListController.m */,
+			);
+			path = ChatList;
+			sourceTree = "<group>";
+		};
 		9335E1DD1B9EBD89000F4D99 /* XMChatBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +206,8 @@
 			children = (
 				9335E1DF1B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.h */,
 				9335E1E01B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m */,
+				9305B1031BA6555600E0C96D /* UIImageView+XMWebImage.h */,
+				9305B1041BA6555600E0C96D /* UIImageView+XMWebImage.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -335,6 +357,7 @@
 				9321FAE31B9D8D0F00921194 /* test_send2.png */,
 				933E5A401B954C19008EEBA8 /* RootViewController.h */,
 				933E5A411B954C19008EEBA8 /* RootViewController.m */,
+				9305B1061BA6578D00E0C96D /* ChatList */,
 				93D5A4671B8187500085D863 /* Main.storyboard */,
 				93D5A46A1B8187500085D863 /* Images.xcassets */,
 				93D5A46C1B8187500085D863 /* LaunchScreen.xib */,
@@ -508,12 +531,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9305B1051BA6555600E0C96D /* UIImageView+XMWebImage.m in Sources */,
 				93D5A4631B8187500085D863 /* AppDelegate.m in Sources */,
 				9335E2291B9EBD89000F4D99 /* XMFaceManager.m in Sources */,
 				9335E2261B9EBD89000F4D99 /* XMLocationController.m in Sources */,
 				9335E23D1B9EBD89000F4D99 /* XMSystemMessageCell.m in Sources */,
 				9335E2341B9EBD89000F4D99 /* XMLocationManager.m in Sources */,
 				9335E23B1B9EBD89000F4D99 /* XMMessageCell.m in Sources */,
+				9305B10D1BA6578D00E0C96D /* ChatListCell.m in Sources */,
 				9335E22E1B9EBD89000F4D99 /* XMTextMessage.m in Sources */,
 				9335E22D1B9EBD89000F4D99 /* XMSystemMessage.m in Sources */,
 				9335E2231B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m in Sources */,
@@ -529,6 +554,7 @@
 				9335E2361B9EBD89000F4D99 /* XMChatFaceView.m in Sources */,
 				933E5A421B954C19008EEBA8 /* RootViewController.m in Sources */,
 				9335E2351B9EBD89000F4D99 /* XMChatBar.m in Sources */,
+				9305B10E1BA6578D00E0C96D /* ChatListController.m in Sources */,
 				9335E23E1B9EBD89000F4D99 /* XMTextMessageCell.m in Sources */,
 				9335E2391B9EBD89000F4D99 /* XMImageMessageCell.m in Sources */,
 				93D5A4601B8187500085D863 /* main.m in Sources */,

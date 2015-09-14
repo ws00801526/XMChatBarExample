@@ -20,6 +20,10 @@
 #import "UITableView+FDTemplateLayoutCell.h"
 
 
+
+#define kSelfName @"XMFraker"
+#define kSelfThumb @"http://img1.touxiang.cn/uploads/20131114/14-065809_117.jpg"
+
 @interface ChatViewController ()<XMMessageDelegate,XMChatBarDelegate,XMAVAudioPlayerDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *tableView;
@@ -27,17 +31,17 @@
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
 @property (weak, nonatomic) id<XMVoiceMessageStatus> voiceMessageCell;
-//@property (assign, nonatomic) XMMessageChatType messageChatType;
+@property (assign, nonatomic) XMMessageChatType messageChatType;
 @end
 
 @implementation ChatViewController
 
-//- (instancetype)initWithChatType:(XMMessageChatType)messageChatType{
-//    if ([super init]) {
-//        self.messageChatType = messageChatType;
-//    }
-//    return self;
-//}
+- (instancetype)initWithChatType:(XMMessageChatType)messageChatType{
+    if ([super init]) {
+        self.messageChatType = messageChatType;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -127,7 +131,9 @@
 
 - (void)chatBar:(XMChatBar *)chatBar sendMessage:(NSString *)message{
     XMTextMessage *textMessage = [XMMessage textMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"messageText":message}];
-    textMessage.messageChatType = rand() % 2;
+    textMessage.senderAvatarThumb = kSelfThumb;
+    textMessage.senderNickName = kSelfName;
+    textMessage.messageChatType = self.messageChatType;
     [self.dataArray addObject:textMessage];
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
@@ -137,7 +143,9 @@
 
 - (void)chatBar:(XMChatBar *)chatBar sendVoice:(NSData *)voiceData seconds:(NSTimeInterval)seconds{
     XMVoiceMessage *voiceMessage = [XMMessage voiceMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"voiceData":voiceData,@"voiceSeconds":@(seconds)}];
-    voiceMessage.messageChatType = rand() % 2;
+    voiceMessage.senderAvatarThumb = kSelfThumb;
+    voiceMessage.senderNickName = kSelfName;
+    voiceMessage.messageChatType = self.messageChatType;
     [self.dataArray addObject:voiceMessage];
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
@@ -149,6 +157,11 @@
     
     XMImageMessage *imageMessage = [XMMessage imageMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"image":pictures[0]}];
     imageMessage.messageChatType = rand() % 2;
+    
+    imageMessage.senderAvatarThumb = kSelfThumb;
+    imageMessage.senderNickName = kSelfName;
+    imageMessage.messageChatType = self.messageChatType;
+    
     [self.dataArray addObject:imageMessage];
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
@@ -159,7 +172,10 @@
 
 - (void)chatBar:(XMChatBar *)chatBar sendLocation:(CLLocationCoordinate2D)locationCoordinate locationText:(NSString *)locationText{
     XMLocationMessage *locationMessage = [XMMessage locationMessage:@{@"messageOwner":@(XMMessageOwnerTypeSelf),@"messageTime":@([[NSDate date] timeIntervalSince1970]),@"address":locationText,@"lat":@(locationCoordinate.latitude),@"lng":@(locationCoordinate.longitude)}];
-    locationMessage.messageChatType = rand() % 2;
+    
+    locationMessage.senderAvatarThumb = kSelfThumb;
+    locationMessage.senderNickName = kSelfName;
+    locationMessage.messageChatType = self.messageChatType;
     
     [self.dataArray addObject:locationMessage];
     [self.tableView beginUpdates];
@@ -209,25 +225,57 @@
         switch (rand() % 4) {
             case 0:
             {
-                XMTextMessage *textMessage = [XMMessage textMessage:@{@"messageTime":@(firstMessageTime),@"messageOwner":@(i%2==0 ? XMMessageOwnerTypeSelf : XMMessageOwnerTypeOther),@"messageText":[ChatViewController generateRandomStr:rand()%5 * 17]}];
+                XMTextMessage *textMessage = [XMMessage textMessage:@{@"messageTime":@(firstMessageTime),@"messageOwner":@(i%2==0 ? XMMessageOwnerTypeSelf : XMMessageOwnerTypeOther),@"messageText":[ChatViewController generateRandomStr:(rand()%5 + 1) * 17]}];
+                if (textMessage.messageOwner == XMMessageOwnerTypeSelf) {
+                    textMessage.senderNickName = kSelfName;
+                    textMessage.senderAvatarThumb = kSelfThumb;
+                }else if (textMessage.messageOwner == XMMessageOwnerTypeOther){
+                    textMessage.senderNickName = self.chatterName;
+                    textMessage.senderAvatarThumb = self.chatterThumb;
+                }
+                textMessage.messageChatType = self.messageChatType;
                 [self.dataArray addObject:textMessage];
             }
                 break;
             case 1:
             {
                 XMVoiceMessage *voiceMessage = [XMMessage voiceMessage:@{@"messageTime":@(firstMessageTime),@"messageOwner":@(i%2==0 ? XMMessageOwnerTypeSelf : XMMessageOwnerTypeOther),@"voiceSeconds":@(i)}];
+                if (voiceMessage.messageOwner == XMMessageOwnerTypeSelf) {
+                    voiceMessage.senderNickName = kSelfName;
+                    voiceMessage.senderAvatarThumb = kSelfThumb;
+                }else if (voiceMessage.messageOwner == XMMessageOwnerTypeOther){
+                    voiceMessage.senderNickName = self.chatterName;
+                    voiceMessage.senderAvatarThumb = self.chatterThumb;
+                }
+                voiceMessage.messageChatType = self.messageChatType;
                 [self.dataArray addObject:voiceMessage];
             }
                 break;
             case 2:
             {
                 XMImageMessage *imageMessage = [XMMessage imageMessage:@{@"messageTime":@(firstMessageTime),@"messageOwner":@(i%2==0 ? XMMessageOwnerTypeSelf : XMMessageOwnerTypeOther),@"image":[UIImage imageNamed:@"test_send"]}];
+                if (imageMessage.messageOwner == XMMessageOwnerTypeSelf) {
+                    imageMessage.senderNickName = kSelfName;
+                    imageMessage.senderAvatarThumb = kSelfThumb;
+                }else if (imageMessage.messageOwner == XMMessageOwnerTypeOther){
+                    imageMessage.senderNickName = self.chatterName;
+                    imageMessage.senderAvatarThumb = self.chatterThumb;
+                }
+                imageMessage.messageChatType = self.messageChatType;
                 [self.dataArray addObject:imageMessage];
             }
                 break;
             case 3:
             {
                 XMLocationMessage *locationMessage = [XMLocationMessage locationMessage:@{@"messageTime":@(firstMessageTime),@"messageOwner":@(i%2==0 ? XMMessageOwnerTypeSelf : XMMessageOwnerTypeOther),@"address":@"上海市杨浦区五角场20号"}];
+                if (locationMessage.messageOwner == XMMessageOwnerTypeSelf) {
+                    locationMessage.senderNickName = kSelfName;
+                    locationMessage.senderAvatarThumb = kSelfThumb;
+                }else if (locationMessage.messageOwner == XMMessageOwnerTypeOther){
+                    locationMessage.senderNickName = self.chatterName;
+                    locationMessage.senderAvatarThumb = self.chatterThumb;
+                }
+                locationMessage.messageChatType = self.messageChatType;
                 [self.dataArray addObject:locationMessage];
             }
                 break;
