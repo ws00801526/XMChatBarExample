@@ -6,11 +6,12 @@
 //  Copyright (c) 2015年 xmfraker. All rights reserved.
 //
 
-#define kFaceIDKey      @"face_id"
-#define kFaceNameKey    @"face_name"
+#define kFaceIDKey          @"face_id"
+#define kFaceNameKey        @"face_name"
+#define kFaceImageNameKey   @"face_image_name"
 
-#define kFaceRankKey    @"face_rank"
-#define kFaceClickKey   @"face_click"
+#define kFaceRankKey        @"face_rank"
+#define kFaceClickKey       @"face_click"
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
@@ -35,23 +36,7 @@
 + (NSArray *)emojiFaces;
 
 
-/**
- *  根据表情名称获取图片名称
- *
- *  @param faceName 表情名称
- *
- *  @return 表情的图片名
- */
-+ (NSString *)faceImageNameWithFaceName:(NSString *)faceName;
-
-/**
- *  根据表情的图片名 获取表情名称
- *
- *  @param faceImageName 表情图片名
- *
- *  @return 表情名称
- */
-+ (NSString *)faceNameWithFaceImageName:(NSString *)faceImageName;
++ (NSString *)faceImageNameWithFaceID:(NSUInteger)faceID;
 
 /**
  *  将文字中带表情的字符处理换成图片显示

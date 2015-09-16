@@ -236,15 +236,7 @@
  */
 - (UIImageView *)faceImageViewWithID:(NSString *)faceID{
     
-    NSString *faceImageName = @"";
-    if ([faceID integerValue] < 10) {
-        faceImageName = [NSString stringWithFormat:@"00%ld",[faceID integerValue]];
-    }else if ([faceID integerValue] < 100){
-        faceImageName = [NSString stringWithFormat:@"0%ld",[faceID integerValue]];
-    }else{
-        faceImageName = faceID;
-    }
-    
+    NSString *faceImageName = [XMFaceManager faceImageNameWithFaceID:[faceID integerValue]];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:faceImageName]];
     imageView.userInteractionEnabled = YES;
     imageView.tag = [faceID integerValue];
@@ -264,10 +256,9 @@
  *  @param tap
  */
 - (void)handleTap:(UITapGestureRecognizer *)tap{
-    NSString *faceName = [XMFaceManager faceNameWithFaceImageName:[NSString stringWithFormat:@"%ld",tap.view.tag]];
-    if (tap.view.tag == 999) {
-        faceName = @"[删除]";
-    }else{
+    NSString *faceName = [XMFaceManager faceImageNameWithFaceID:tap.view.tag];
+//    NSString *faceName = [XMFaceManager faceNameWithFaceImageName:[NSString stringWithFormat:@"%ld",tap.view.tag]];
+    if (tap.view.tag != 999) {
         [XMFaceManager saveRecentFace:@{@"face_id":[NSString stringWithFormat:@"%ld",tap.view.tag],@"face_name":faceName}];
     }
     if (self.delegate && [self.delegate respondsToSelector:@selector(faceViewSendFace:)]) {

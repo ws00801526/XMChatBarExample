@@ -20,12 +20,20 @@
 - (instancetype)init{
     if (self = [super init]) {
         _emojiFaceArrays = [NSMutableArray array];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:[XMFaceManager documentEmojiFacePath]]) {
-            NSArray *array = [NSArray arrayWithContentsOfFile:[XMFaceManager defaultEmojiFacePath]];
-            [array writeToFile:[XMFaceManager documentEmojiFacePath] atomically:YES];
-        }
-        NSArray *faceArray = [NSArray arrayWithContentsOfFile:[XMFaceManager documentEmojiFacePath]];
+        
+        NSArray *faceArray = [NSArray arrayWithContentsOfFile:[XMFaceManager defaultEmojiFacePath]];
         [_emojiFaceArrays addObjectsFromArray:faceArray];
+//        [_emojiFaceArrays sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+//            NSInteger rank1 = [obj1[kFaceRankKey] integerValue];
+//            NSInteger rank2 = [obj1[kFaceRankKey] integerValue];
+//            if (rank1 < rank2) {
+//                return NSOrderedAscending;
+//            }else if (rank1 > rank2){
+//                return NSOrderedDescending;
+//            }else{
+//                return NSOrderedSame;
+//            }
+//        }];
         
         NSArray *recentArrays = [[NSUserDefaults standardUserDefaults] arrayForKey:@"recentFaceArrays"];
         if (recentArrays) {
@@ -62,26 +70,13 @@
     return [[NSBundle mainBundle] pathForResource:@"face" ofType:@"plist"];
 }
 
-+ (NSString *)documentEmojiFacePath{
-    return [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"face.plist"];
-}
-
-+ (NSString *)faceImageNameWithFaceName:(NSString *)faceName{
-    for (NSDictionary *faceDict in [[XMFaceManager shareInstance] emojiFaceArrays]) {
-        if ([faceDict[kFaceNameKey] isEqualToString:faceName]) {
-            return faceDict[kFaceIDKey];
-            break;
-        }
++ (NSString *)faceImageNameWithFaceID:(NSUInteger)faceID{
+    if (faceID == 999) {
+        return @"[删除]";
     }
-    return @"";
-}
-
-+ (NSString *)faceNameWithFaceImageName:(NSString *)faceImageName{
-
     for (NSDictionary *faceDict in [[XMFaceManager shareInstance] emojiFaceArrays]) {
-        if ([faceDict[kFaceIDKey] integerValue] == [faceImageName integerValue]) {
-            return faceDict[kFaceNameKey];
-            break;
+        if ([faceDict[kFaceIDKey] integerValue] == faceID) {
+            return faceDict[kFaceImageNameKey];
         }
     }
     return @"";
@@ -118,7 +113,7 @@
                 //新建文字附件来存放我们的图片,iOS7才新加的对象
                 NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
                 //给附件添加图片
-                textAttachment.image = [UIImage imageNamed:dict[kFaceIDKey]];
+                textAttachment.image = [UIImage imageNamed:dict[kFaceImageNameKey]];
                 //调整一下图片的位置,如果你的图片偏上或者偏下，调整一下bounds的y值即可
                 textAttachment.bounds = CGRectMake(0, -8, textAttachment.image.size.width, textAttachment.image.size.height);
                 //把附件转换成可变字符串，用于替换掉源字符串中的表情文字
