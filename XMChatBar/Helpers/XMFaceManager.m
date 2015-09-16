@@ -27,7 +27,6 @@
         NSArray *faceArray = [NSArray arrayWithContentsOfFile:[XMFaceManager documentEmojiFacePath]];
         [_emojiFaceArrays addObjectsFromArray:faceArray];
         
-        
         NSArray *recentArrays = [[NSUserDefaults standardUserDefaults] arrayForKey:@"recentFaceArrays"];
         if (recentArrays) {
             _recentFaceArrays = [NSMutableArray arrayWithArray:recentArrays];
