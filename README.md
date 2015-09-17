@@ -12,12 +12,12 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片,�
 
 ####1. 截图
 
-![](xmchatbar.gif)
+![](http://7xlt1j.com1.z0.glb.clouddn.com/XMChatBarScreenShot_3.gif)
 
-![](1.png)
+![](http://7xlt1j.com1.z0.glb.clouddn.com/XMChatBarScreenShot_1.png)
 
 
-![](2.png)
+![](http://7xlt1j.com1.z0.glb.clouddn.com/XMChatBarScreenShot_2.png)
 
 
 ####2. 相关类说明,介绍

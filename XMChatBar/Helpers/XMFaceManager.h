@@ -35,7 +35,6 @@
  */
 + (NSArray *)emojiFaces;
 
-
 + (NSString *)faceImageNameWithFaceID:(NSUInteger)faceID;
 
 /**
