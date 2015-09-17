@@ -687,6 +687,7 @@
 			baseConfigurationReference = 9F9385FC96BE12AEFE8854F5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = XMChatBarExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -705,6 +706,7 @@
 			baseConfigurationReference = 327D40C22EA158C7EF8FA026 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = XMChatBarExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

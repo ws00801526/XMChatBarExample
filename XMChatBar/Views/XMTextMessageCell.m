@@ -43,6 +43,7 @@
     [self.messageContentView addSubview:self.messageTextLabel];
 }
 
+
 #pragma mark - Setters
 
 - (void)setMessage:(XMMessage *)message{

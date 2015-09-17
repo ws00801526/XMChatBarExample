@@ -19,6 +19,8 @@
 
 @interface XMMessageCell    ()
 
+@property (strong, nonatomic) UIMenuController *menuController /**< 长按弹出选择框 */;
+
 @end
 
 @implementation XMMessageCell
@@ -50,6 +52,13 @@
     [self.contentView addSubview:self.avatarImageView];
     [self.contentView addSubview:self.messageNickNameLabel];
     [self.contentView addSubview:self.messageContentView];
+    
+    UILongPressGestureRecognizer *longPressGes = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longPressGes.numberOfTouchesRequired = 1;
+    longPressGes.minimumPressDuration = 1.0f;
+    [self.contentView addGestureRecognizer:longPressGes];
+    
+    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
@@ -149,6 +158,49 @@
     }
 }
 
+
+#pragma mark - UIMenuController 需要的方法
+//以下两个方法必须有
+/*
+ *  让UIView成为第一responser
+ */
+- (BOOL)canBecomeFirstResponder{
+    return YES;
+}
+
+/*
+ *  根据action,判断UIMenuController是否显示对应aciton的title
+ */
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    if (action == @selector(doCellCopy) || action == @selector(doCellShare)) {
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - Private Methods
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)longPressGes{
+    if (longPressGes.state == UIGestureRecognizerStateBegan) {
+        //首先自己成为第一responser
+        [self becomeFirstResponder];
+        //!!!此处使用self.superview.superview 获得到cell所在的tableView,不是很严谨,有哪位知道更加好的方法请告知
+        [self.menuController setTargetRect:self.frame inView:self.superview.superview];
+        [self.menuController setMenuVisible:YES animated:YES];
+    }
+}
+
+- (void)doCellCopy{
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = self.message.messageText;
+}
+
+- (void)doCellShare{
+    if (self.messageDelegate && [self.messageDelegate respondsToSelector:@selector(XMMessageShared:)]) {
+        [self.messageDelegate XMMessageShared:self.message];
+    }
+}
+
 #pragma mark - Setters
 
 - (void)setMessage:(XMMessage *)message{
@@ -201,6 +253,21 @@
         _messageContentView = [[UIView alloc] init];
     }
     return _messageContentView;
+}
+
+- (UIMenuController *)menuController{
+    if (!_menuController) {
+        _menuController = [UIMenuController sharedMenuController];
+        UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(doCellCopy)];
+        UIMenuItem *shareItem = [[UIMenuItem alloc] initWithTitle:@"转发" action:@selector(doCellShare)];
+        if (self.message.messageType == XMMessageTypeText) {
+            [_menuController setMenuItems:@[copyItem,shareItem]];
+        }else{
+            [_menuController setMenuItems:@[shareItem]];
+        }
+        [_menuController setArrowDirection:UIMenuControllerArrowDown];
+    }
+    return _menuController;
 }
 
 @end

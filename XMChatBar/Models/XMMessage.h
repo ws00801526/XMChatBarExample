@@ -169,6 +169,9 @@ typedef NS_ENUM(NSUInteger, XMMessageReadState) {
 
 @protocol XMMessageDelegate <NSObject>
 
+
+
+@optional
 /**
  *  图片消息被点击
  *
@@ -197,5 +200,12 @@ typedef NS_ENUM(NSUInteger, XMMessageReadState) {
  *  @param message 被点击的消息
  */
 - (void)XMMessageBankTapped:(XMMessage *)message;
+
+/**
+ *  消息menu选中转发时回调
+ *
+ *  @param message 需要被转发的消息
+ */
+- (void)XMMessageShared:(XMMessage *)message;
 
 @end

@@ -225,7 +225,7 @@
     XMMessage *systemMessage = [XMMessage systemMessage:@{@"messageTime":@(firstMessageTime)}];
     [self.dataArray addObject:systemMessage];
 
-    for (int i = 1 ; i < 100; i ++) {
+    for (int i = 1 ; i < 30; i ++) {
         firstMessageTime -= 1000;
         switch (rand() % 4) {
             case 0:

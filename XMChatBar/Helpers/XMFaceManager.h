@@ -56,6 +56,7 @@
  */
 + (NSArray *)recentFaces;
 
+
 /**
  *  存储一个最近使用的face
  *

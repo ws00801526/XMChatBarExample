@@ -39,9 +39,6 @@
     
     self.dataArray = [NSMutableArray array];
     
-    [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
-    
     [self.view addSubview:self.tableView];
     
     [self.view updateConstraintsIfNeeded];
@@ -55,7 +52,7 @@
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left);
-        make.top.equalTo(self.view.mas_top);
+        make.top.equalTo(self.view.mas_top).with.offset(64);
         make.right.equalTo(self.view.mas_right);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
@@ -73,9 +70,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ChatListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatListCell"];
-    if (!cell) {
-        cell = [[ChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ChatListCell"];
-    }
     [cell.headImageView setImageWithUrlString:self.dataArray[indexPath.row][@"thumb"]];
     [cell.titleLabel setText:self.dataArray[indexPath.row][@"nickName"]];
     return cell;
@@ -116,6 +110,7 @@
 - (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        [_tableView registerClass:[ChatListCell class] forCellReuseIdentifier:@"ChatListCell"];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
