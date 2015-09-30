@@ -386,7 +386,8 @@
 }
 
 - (NSUInteger)maxPerLine{
-    return 6;
+    return 6;  //iphone5s 返回6 ,6plus 返回7个合适
+//    return 7;
 }
 
 - (NSUInteger)maxLine{

@@ -66,6 +66,9 @@
 
 - (void)updateConstraints{
     [super updateConstraints];
+    
+    self.avatarImageView.hidden = NO;
+
     if (self.message.messageChatType == XMMessageChatSingle) {
         self.messageNickNameLabel.hidden = YES;
         [self.messageNickNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -93,8 +96,8 @@
     }
     
     [self.messageContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.messageNickNameLabel.mas_bottom);
-        make.bottom.equalTo(self.contentView.mas_bottom);
+        make.top.equalTo(self.messageNickNameLabel.mas_bottom).with.offset(8);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-8);
         if (self.message.messageOwner == XMMessageOwnerTypeSelf) {
             make.right.equalTo(self.avatarImageView.mas_left).with.offset(-8);
         }else{
@@ -102,7 +105,6 @@
         }
     }];
     
-    self.avatarImageView.hidden = NO;
     if (self.message.messageOwner == XMMessageOwnerTypeOther) {
         [self.avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView.mas_left).with.offset(10);

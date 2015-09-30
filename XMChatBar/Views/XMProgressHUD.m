@@ -209,6 +209,7 @@
         _overlayWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _overlayWindow.userInteractionEnabled = NO;
         [_overlayWindow makeKeyAndVisible];
+        
     }
     return _overlayWindow;
 }

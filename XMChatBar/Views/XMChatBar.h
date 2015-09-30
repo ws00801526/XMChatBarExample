@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 xmfraker. All rights reserved.
 //
 
-#define kMaxHeight 80.0f
+#define kMaxHeight 60.0f
 #define kMinHeight 45.0f
 #define kFunctionViewHeight 210.0f
 

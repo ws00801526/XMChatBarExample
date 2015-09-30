@@ -41,6 +41,7 @@
 		9335E23E1B9EBD89000F4D99 /* XMTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E2201B9EBD89000F4D99 /* XMTextMessageCell.m */; };
 		9335E23F1B9EBD89000F4D99 /* XMVoiceMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E2221B9EBD89000F4D99 /* XMVoiceMessageCell.m */; };
 		933E5A421B954C19008EEBA8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933E5A411B954C19008EEBA8 /* RootViewController.m */; };
+		9350F47D1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9350F47C1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.m */; };
 		93D5A4601B8187500085D863 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D5A45F1B8187500085D863 /* main.m */; };
 		93D5A4631B8187500085D863 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D5A4621B8187500085D863 /* AppDelegate.m */; };
 		93D5A4691B8187500085D863 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D5A4671B8187500085D863 /* Main.storyboard */; };
@@ -50,6 +51,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9350F47F1BB8E4BF0092EFB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93D5A4521B8187500085D863 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93D5A4591B8187500085D863;
+			remoteInfo = XMChatBarExample;
+		};
 		93D5A4741B8187500085D863 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 93D5A4521B8187500085D863 /* Project object */;
@@ -124,6 +132,9 @@
 		9335E2221B9EBD89000F4D99 /* XMVoiceMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMVoiceMessageCell.m; sourceTree = "<group>"; };
 		933E5A401B954C19008EEBA8 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		933E5A411B954C19008EEBA8 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		9350F47A1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XMChatBarExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9350F47C1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XMChatBarExampleUITests.m; sourceTree = "<group>"; };
+		9350F47E1BB8E4BF0092EFB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93D5A45A1B8187500085D863 /* XMChatBarExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XMChatBarExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D5A45E1B8187500085D863 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93D5A45F1B8187500085D863 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -139,6 +150,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9350F4771BB8E4BF0092EFB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93D5A4571B8187500085D863 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -327,12 +345,22 @@
 			name = XMChatView;
 			sourceTree = "<group>";
 		};
+		9350F47B1BB8E4BF0092EFB7 /* XMChatBarExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9350F47C1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.m */,
+				9350F47E1BB8E4BF0092EFB7 /* Info.plist */,
+			);
+			path = XMChatBarExampleUITests;
+			sourceTree = "<group>";
+		};
 		93D5A4511B8187500085D863 = {
 			isa = PBXGroup;
 			children = (
 				9335E1DD1B9EBD89000F4D99 /* XMChatBar */,
 				93D5A45C1B8187500085D863 /* XMChatBarExample */,
 				93D5A4761B8187500085D863 /* XMChatBarExampleTests */,
+				9350F47B1BB8E4BF0092EFB7 /* XMChatBarExampleUITests */,
 				93D5A45B1B8187500085D863 /* Products */,
 				023FF0F96EF8833049151E7E /* Pods */,
 				822AD1512F3F05CF6DDBB0F9 /* Frameworks */,
@@ -344,6 +372,7 @@
 			children = (
 				93D5A45A1B8187500085D863 /* XMChatBarExample.app */,
 				93D5A4731B8187500085D863 /* XMChatBarExampleTests.xctest */,
+				9350F47A1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -395,6 +424,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9350F4791BB8E4BF0092EFB7 /* XMChatBarExampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9350F4831BB8E4BF0092EFB7 /* Build configuration list for PBXNativeTarget "XMChatBarExampleUITests" */;
+			buildPhases = (
+				9350F4761BB8E4BF0092EFB7 /* Sources */,
+				9350F4771BB8E4BF0092EFB7 /* Frameworks */,
+				9350F4781BB8E4BF0092EFB7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9350F4801BB8E4BF0092EFB7 /* PBXTargetDependency */,
+			);
+			name = XMChatBarExampleUITests;
+			productName = XMChatBarExampleUITests;
+			productReference = 9350F47A1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		93D5A4591B8187500085D863 /* XMChatBarExample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93D5A47D1B8187500085D863 /* Build configuration list for PBXNativeTarget "XMChatBarExample" */;
@@ -441,6 +488,10 @@
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = xmfraker;
 				TargetAttributes = {
+					9350F4791BB8E4BF0092EFB7 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 93D5A4591B8187500085D863;
+					};
 					93D5A4591B8187500085D863 = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -465,11 +516,19 @@
 			targets = (
 				93D5A4591B8187500085D863 /* XMChatBarExample */,
 				93D5A4721B8187500085D863 /* XMChatBarExampleTests */,
+				9350F4791BB8E4BF0092EFB7 /* XMChatBarExampleUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9350F4781BB8E4BF0092EFB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93D5A4581B8187500085D863 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -527,6 +586,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9350F4761BB8E4BF0092EFB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9350F47D1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93D5A4561B8187500085D863 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -575,6 +642,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9350F4801BB8E4BF0092EFB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93D5A4591B8187500085D863 /* XMChatBarExample */;
+			targetProxy = 9350F47F1BB8E4BF0092EFB7 /* PBXContainerItemProxy */;
+		};
 		93D5A4751B8187500085D863 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 93D5A4591B8187500085D863 /* XMChatBarExample */;
@@ -602,6 +674,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9350F4811BB8E4BF0092EFB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				INFOPLIST_FILE = XMChatBarExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmfraker.XMChatBarExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = XMChatBarExample;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		9350F4821BB8E4BF0092EFB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = XMChatBarExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmfraker.XMChatBarExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = XMChatBarExample;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 		93D5A47B1B8187500085D863 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -757,6 +857,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9350F4831BB8E4BF0092EFB7 /* Build configuration list for PBXNativeTarget "XMChatBarExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9350F4811BB8E4BF0092EFB7 /* Debug */,
+				9350F4821BB8E4BF0092EFB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		93D5A4551B8187500085D863 /* Build configuration list for PBXProject "XMChatBarExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -128,8 +128,11 @@
 - (void)textViewDidChange:(UITextView *)textView{
 
     CGRect textViewFrame = self.textView.frame;
+    
     CGSize textSize = [self.textView sizeThatFits:CGSizeMake(CGRectGetWidth(textViewFrame), 1000.0f)];
     
+    textSize = [self.textView.text boundingRectWithSize:CGSizeMake(CGRectGetWidth(textViewFrame), 1000.0f) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.textView.font} context:nil].size;
+    NSLog(@"this is textSize  :%@",NSStringFromCGSize(textSize));
     CGFloat offset = 10;
     textView.scrollEnabled = (textSize.height > kMaxHeight-offset);
     textViewFrame.size.height = MAX(34, MIN(kMaxHeight, textSize.height));
@@ -435,7 +438,6 @@
  */
 - (void)showMoreView:(BOOL)show{
     if (show) {
- 
         [self.superview addSubview:self.moreView];
         [UIView animateWithDuration:.3 animations:^{
             [self.moreView setFrame:CGRectMake(0, self.screenHeight - kFunctionViewHeight, self.frame.size.width, kFunctionViewHeight)];
@@ -450,6 +452,7 @@
 }
 
 - (void)showVoiceView:(BOOL)show{
+    self.voiceButton.selected = show;
     self.voiceRecordButton.selected = show;
     self.voiceRecordButton.hidden = !show;
 }
@@ -606,7 +609,6 @@
 #pragma mark - Getters
 
 - (void)setFrame:(CGRect)frame{
-    [super setFrame:frame];
     [UIView animateWithDuration:.3 animations:^{
         [super setFrame:frame];
     }completion:nil];

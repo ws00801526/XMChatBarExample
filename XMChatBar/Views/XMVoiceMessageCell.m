@@ -51,6 +51,11 @@
     }
 }
 
+- (void)prepareForReuse{
+    NSLog(@"voice Cell prepare for reuse");
+    [self stopPlaying];
+}
+
 #pragma mark - Public Methods
 
 - (void)setup{
@@ -169,7 +174,6 @@
                 [self.voiceStateImageView setImage:[UIImage imageNamed:@"message_voice_sender_normal"]];
             }
         });
-        
     }
     self.isVoicePlaying = NO;
 }

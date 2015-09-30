@@ -211,6 +211,7 @@
 
 - (void)audioPlayerDidFinishPlay{
     [self.voiceMessageCell stopPlaying];
+    self.voiceMessageCell = nil;
 }
 
 #pragma mark - Private Methods
@@ -302,6 +303,8 @@
 
     [self.tableView reloadData];
     [self scrollToBottom];
+    [self.tableView reloadData];
+    [self scrollToBottom];
 }
 
 
@@ -337,9 +340,6 @@
         [_tableView registerClass:[XMImageMessageCell class] forCellReuseIdentifier:@"XMImageMessageCell"];
         [_tableView registerClass:[XMLocationMessageCell class] forCellReuseIdentifier:@"XMLocationMessageCell"];
         [_tableView registerClass:[XMVoiceMessageCell class] forCellReuseIdentifier:@"XMVoiceMessageCell"];
-        //!!!设置少了会导致首次进入页面tableView计算不准高度,无法滑动到最后一行的bug,所以此处设置了300  但不清楚是否会导致其他bug
-        _tableView.estimatedRowHeight = 150;
-        _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
