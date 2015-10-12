@@ -30,8 +30,7 @@
 @property (strong, nonatomic) XMChatBar *chatBar;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
-@property (weak, nonatomic) id<XMVoiceMessageStatus> voiceMessageCell;
-@property (weak, nonatomic) NSIndexPath *voicePlayingIndexPath; /**< 正在播放的列表 */
+@property (weak, nonatomic) NSIndexPath *voicePlayingIndexPath; /**< 正在播放的列表,用来标注正在播放的语音cell,修复复用产生的状态不正确问题 */
 
 @property (assign, nonatomic) XMMessageChatType messageChatType;
 @end
@@ -119,23 +118,27 @@
     NSLog(@"you tap imageMessage you can show imageBrowser");
 }
 
+//!!!修复语音播放复用问题,使用voicePlayIndexPath来
 - (void)XMVoiceMessageTapped:(XMVoiceMessage *)voiceMessage voiceStatus:(id<XMVoiceMessageStatus>)voiceStatus{
 
-    if (self.voiceMessageCell && self.voiceMessageCell != voiceStatus) {
-        [self.voiceMessageCell stopPlaying];
+    NSIndexPath *currentIndexPath = [self.tableView indexPathForCell:(XMVoiceMessageCell *)voiceStatus];
+    XMVoiceMessageCell *lastVoiceMessageCell = [self.tableView cellForRowAtIndexPath:self.voicePlayingIndexPath];
+    if (lastVoiceMessageCell) {
+        [lastVoiceMessageCell stopPlaying];
         [[XMAVAudioPlayer sharedInstance] stopSound];
     }
-    self.voiceMessageCell = voiceStatus;
-    if (![self.voiceMessageCell isPlaying]) {
-        if (voiceMessage.voiceData) {
-            [[XMAVAudioPlayer sharedInstance] playSongWithData:voiceMessage.voiceData];
-        }else{
-            [[XMAVAudioPlayer sharedInstance] playSongWithUrl:voiceMessage.voiceUrlString];
-        }
+    if (currentIndexPath.row == self.voicePlayingIndexPath.row) {
+        self.voicePlayingIndexPath = nil;
+        return;
+    }
+    self.voicePlayingIndexPath = nil;
+    [voiceStatus startPlaying];
+    if (voiceMessage.voiceData) {
+        [[XMAVAudioPlayer sharedInstance] playSongWithData:voiceMessage.voiceData];
     }else{
-        [self.voiceMessageCell stopPlaying];
-        [[XMAVAudioPlayer sharedInstance] stopSound];
+        [[XMAVAudioPlayer sharedInstance] playSongWithUrl:voiceMessage.voiceUrlString];
     }
+    self.voicePlayingIndexPath = currentIndexPath;
 }
 
 
@@ -213,14 +216,13 @@
 }
 
 - (void)audioPlayerBeginPlay{
-    self.voicePlayingIndexPath = [self.tableView indexPathForCell:(UITableViewCell *)self.voiceMessageCell];
-    [self.voiceMessageCell startPlaying];
+
 }
 
 - (void)audioPlayerDidFinishPlay{
+    XMVoiceMessageCell *voicePlayingCell = [self.tableView cellForRowAtIndexPath:self.voicePlayingIndexPath];
+    [voicePlayingCell stopPlaying];
     self.voicePlayingIndexPath = nil;
-    [self.voiceMessageCell stopPlaying];
-    self.voiceMessageCell = nil;
 }
 
 #pragma mark - Private Methods
