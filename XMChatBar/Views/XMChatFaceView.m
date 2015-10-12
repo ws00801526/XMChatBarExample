@@ -256,8 +256,7 @@
  *  @param tap
  */
 - (void)handleTap:(UITapGestureRecognizer *)tap{
-    NSString *faceName = [XMFaceManager faceImageNameWithFaceID:tap.view.tag];
-//    NSString *faceName = [XMFaceManager faceNameWithFaceImageName:[NSString stringWithFormat:@"%ld",tap.view.tag]];
+    NSString *faceName = [XMFaceManager faceNameWithFaceID:tap.view.tag];
     if (tap.view.tag != 999) {
         [XMFaceManager saveRecentFace:@{@"face_id":[NSString stringWithFormat:@"%ld",tap.view.tag],@"face_name":faceName}];
     }
@@ -386,8 +385,8 @@
 }
 
 - (NSUInteger)maxPerLine{
-    return 6;  //iphone5s 返回6 ,6plus 返回7个合适
-//    return 7;
+//    return 6;  //iphone5s 返回6 ,6plus 返回7个合适
+    return 7;
 }
 
 - (NSUInteger)maxLine{

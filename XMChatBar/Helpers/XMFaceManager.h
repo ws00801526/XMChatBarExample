@@ -37,6 +37,7 @@
 
 + (NSString *)faceImageNameWithFaceID:(NSUInteger)faceID;
 
++ (NSString *)faceNameWithFaceID:(NSUInteger)faceID;
 /**
  *  将文字中带表情的字符处理换成图片显示
  *

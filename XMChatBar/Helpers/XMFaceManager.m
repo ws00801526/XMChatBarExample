@@ -23,18 +23,7 @@
         
         NSArray *faceArray = [NSArray arrayWithContentsOfFile:[XMFaceManager defaultEmojiFacePath]];
         [_emojiFaceArrays addObjectsFromArray:faceArray];
-//        [_emojiFaceArrays sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-//            NSInteger rank1 = [obj1[kFaceRankKey] integerValue];
-//            NSInteger rank2 = [obj1[kFaceRankKey] integerValue];
-//            if (rank1 < rank2) {
-//                return NSOrderedAscending;
-//            }else if (rank1 > rank2){
-//                return NSOrderedDescending;
-//            }else{
-//                return NSOrderedSame;
-//            }
-//        }];
-        
+
         NSArray *recentArrays = [[NSUserDefaults standardUserDefaults] arrayForKey:@"recentFaceArrays"];
         if (recentArrays) {
             _recentFaceArrays = [NSMutableArray arrayWithArray:recentArrays];
@@ -81,6 +70,19 @@
     }
     return @"";
 }
+
++ (NSString *)faceNameWithFaceID:(NSUInteger)faceID{
+    if (faceID == 999) {
+        return @"[删除]";
+    }
+    for (NSDictionary *faceDict in [[XMFaceManager shareInstance] emojiFaceArrays]) {
+        if ([faceDict[kFaceIDKey] integerValue] == faceID) {
+            return faceDict[kFaceNameKey];
+        }
+    }
+    return @"";
+}
+
 
 + (NSMutableAttributedString *)emotionStrWithString:(NSString *)text
 {
