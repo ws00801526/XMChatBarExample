@@ -162,7 +162,6 @@
             });
     });
     dispatch_resume(timer);
-
 }
 
 - (void)stopPlayingAnimation {

@@ -131,16 +131,16 @@
     
     CGSize textSize = [self.textView sizeThatFits:CGSizeMake(CGRectGetWidth(textViewFrame), 1000.0f)];
     
-    textSize = [self.textView.text boundingRectWithSize:CGSizeMake(CGRectGetWidth(textViewFrame), 1000.0f) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.textView.font} context:nil].size;
     NSLog(@"this is textSize  :%@",NSStringFromCGSize(textSize));
     CGFloat offset = 10;
-    textView.scrollEnabled = (textSize.height > kMaxHeight-offset);
+    textView.scrollEnabled = (textSize.height + 0.1 > kMaxHeight-offset);
     textViewFrame.size.height = MAX(34, MIN(kMaxHeight, textSize.height));
     
     CGRect addBarFrame = self.frame;
     addBarFrame.size.height = textViewFrame.size.height+offset;
     addBarFrame.origin.y = self.screenHeight - self.bottomHeight - addBarFrame.size.height;
-    self.frame = addBarFrame;
+//    self.frame = addBarFrame;
+    [self setFrame:addBarFrame animated:NO];
     if (textView.scrollEnabled) {
         [textView scrollRangeToVisible:NSMakeRange(textView.text.length - 2, 1)];
     }
@@ -258,7 +258,7 @@
         }
         self.inputText = @"";
         self.textView.text = @"";
-        [self setFrame:CGRectMake(0, self.screenHeight - self.bottomHeight - kMinHeight, self.frame.size.width, kMinHeight)];
+        [self setFrame:CGRectMake(0, self.screenHeight - self.bottomHeight - kMinHeight, self.frame.size.width, kMinHeight) animated:NO];
         [self showViewWithType:XMFunctionViewShowFace];
     }else{
         self.textView.text = [self.textView.text stringByAppendingString:faceName];
@@ -365,14 +365,14 @@
         {
             self.inputText = self.textView.text;
             self.textView.text = nil;
-            [self setFrame:CGRectMake(0, self.screenHeight - kMinHeight, self.frame.size.width, kMinHeight)];
+            [self setFrame:CGRectMake(0, self.screenHeight - kMinHeight, self.frame.size.width, kMinHeight) animated:NO];
             [self.textView resignFirstResponder];
         }
             break;
         case XMFunctionViewShowMore:
         case XMFunctionViewShowFace:
             self.inputText = self.textView.text;
-            [self setFrame:CGRectMake(0, self.screenHeight - kFunctionViewHeight - self.textView.frame.size.height - 10, self.frame.size.width, self.textView.frame.size.height + 10)];
+            [self setFrame:CGRectMake(0, self.screenHeight - kFunctionViewHeight - self.textView.frame.size.height - 10, self.frame.size.width, self.textView.frame.size.height + 10) animated:NO];
             [self.textView resignFirstResponder];
             [self textViewDidChange:self.textView];
             break;
@@ -472,7 +472,7 @@
     }
     self.inputText = @"";
     self.textView.text = @"";
-    [self setFrame:CGRectMake(0, self.screenHeight - self.bottomHeight - kMinHeight, self.frame.size.width, kMinHeight)];
+    [self setFrame:CGRectMake(0, self.screenHeight - self.bottomHeight - kMinHeight, self.frame.size.width, kMinHeight) animated:NO];
     [self showViewWithType:XMFunctionViewShowKeyboard];
 }
 
@@ -608,13 +608,27 @@
 
 #pragma mark - Getters
 
-- (void)setFrame:(CGRect)frame{
-    [UIView animateWithDuration:.3 animations:^{
-        [super setFrame:frame];
-    }completion:nil];
+- (void)setFrame:(CGRect)frame animated:(BOOL)animated{
+    if (animated) {
+        [UIView animateWithDuration:.3 animations:^{
+            [self setFrame:frame];
+        }];
+    }else{
+        [self setFrame:frame];
+    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:frame:)]) {
         [self.delegate chatBarFrameDidChange:self frame:frame];
     }
 }
+
+//- (void)setFrame:(CGRect)frame{
+//    [super setFrame:frame];
+//    [UIView animateWithDuration:.3 animations:^{
+//        [super setFrame:frame];
+//    }completion:nil];
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarFrameDidChange:frame:)]) {
+//        [self.delegate chatBarFrameDidChange:self frame:frame];
+//    }
+//}
 
 @end

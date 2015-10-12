@@ -31,6 +31,8 @@
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
 @property (weak, nonatomic) id<XMVoiceMessageStatus> voiceMessageCell;
+@property (weak, nonatomic) NSIndexPath *voicePlayingIndexPath; /**< 正在播放的列表 */
+
 @property (assign, nonatomic) XMMessageChatType messageChatType;
 @end
 
@@ -84,6 +86,7 @@
     messageCell.backgroundColor = tableView.backgroundColor;
     messageCell.messageDelegate = self;
     [self configureCell:messageCell atIndex:indexPath];
+
     return messageCell;
 }
 
@@ -95,6 +98,9 @@
 
 - (void)configureCell:(XMMessageCell *)cell atIndex:(NSIndexPath *)indexPath{
     [cell setMessage:self.dataArray[indexPath.row]];
+    if ([cell isKindOfClass:[XMVoiceMessageCell class]] && self.voicePlayingIndexPath && self.voicePlayingIndexPath.row == indexPath.row) {
+        [(XMVoiceMessageCell *)cell startPlaying];
+    }
 }
 
 
@@ -114,6 +120,7 @@
 }
 
 - (void)XMVoiceMessageTapped:(XMVoiceMessage *)voiceMessage voiceStatus:(id<XMVoiceMessageStatus>)voiceStatus{
+
     if (self.voiceMessageCell && self.voiceMessageCell != voiceStatus) {
         [self.voiceMessageCell stopPlaying];
         [[XMAVAudioPlayer sharedInstance] stopSound];
@@ -206,10 +213,12 @@
 }
 
 - (void)audioPlayerBeginPlay{
+    self.voicePlayingIndexPath = [self.tableView indexPathForCell:(UITableViewCell *)self.voiceMessageCell];
     [self.voiceMessageCell startPlaying];
 }
 
 - (void)audioPlayerDidFinishPlay{
+    self.voicePlayingIndexPath = nil;
     [self.voiceMessageCell stopPlaying];
     self.voiceMessageCell = nil;
 }

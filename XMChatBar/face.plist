@@ -132,8 +132,6 @@
 		<key>face_rank</key>
 		<integer>0</integer>
 	</dict>
-
-
 	<dict>
 		<key>face_id</key>
 		<string>19</string>
@@ -314,9 +312,6 @@
 		<key>face_rank</key>
 		<integer>0</integer>
 	</dict>
-
-
-
 	<dict>
 		<key>face_id</key>
 		<string>40</string>
@@ -367,8 +362,7 @@
 		<key>face_rank</key>
 		<integer>0</integer>
 	</dict>
-
-		<dict>
+	<dict>
 		<key>face_id</key>
 		<string>87</string>
 		<key>face_image_name</key>
@@ -408,9 +402,6 @@
 		<key>face_rank</key>
 		<integer>0</integer>
 	</dict>
-
-
-
 	<dict>
 		<key>face_id</key>
 		<string>49</string>
@@ -451,8 +442,7 @@
 		<key>face_rank</key>
 		<integer>0</integer>
 	</dict>
-
-<dict>
+	<dict>
 		<key>face_id</key>
 		<string>80</string>
 		<key>face_image_name</key>
@@ -462,7 +452,7 @@
 		<key>face_rank</key>
 		<integer>0</integer>
 	</dict>
-		<dict>
+	<dict>
 		<key>face_id</key>
 		<string>105</string>
 		<key>face_image_name</key>
@@ -532,7 +522,6 @@
 		<key>face_rank</key>
 		<integer>0</integer>
 	</dict>
-
 	<dict>
 		<key>face_id</key>
 		<string>88</string>
@@ -563,9 +552,7 @@
 		<key>face_rank</key>
 		<integer>0</integer>
 	</dict>
-
-
-			<dict>
+	<dict>
 		<key>face_id</key>
 		<string>8</string>
 		<key>face_image_name</key>
@@ -925,7 +912,6 @@
 		<key>face_rank</key>
 		<integer>0</integer>
 	</dict>
-	
 	<dict>
 		<key>face_id</key>
 		<string>91</string>
@@ -1066,7 +1052,6 @@
 		<key>face_rank</key>
 		<integer>0</integer>
 	</dict>
-
 	<dict>
 		<key>face_id</key>
 		<string>106</string>
