@@ -63,7 +63,10 @@
     if (messageText) {
         systemMessage.messageText = messageText;
     }else{
-        systemMessage.messageText = [[NSDate dateWithTimeIntervalSince1970:systemMessage.messageTime] description];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy年MM月dd日 HH:mm:ss"];
+        NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:systemMessage.messageTime];
+        systemMessage.messageText = [formatter stringFromDate:detaildate];
     }
     return systemMessage;
 }
