@@ -59,7 +59,7 @@
     
     self.dataArray = [NSMutableArray array];
 
-    [self loadData];
+//    [self loadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -127,7 +127,7 @@
         [lastVoiceMessageCell stopPlaying];
         [[XMAVAudioPlayer sharedInstance] stopSound];
     }
-    if (currentIndexPath.row == self.voicePlayingIndexPath.row) {
+    if (currentIndexPath.row == self.voicePlayingIndexPath.row && [voiceStatus isPlaying]) {
         self.voicePlayingIndexPath = nil;
         return;
     }
@@ -321,7 +321,9 @@
 
 - (void)scrollToBottom {
     
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    if (self.dataArray.count >= 1) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }
 
 }
 
