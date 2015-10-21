@@ -127,6 +127,7 @@
         [lastVoiceMessageCell stopPlaying];
         [[XMAVAudioPlayer sharedInstance] stopSound];
     }
+    //第一条信息为语音时导致无法播放,增加[voiceStatus isPlaying]判断
     if (currentIndexPath.row == self.voicePlayingIndexPath.row && [voiceStatus isPlaying]) {
         self.voicePlayingIndexPath = nil;
         return;
