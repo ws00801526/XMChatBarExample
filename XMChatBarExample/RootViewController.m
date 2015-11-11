@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "AppDelegate.h"
 
 #import "ChatViewController.h"
 
@@ -18,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

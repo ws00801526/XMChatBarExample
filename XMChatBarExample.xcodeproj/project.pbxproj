@@ -864,6 +864,7 @@
 				9350F4821BB8E4BF0092EFB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		93D5A4551B8187500085D863 /* Build configuration list for PBXProject "XMChatBarExample" */ = {
 			isa = XCConfigurationList;

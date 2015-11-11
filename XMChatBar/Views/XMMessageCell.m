@@ -48,6 +48,7 @@
     return self;
 }
 
+
 - (void)setup{
     [self.contentView addSubview:self.avatarImageView];
     [self.contentView addSubview:self.messageNickNameLabel];
@@ -217,7 +218,7 @@
     self.messageNickNameLabel.text = message.senderNickName;
     [self.avatarImageView setImageWithUrlString:message
          .senderAvatarThumb];
-    [self updateConstraints];
+    [self setNeedsUpdateConstraints];
 }
 
 #pragma mark - Getters
