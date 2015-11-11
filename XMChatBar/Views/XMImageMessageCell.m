@@ -7,12 +7,11 @@
 //
 
 #import "XMImageMessageCell.h"
+#import "XMNShapeImageView.h"
 
 @interface XMImageMessageCell  ()
 
 @property (strong, nonatomic) UIImageView *messageImageView /**< 显示image的imageView */;
-@property (strong, nonatomic) UIImageView *messageMaskImageView /**< 遮罩imageView */;
-
 @end
 
 @implementation XMImageMessageCell
@@ -23,7 +22,7 @@
     [super touchesEnded:touches withEvent:event];
     UITouch *touch = [touches allObjects][0];
     CGPoint touchPoint = [touch locationInView:self.messageContentView];
-    if (CGRectContainsPoint(self.messageMaskImageView.frame, touchPoint)) {
+    if (CGRectContainsPoint(self.messageImageView.frame, touchPoint)) {
         if (self.messageDelegate && [self.messageDelegate respondsToSelector:@selector(XMImageMessageTapped:)]) {
             [self.messageDelegate XMImageMessageTapped:(XMImageMessage *)self.message];
         }
@@ -34,10 +33,10 @@
 
 - (void)updateConstraints{
     [super updateConstraints];
-    
+    NSLog(@"updateConstraints :%@",[self class]);
     XMImageMessage *imageMessage = (XMImageMessage *)self.message;
     
-    [self.messageMaskImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.messageImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.messageContentView.mas_top);
         make.bottom.equalTo(self.messageContentView.mas_bottom).priorityHigh();
         make.height.mas_lessThanOrEqualTo(imageMessage.imageSize.height);
@@ -49,18 +48,13 @@
         }
     }];
     
-    [self.messageImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.messageMaskImageView);
-    }];
-
 }
 
 - (void)setup{
+    
     [super setup];
-    
     [self.messageContentView addSubview:self.messageImageView];
-    [self.messageContentView addSubview:self.messageMaskImageView];
-    
+
 }
 
 - (void)setMessage:(XMMessage *)message{
@@ -75,12 +69,9 @@
             });
         });
     }
-    self.messageMaskImageView.image = nil;
-    if (message.messageOwner == XMMessageOwnerTypeSelf) {
-        self.messageMaskImageView.image = [[UIImage imageNamed:@"message_sender_background_reversed"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 50, 15, 30) resizingMode:UIImageResizingModeStretch];
-    }else{
-        self.messageMaskImageView.image = [[UIImage imageNamed:@"message_receiver_background_reversed"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 50, 15, 30) resizingMode:UIImageResizingModeStretch];
-    }
+    
+    self.messageImageView.maskView = [self messageMaskImageViewWithMessage:imageMessage];
+    
     [super setMessage:message];
 }
 
@@ -93,11 +84,16 @@
     return _messageImageView;
 }
 
-- (UIImageView *)messageMaskImageView{
-    if (!_messageMaskImageView) {
-        _messageMaskImageView = [[UIImageView alloc] init];
+- (UIImageView *)messageMaskImageViewWithMessage:(XMImageMessage *)message {
+    UIImageView *maskView = [[UIImageView alloc] init];
+    if (message.messageOwner == XMMessageOwnerTypeSelf) {
+//        [maskView setImage:[UIImage imageNamed:@"message_sender_background_normal"]];
+        [maskView setImage:[[UIImage imageNamed:@"message_sender_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
+    }else {
+        [maskView setImage:[[UIImage imageNamed:@"message_receiver_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 24, 16, 16) resizingMode:UIImageResizingModeStretch]];
     }
-    return _messageMaskImageView;
+    maskView.frame = CGRectMake(0, 0, message.imageSize.width, message.imageSize.height);
+    return maskView;
 }
 
 @end
