@@ -13,6 +13,8 @@
 		9305B10E1BA6578D00E0C96D /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305B10A1BA6578D00E0C96D /* ChatListController.m */; };
 		9321FAE41B9D8D0F00921194 /* test_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 9321FAE21B9D8D0F00921194 /* test_send.png */; };
 		9321FAE51B9D8D0F00921194 /* test_send2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9321FAE31B9D8D0F00921194 /* test_send2.png */; };
+		9325A6F11BF4236300978087 /* XMNFacePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9325A6F01BF4236300978087 /* XMNFacePageView.m */; settings = {ASSET_TAGS = (); }; };
+		9325A6F51BF4236B00978087 /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9325A6F41BF4236B00978087 /* SwipeView.m */; settings = {ASSET_TAGS = (); }; };
 		9335E2231B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E1E01B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m */; };
 		9335E2241B9EBD89000F4D99 /* chatBar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9335E1E11B9EBD89000F4D99 /* chatBar.xcassets */; };
 		9335E2251B9EBD89000F4D99 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E1E41B9EBD89000F4D99 /* ChatViewController.m */; };
@@ -78,6 +80,10 @@
 		9305B10A1BA6578D00E0C96D /* ChatListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListController.m; sourceTree = "<group>"; };
 		9321FAE21B9D8D0F00921194 /* test_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_send.png; sourceTree = "<group>"; };
 		9321FAE31B9D8D0F00921194 /* test_send2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_send2.png; sourceTree = "<group>"; };
+		9325A6EF1BF4236300978087 /* XMNFacePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNFacePageView.h; sourceTree = "<group>"; };
+		9325A6F01BF4236300978087 /* XMNFacePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMNFacePageView.m; sourceTree = "<group>"; };
+		9325A6F31BF4236B00978087 /* SwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeView.h; sourceTree = "<group>"; };
+		9325A6F41BF4236B00978087 /* SwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeView.m; sourceTree = "<group>"; };
 		9335E1DF1B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
 		9335E1E01B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		9335E1E11B9EBD89000F4D99 /* chatBar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = chatBar.xcassets; sourceTree = "<group>"; };
@@ -204,6 +210,15 @@
 			path = ChatList;
 			sourceTree = "<group>";
 		};
+		9325A6F21BF4236B00978087 /* SwipeView */ = {
+			isa = PBXGroup;
+			children = (
+				9325A6F31BF4236B00978087 /* SwipeView.h */,
+				9325A6F41BF4236B00978087 /* SwipeView.m */,
+			);
+			path = SwipeView;
+			sourceTree = "<group>";
+		};
 		9335E1DD1B9EBD89000F4D99 /* XMChatBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +289,7 @@
 		9335E1FA1B9EBD89000F4D99 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				9325A6F21BF4236B00978087 /* SwipeView */,
 				9335E2041B9EBD89000F4D99 /* VoiceLib */,
 				9335E2091B9EBD89000F4D99 /* XMLocationManager */,
 			);
@@ -316,6 +332,8 @@
 				9335E20E1B9EBD89000F4D99 /* XMChatBar.m */,
 				9335E20F1B9EBD89000F4D99 /* XMChatFaceView.h */,
 				9335E2101B9EBD89000F4D99 /* XMChatFaceView.m */,
+				9325A6EF1BF4236300978087 /* XMNFacePageView.h */,
+				9325A6F01BF4236300978087 /* XMNFacePageView.m */,
 				9335E2111B9EBD89000F4D99 /* XMChatMoreItem.h */,
 				9335E2121B9EBD89000F4D99 /* XMChatMoreItem.m */,
 				9335E2131B9EBD89000F4D99 /* XMChatMoreView.h */,
@@ -607,6 +625,7 @@
 				9335E23B1B9EBD89000F4D99 /* XMMessageCell.m in Sources */,
 				9305B10D1BA6578D00E0C96D /* ChatListCell.m in Sources */,
 				9335E22E1B9EBD89000F4D99 /* XMTextMessage.m in Sources */,
+				9325A6F51BF4236B00978087 /* SwipeView.m in Sources */,
 				9335E22D1B9EBD89000F4D99 /* XMSystemMessage.m in Sources */,
 				9335E2231B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				9335E2281B9EBD89000F4D99 /* XMAVAudioPlayer.m in Sources */,
@@ -628,6 +647,7 @@
 				9335E23A1B9EBD89000F4D99 /* XMLocationMessageCell.m in Sources */,
 				9335E2331B9EBD89000F4D99 /* Mp3Recorder.m in Sources */,
 				9335E22B1B9EBD89000F4D99 /* XMLocationMessage.m in Sources */,
+				9325A6F11BF4236300978087 /* XMNFacePageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

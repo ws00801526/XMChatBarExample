@@ -388,7 +388,7 @@
 }
 
 - (void)buttonAction:(UIButton *)button{
-    
+    self.inputText = self.textView.text;
     XMFunctionViewShowType showType = button.tag;
     
     //更改对应按钮的状态

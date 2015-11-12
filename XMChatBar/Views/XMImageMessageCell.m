@@ -7,7 +7,6 @@
 //
 
 #import "XMImageMessageCell.h"
-#import "XMNShapeImageView.h"
 
 @interface XMImageMessageCell  ()
 
@@ -70,6 +69,7 @@
         });
     }
     
+    //设置messageImageView的maskView
     self.messageImageView.maskView = [self messageMaskImageViewWithMessage:imageMessage];
     
     [super setMessage:message];
@@ -84,10 +84,17 @@
     return _messageImageView;
 }
 
+
+/**
+ *  获取一个遮罩层的imageView
+ *
+ *  @param message 传入的imageMessage消息,最主要的是提供了图片的大小
+ *
+ *  @return 返回一个遮罩层
+ */
 - (UIImageView *)messageMaskImageViewWithMessage:(XMImageMessage *)message {
     UIImageView *maskView = [[UIImageView alloc] init];
     if (message.messageOwner == XMMessageOwnerTypeSelf) {
-//        [maskView setImage:[UIImage imageNamed:@"message_sender_background_normal"]];
         [maskView setImage:[[UIImage imageNamed:@"message_sender_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
     }else {
         [maskView setImage:[[UIImage imageNamed:@"message_receiver_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 24, 16, 16) resizingMode:UIImageResizingModeStretch]];
