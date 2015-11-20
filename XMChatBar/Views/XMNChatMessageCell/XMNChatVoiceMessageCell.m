@@ -78,12 +78,12 @@
     [self.messageContentV addSubview:self.messageIndicatorV];
     [super setup];
     self.voiceMessageState = XMNVoiceMessageStateNormal;
-
+    
 }
 
 - (void)configureCellWithData:(id)data {
     [super configureCellWithData:data];
-    
+    self.messageVoiceSecondsL.text = [NSString stringWithFormat:@"%ld''",[data[kXMNMessageConfigurationVoiceSecondsKey] integerValue]];
 }
 
 #pragma mark - Getters

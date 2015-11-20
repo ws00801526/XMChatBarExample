@@ -115,6 +115,12 @@ static NSString *const kXMNMessageConfigurationImageKey = @"com.XMFraker.kXMNMes
  *  语音消息内容的key
  */
 static NSString *const kXMNMessageConfigurationVoiceKey = @"com.XMFraker.kXMNMessageConfigurationVoiceKey";
+
+/**
+ *  语音消息时长key
+ */
+static NSString *const kXMNMessageConfigurationVoiceSecondsKey = @"com.XMFraker.kXMNMessageConfigurationVoiceSecondsKey";
+
 /**
  *  地理位置消息内容的key
  */

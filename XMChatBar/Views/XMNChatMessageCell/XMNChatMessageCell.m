@@ -159,14 +159,13 @@
     [self.contentView addSubview:self.messageReadStateIV];
     [self.contentView addSubview:self.messageSendStateIV];
     
+    self.messageSendStateIV.hidden = YES;
+    self.messageReadStateIV.hidden = YES;
+    
     if (self.messageOwner == XMNMessageOwnerSelf) {
-        self.messageSendStateIV.hidden = NO;
-        self.messageReadStateIV.hidden = YES;
         [self.messageContentMaskIV setImage:[[UIImage imageNamed:@"message_sender_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
         [self.messageContentMaskIV setHighlightedImage:[[UIImage imageNamed:@"message_sender_background_highlight"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
     }else if (self.messageOwner == XMNMessageOwnerOther){
-        self.messageSendStateIV.hidden = YES;
-        self.messageReadStateIV.hidden = NO;
         [self.messageContentMaskIV setImage:[[UIImage imageNamed:@"message_receiver_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
         [self.messageContentMaskIV setHighlightedImage:[[UIImage imageNamed:@"message_receiver_background_highlight"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
     }
@@ -174,7 +173,6 @@
     self.messageContentBackgroundIV.image = self.messageContentMaskIV.image;
     self.messageContentBackgroundIV.highlightedImage = self.messageContentMaskIV.highlightedImage;
     [self.contentView insertSubview:self.messageContentBackgroundIV belowSubview:self.messageContentV];
-
     
     [self updateConstraintsIfNeeded];
     
@@ -187,7 +185,6 @@
 - (void)handleTap:(UITapGestureRecognizer *)tap {
     if (tap.state == UIGestureRecognizerStateEnded) {
         CGPoint tapPoint = [tap locationInView:self.contentView];
-//        __weak __typeof(&*self) wself = self;
         if (CGRectContainsPoint(self.messageContentV.frame, tapPoint)) {
             NSLog(@"tap message");
             [self.delegate messageCellTappedMessage:self];
@@ -206,6 +203,26 @@
 - (void)configureCellWithData:(id)data {
     self.nicknameL.text = data[kXMNMessageConfigurationNicknameKey];
     [self.headIV setImageWithUrlString:data[kXMNMessageConfigurationAvatarKey]];
+    
+    if (self.messageOwner == XMNMessageOwnerSelf) {
+        self.messageReadStateIV.hidden = YES;
+        if (data[kXMNMessageConfigurationSendStateKey] && [data[kXMNMessageConfigurationSendStateKey] integerValue] == XMNMessageSendFail) {
+            self.messageSendStateIV.hidden = NO;
+        }else {
+            self.messageSendStateIV.hidden = YES;
+        }
+    }else if (self.messageOwner == XMNMessageOwnerOther) {
+        self.messageSendStateIV.hidden = YES;
+        if (self.messageType == XMNMessageTypeVoice) {
+            if (data[kXMNMessageConfigurationReadStateKey]  && [data[kXMNMessageConfigurationReadStateKey] integerValue] == XMNMessageReaded) {
+                self.messageReadStateIV.hidden = YES;
+            }else {
+                self.messageReadStateIV.hidden = NO;
+            }
+        }else {
+            self.messageReadStateIV.hidden = YES;
+        }
+    }
 }
 
 #pragma mark - Getters

@@ -89,6 +89,7 @@
     voiceMessageDict[kXMNMessageConfigurationNicknameKey] = kSelfName;
     voiceMessageDict[kXMNMessageConfigurationAvatarKey] = kSelfThumb;
     voiceMessageDict[kXMNMessageConfigurationVoiceKey] = voiceFileName;
+    voiceMessageDict[kXMNMessageConfigurationVoiceSecondsKey] = @(seconds);
     [self addMessage:voiceMessageDict];
     
 }
