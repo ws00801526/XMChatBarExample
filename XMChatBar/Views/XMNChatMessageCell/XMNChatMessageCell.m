@@ -170,7 +170,7 @@
         [self.messageContentBackgroundIV setHighlightedImage:[[UIImage imageNamed:@"message_receiver_background_highlight"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
     }
     
-    self.messageContentMaskIV.image = self.messageContentBackgroundIV.image;
+    self.messageContentV.layer.mask.contents = (__bridge id _Nullable)(self.messageContentBackgroundIV.image.CGImage);
     [self.contentView insertSubview:self.messageContentBackgroundIV belowSubview:self.messageContentV];
     
     [self updateConstraintsIfNeeded];
@@ -249,12 +249,6 @@
 - (XMNContentView *)messageContentV {
     if (!_messageContentV) {
         _messageContentV = [[XMNContentView alloc] init];
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f) {
-            _messageContentV.maskView = self.messageContentMaskIV;
-        }else {
-            _messageContentV.layer.mask = [CAShapeLayer layer];
-            _messageContentV.layer.mask.backgroundColor = [UIColor grayColor].CGColor;
-        }
     }
     return _messageContentV;
 }
@@ -273,14 +267,6 @@
         _messageSendStateIV.backgroundColor = [UIColor greenColor];
     }
     return _messageSendStateIV;
-}
-
-- (UIImageView *)messageContentMaskIV {
-    if (!_messageContentMaskIV) {
-        _messageContentMaskIV = [[UIImageView alloc] init];
-        _messageContentMaskIV.contentScaleFactor = [UIScreen mainScreen].scale;
-    }
-    return _messageContentMaskIV;
 }
 
 - (UIImageView *)messageContentBackgroundIV {

@@ -59,9 +59,6 @@ NSString *const kXMNAudioDataKey;
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityStateChanged:) name:UIDeviceProximityStateDidChangeNotification object:nil];
         }
         
-        //配置播放器配置
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error: nil];
-        
         _audioDataOperationQueue = [[NSOperationQueue alloc] init];
         _audioDataOperationQueue.name = @"com.XMFraker.XMNAVAudipPlayer.loadAudioDataQueue";
         
@@ -177,12 +174,16 @@ NSString *const kXMNAudioDataKey;
         return;
     }
     
+    //配置播放器配置
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error: nil];
+
     NSError *audioPlayerError;
     _audioPlayer = [[AVAudioPlayer alloc] initWithData:audioData error:&audioPlayerError];
     if (!_audioPlayer || !audioData) {
         [self setAudioPlayerState:XMNVoiceMessageStateCancel];
         return;
     }
+    
     _audioPlayer.volume = 1.0f;
     _audioPlayer.delegate = self;
     [_audioPlayer prepareToPlay];

@@ -35,7 +35,7 @@
 @property (nonatomic, strong) UILabel *nicknameL;
 
 /**
- *  显示用户消息主体的View,所有的消息用到的textView,imageView都会被添加到这个view中
+ *  显示用户消息主体的View,所有的消息用到的textView,imageView都会被添加到这个view中 -> XMNContentView 自带一个CAShapeLayer的蒙版
  */
 @property (nonatomic, strong) XMNContentView *messageContentV;
 
@@ -48,11 +48,6 @@
  *  显示消息发送状态的UIImageView -> 用于消息发送不成功时显示
  */
 @property (nonatomic, strong) UIImageView *messageSendStateIV;
-
-/**
- *  messageContentV的蒙版层,主要作用是让messageContentV显示特殊形状
- */
-@property (nonatomic, strong) UIImageView *messageContentMaskIV;
 
 /**
  *  messageContentV的背景层
