@@ -153,6 +153,11 @@
     
 }
 
+- (void)messageCell:(XMNChatMessageCell *)messageCell withActionType:(XMNChatMessageCellMenuActionType)actionType {
+    NSString *action = actionType ==XMNChatMessageCellMenuActionTypeRelay ? @"转发" : @"复制";
+    NSLog(@"messageCell :%@ willDoAction :%@",messageCell,action);
+}
+
 #pragma mark - XMNAVAudioPlayerDelegate
 
 

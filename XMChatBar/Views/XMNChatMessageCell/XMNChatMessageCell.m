@@ -18,6 +18,13 @@
 
 #import "UIImageView+XMWebImage.h"
 
+
+@interface XMNChatMessageCell ()
+
+@property (nonatomic, strong) UIMenuController *menuController;
+
+@end
+
 @implementation XMNChatMessageCell
 
 
@@ -178,23 +185,11 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.contentView addGestureRecognizer:tap];
 
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longPress.numberOfTouchesRequired = 1;
+    longPress.minimumPressDuration = 1.f;
+    [self.contentView addGestureRecognizer:longPress];
     
-}
-
-- (void)handleTap:(UITapGestureRecognizer *)tap {
-    if (tap.state == UIGestureRecognizerStateEnded) {
-        CGPoint tapPoint = [tap locationInView:self.contentView];
-        if (CGRectContainsPoint(self.messageContentV.frame, tapPoint)) {
-            NSLog(@"tap message");
-            [self.delegate messageCellTappedMessage:self];
-        }else if (CGRectContainsPoint(self.headIV.frame, tapPoint)) {
-            NSLog(@"tap head");
-            [self.delegate messageCellTappedHead:self];
-        }else {
-            NSLog(@"tap blank");
-            [self.delegate messageCellTappedBlank:self];
-        }
-    }
 }
 
 #pragma mark - Public Methods
@@ -223,6 +218,68 @@
         }
     }
 }
+
+#pragma mark - Private Methods
+
+
+//以下两个方法必须有
+/*
+ *  让UIView成为第一responser
+ */
+- (BOOL)canBecomeFirstResponder{
+    return YES;
+}
+
+/*
+ *  根据action,判断UIMenuController是否显示对应aciton的title
+ */
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    if (action == @selector(menuRelayAction) || action == @selector(menuCopyAction)) {
+        return YES;
+    }
+    return NO;
+}
+
+
+- (void)handleTap:(UITapGestureRecognizer *)tap {
+    if (tap.state == UIGestureRecognizerStateEnded) {
+        CGPoint tapPoint = [tap locationInView:self.contentView];
+        if (CGRectContainsPoint(self.messageContentV.frame, tapPoint)) {
+            NSLog(@"tap message");
+            [self.delegate messageCellTappedMessage:self];
+        }else if (CGRectContainsPoint(self.headIV.frame, tapPoint)) {
+            NSLog(@"tap head");
+            [self.delegate messageCellTappedHead:self];
+        }else {
+            NSLog(@"tap blank");
+            [self.delegate messageCellTappedBlank:self];
+        }
+    }
+}
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)longPressGes {
+    if (longPressGes.state == UIGestureRecognizerStateBegan) {
+        //首先自己成为第一responser
+        [self becomeFirstResponder];
+        //!!!此处使用self.superview.superview 获得到cell所在的tableView,不是很严谨,有哪位知道更加好的方法请告知
+        [self.menuController setTargetRect:self.messageContentV.frame inView:self.superview.superview];
+        [self.menuController setMenuVisible:YES animated:YES];
+    }
+}
+
+
+- (void)menuCopyAction {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(messageCell:withActionType:)]) {
+        [self.delegate messageCell:self withActionType: XMNChatMessageCellMenuActionTypeCopy];
+    }
+}
+
+- (void)menuRelayAction {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(messageCell:withActionType:)]) {
+        [self.delegate messageCell:self withActionType: XMNChatMessageCellMenuActionTypeRelay];
+    }
+}
+
 
 #pragma mark - Getters
 
@@ -309,6 +366,23 @@
     }
     return XMNMessageOwnerUnknown;
 }
+
+
+- (UIMenuController *)menuController{
+    if (!_menuController) {
+        _menuController = [UIMenuController sharedMenuController];
+        UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(menuCopyAction)];
+        UIMenuItem *shareItem = [[UIMenuItem alloc] initWithTitle:@"转发" action:@selector(menuRelayAction)];
+        if (self.messageType == XMNMessageTypeText) {
+            [_menuController setMenuItems:@[copyItem,shareItem]];
+        }else{
+            [_menuController setMenuItems:@[shareItem]];
+        }
+        [_menuController setArrowDirection:UIMenuControllerArrowDown];
+    }
+    return _menuController;
+}
+
 
 #pragma mark - Class Methods
 

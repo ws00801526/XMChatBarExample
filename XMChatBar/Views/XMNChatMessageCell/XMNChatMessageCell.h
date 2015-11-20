@@ -18,6 +18,7 @@
 - (void)messageCellTappedBlank:(XMNChatMessageCell *)messageCell;
 - (void)messageCellTappedHead:(XMNChatMessageCell *)messageCell;
 - (void)messageCellTappedMessage:(XMNChatMessageCell *)messageCell;
+- (void)messageCell:(XMNChatMessageCell *)messageCell withActionType:(XMNChatMessageCellMenuActionType)actionType;
 
 @end
 
