@@ -174,10 +174,10 @@
 
 #pragma mark - MP3RecordedDelegate
 
-- (void)endConvertWithData:(NSData *)voiceData{
-    if (voiceData) {
+- (void)endConvertWithMP3FileName:(NSString *)fileName {
+    if (fileName) {
         [XMProgressHUD dismissWithProgressState:XMProgressSuccess];
-        [self sendVoiceMessage:voiceData seconds:[XMProgressHUD seconds]];
+        [self sendVoiceMessage:fileName seconds:[XMProgressHUD seconds]];
     }else{
         [XMProgressHUD dismissWithProgressState:XMProgressError];
     }
@@ -482,9 +482,9 @@
  *  @param voiceData 发送的语音信息data
  *  @param seconds   语音时长
  */
-- (void)sendVoiceMessage:(NSData *)voiceData seconds:(NSTimeInterval)seconds{
+- (void)sendVoiceMessage:(NSString *)voiceFileName seconds:(NSTimeInterval)seconds{
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatBar:sendVoice:seconds:)]) {
-        [self.delegate chatBar:self sendVoice:voiceData seconds:seconds];
+        [self.delegate chatBar:self sendVoice:voiceFileName seconds:seconds];
     }
 }
 

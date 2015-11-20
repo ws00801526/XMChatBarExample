@@ -89,6 +89,6 @@ typedef NS_ENUM(NSUInteger, XMFunctionViewShowType){
  *  @param voiceData 语音data数据
  *  @param seconds   语音时长
  */
-- (void)chatBar:(XMChatBar *)chatBar sendVoice:(NSData *)voiceData seconds:(NSTimeInterval)seconds;
+- (void)chatBar:(XMChatBar *)chatBar sendVoice:(NSString *)voiceFileName seconds:(NSTimeInterval)seconds;
 
 @end

@@ -11,7 +11,7 @@
 @protocol Mp3RecorderDelegate <NSObject>
 - (void)failRecord;
 - (void)beginConvert;
-- (void)endConvertWithData:(NSData *)voiceData;
+- (void)endConvertWithMP3FileName:(NSString *)fileName;
 @end
 
 @interface Mp3Recorder : NSObject

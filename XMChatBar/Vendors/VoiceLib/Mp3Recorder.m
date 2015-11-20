@@ -126,10 +126,7 @@
 - (void)audio_PCMtoMP3
 {
     NSString *cafFilePath = [self cafPath];
-    NSString *mp3FilePath = [self mp3Path];
-    
-    // remove the old mp3 file
-    [self deleteMp3Cache];
+    NSString *mp3FilePath = [[self mp3Path] stringByAppendingPathComponent:[self randomMP3FileName]];
 
     NSLog(@"MP3转换开始");
     if (_delegate && [_delegate respondsToSelector:@selector(beginConvert)]) {
@@ -169,17 +166,18 @@
     }
     @catch (NSException *exception) {
         NSLog(@"%@",[exception description]);
+        mp3FilePath = nil;
     }
     @finally {
         [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
+        NSLog(@"MP3转换结束");
+        if (_delegate && [_delegate respondsToSelector:@selector(endConvertWithMP3FileName:)]) {
+            [_delegate endConvertWithMP3FileName:mp3FilePath];
+        }
+        [self deleteCafCache];
     }
     
-    [self deleteCafCache];
-    NSLog(@"MP3转换结束");
-    if (_delegate && [_delegate respondsToSelector:@selector(endConvertWithData:)]) {
-        NSData *voiceData = [NSData dataWithContentsOfFile:[self mp3Path]];
-        [_delegate endConvertWithData:voiceData];
-    }
+    
 }
 
 #pragma mark - Path Utils
@@ -189,10 +187,18 @@
     return cafPath;
 }
 
-- (NSString *)mp3Path
-{
-    NSString *mp3Path = [NSTemporaryDirectory() stringByAppendingPathComponent:@"mp3.caf"];
+- (NSString *)mp3Path {
+    NSString *mp3Path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"com.XMFraker.XMNChat.audioCache"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:mp3Path]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:mp3Path withIntermediateDirectories:YES attributes:nil error:nil];
+    }
     return mp3Path;
+}
+
+- (NSString *)randomMP3FileName {
+    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSince1970];
+    NSString *fileName = [NSString stringWithFormat:@"record_%.0f.mp3",timeInterval];
+    return fileName;
 }
 
 @end

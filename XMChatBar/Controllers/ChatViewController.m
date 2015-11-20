@@ -80,7 +80,7 @@
     
 }
 
-- (void)chatBar:(XMChatBar *)chatBar sendVoice:(NSData *)voiceData seconds:(NSTimeInterval)seconds{
+- (void)chatBar:(XMChatBar *)chatBar sendVoice:(NSString *)voiceFileName seconds:(NSTimeInterval)seconds{
  
     NSMutableDictionary *voiceMessageDict = [NSMutableDictionary dictionary];
     voiceMessageDict[kXMNMessageConfigurationTypeKey] = @(XMNMessageTypeVoice);
@@ -88,6 +88,7 @@
     voiceMessageDict[kXMNMessageConfigurationGroupKey] = @(self.messageChatType);
     voiceMessageDict[kXMNMessageConfigurationNicknameKey] = kSelfName;
     voiceMessageDict[kXMNMessageConfigurationAvatarKey] = kSelfThumb;
+    voiceMessageDict[kXMNMessageConfigurationVoiceKey] = voiceFileName;
     [self addMessage:voiceMessageDict];
     
 }
@@ -145,7 +146,10 @@
     NSLog(@"tapMessage :%@",indexPath);
     switch (messageCell.messageType) {
         case XMNMessageTypeVoice:
-            [[XMNAVAudioPlayer sharePlayer] playAudioWithURLString:@"http://yinyueshiting.baidu.com/data2/music/130854687/13025927214400064.mp3?xcode=11864335d721735d2e999d51bc758b81" atIndex:indexPath.row];
+        {
+            NSString *voiceFileName = [self.chatViewModel messageAtIndex:indexPath.row][kXMNMessageConfigurationVoiceKey];
+            [[XMNAVAudioPlayer sharePlayer] playAudioWithURLString:voiceFileName atIndex:indexPath.row];
+        }
             break;
             
         default:
