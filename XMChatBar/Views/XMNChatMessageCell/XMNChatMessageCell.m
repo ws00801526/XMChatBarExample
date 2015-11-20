@@ -245,13 +245,10 @@
     if (tap.state == UIGestureRecognizerStateEnded) {
         CGPoint tapPoint = [tap locationInView:self.contentView];
         if (CGRectContainsPoint(self.messageContentV.frame, tapPoint)) {
-            NSLog(@"tap message");
             [self.delegate messageCellTappedMessage:self];
         }else if (CGRectContainsPoint(self.headIV.frame, tapPoint)) {
-            NSLog(@"tap head");
             [self.delegate messageCellTappedHead:self];
         }else {
-            NSLog(@"tap blank");
             [self.delegate messageCellTappedBlank:self];
         }
     }
@@ -259,10 +256,15 @@
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPressGes {
     if (longPressGes.state == UIGestureRecognizerStateBegan) {
+        CGPoint longPressPoint = [longPressGes locationInView:self.contentView];
+        if (!CGRectContainsPoint(self.messageContentV.frame, longPressPoint)) {
+            return;
+        }
         //首先自己成为第一responser
         [self becomeFirstResponder];
         //!!!此处使用self.superview.superview 获得到cell所在的tableView,不是很严谨,有哪位知道更加好的方法请告知
-        [self.menuController setTargetRect:self.messageContentV.frame inView:self.superview.superview];
+        CGRect targetRect = [self convertRect:self.messageContentV.frame toView:self.superview.superview];
+        [self.menuController setTargetRect:targetRect inView:self.superview.superview];
         [self.menuController setMenuVisible:YES animated:YES];
     }
 }
