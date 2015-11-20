@@ -15,4 +15,10 @@
     self.maskView.frame = CGRectInset(self.bounds, 0, 0);
 }
 
+- (void)layoutSublayersOfLayer:(CALayer *)layer {
+    [super layoutSublayersOfLayer:layer];
+    self.layer.mask.frame = CGRectInset(self.bounds, 0, 0);
+    self.layer.mask.cornerRadius = 5.0f;
+}
+
 @end

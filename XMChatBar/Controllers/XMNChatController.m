@@ -1,34 +1,32 @@
 //
-//  ChatViewController.m
-//  XMChatControllerExample
+//  XMNChatController.m
+//  XMChatBarExample
 //
-//  Created by shscce on 15/9/3.
-//  Copyright (c) 2015年 xmfraker. All rights reserved.
+//  Created by shscce on 15/11/20.
+//  Copyright © 2015年 xmfraker. All rights reserved.
 //
 
-#import "ChatViewController.h"
-
-#import "XMNChat.h"
+#import "XMNChatController.h"
 
 #import "UITableView+FDTemplateLayoutCell.h"
-
-
 
 #define kSelfName @"XMFraker"
 #define kSelfThumb @"http://img1.touxiang.cn/uploads/20131114/14-065809_117.jpg"
 
-@interface ChatViewController ()<XMChatBarDelegate,XMNChatMessageCellDelegate,XMNAVAudioPlayerDelegate>
+@interface XMNChatController () <XMChatBarDelegate,XMNAVAudioPlayerDelegate,XMNChatMessageCellDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) XMChatBar *chatBar;
 
 @property (assign, nonatomic) XMNMessageChat messageChatType;
-
 @property (nonatomic, strong) XMNChatViewModel *chatViewModel;
 
 @end
 
-@implementation ChatViewController
+@implementation XMNChatController
+
+
+#pragma mark - Life Cycle
 
 - (instancetype)initWithChatType:(XMNMessageChat)messageChatType{
     if ([super init]) {
@@ -39,8 +37,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    
     
     [XMNAVAudioPlayer sharePlayer].delegate = self;
     self.chatViewModel = [[XMNChatViewModel alloc] initWithParentVC:self];
@@ -48,8 +44,6 @@
     self.view.backgroundColor = [UIColor colorWithRed:234.0f/255.0f green:234/255.0f blue:234/255.f alpha:1.0f];
     
     [self.view addSubview:self.tableView];
-    self.chatBar = [[XMChatBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kMinHeight, self.view.frame.size.width, kMinHeight)];
-    self.chatBar.delegate = self;
     [self.view addSubview:self.chatBar];
     
 }
@@ -68,7 +62,7 @@
 #pragma mark - XMChatBarDelegate
 
 - (void)chatBar:(XMChatBar *)chatBar sendMessage:(NSString *)message{
-
+    
     NSMutableDictionary *textMessageDict = [NSMutableDictionary dictionary];
     textMessageDict[kXMNMessageConfigurationTypeKey] = @(XMNMessageTypeText);
     textMessageDict[kXMNMessageConfigurationOwnerKey] = @(XMNMessageOwnerSelf);
@@ -81,7 +75,7 @@
 }
 
 - (void)chatBar:(XMChatBar *)chatBar sendVoice:(NSString *)voiceFileName seconds:(NSTimeInterval)seconds{
- 
+    
     NSMutableDictionary *voiceMessageDict = [NSMutableDictionary dictionary];
     voiceMessageDict[kXMNMessageConfigurationTypeKey] = @(XMNMessageTypeVoice);
     voiceMessageDict[kXMNMessageConfigurationOwnerKey] = @(XMNMessageOwnerSelf);
@@ -95,7 +89,7 @@
 }
 
 - (void)chatBar:(XMChatBar *)chatBar sendPictures:(NSArray *)pictures{
-
+    
     NSMutableDictionary *imageMessageDict = [NSMutableDictionary dictionary];
     imageMessageDict[kXMNMessageConfigurationTypeKey] = @(XMNMessageTypeImage);
     imageMessageDict[kXMNMessageConfigurationOwnerKey] = @(XMNMessageOwnerSelf);
@@ -115,7 +109,7 @@
     locationMessageDict[kXMNMessageConfigurationNicknameKey] = kSelfName;
     locationMessageDict[kXMNMessageConfigurationAvatarKey] = kSelfThumb;
     [self addMessage:locationMessageDict];
-
+    
 }
 
 - (void)chatBarFrameDidChange:(XMChatBar *)chatBar frame:(CGRect)frame{
@@ -129,7 +123,7 @@
 
 
 
-#pragma mark - XMNChatMessageCell
+#pragma mark - XMNChatMessageCellDelegate
 
 - (void)messageCellTappedHead:(XMNChatMessageCell *)messageCell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:messageCell];
@@ -193,12 +187,21 @@
         [XMNChatMessageCell registerCellClassForTableView:_tableView];
         
         _tableView.backgroundColor = self.view.backgroundColor;
-
+        
         _tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+        
     }
     return _tableView;
+}
+
+
+- (XMChatBar *)chatBar {
+    if (!_chatBar) {
+        _chatBar = [[XMChatBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kMinHeight, self.view.frame.size.width, kMinHeight)];
+        _chatBar.delegate = self;
+    }
+    return _chatBar;
 }
 
 @end

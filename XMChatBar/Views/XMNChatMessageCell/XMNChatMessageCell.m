@@ -163,15 +163,14 @@
     self.messageReadStateIV.hidden = YES;
     
     if (self.messageOwner == XMNMessageOwnerSelf) {
-        [self.messageContentMaskIV setImage:[[UIImage imageNamed:@"message_sender_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
-        [self.messageContentMaskIV setHighlightedImage:[[UIImage imageNamed:@"message_sender_background_highlight"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
+        [self.messageContentBackgroundIV setImage:[[UIImage imageNamed:@"message_sender_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
+        [self.messageContentBackgroundIV setHighlightedImage:[[UIImage imageNamed:@"message_sender_background_highlight"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
     }else if (self.messageOwner == XMNMessageOwnerOther){
-        [self.messageContentMaskIV setImage:[[UIImage imageNamed:@"message_receiver_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
-        [self.messageContentMaskIV setHighlightedImage:[[UIImage imageNamed:@"message_receiver_background_highlight"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
+        [self.messageContentBackgroundIV setImage:[[UIImage imageNamed:@"message_receiver_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
+        [self.messageContentBackgroundIV setHighlightedImage:[[UIImage imageNamed:@"message_receiver_background_highlight"] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 16, 16, 24) resizingMode:UIImageResizingModeStretch]];
     }
     
-    self.messageContentBackgroundIV.image = self.messageContentMaskIV.image;
-    self.messageContentBackgroundIV.highlightedImage = self.messageContentMaskIV.highlightedImage;
+    self.messageContentMaskIV.image = self.messageContentBackgroundIV.image;
     [self.contentView insertSubview:self.messageContentBackgroundIV belowSubview:self.messageContentV];
     
     [self updateConstraintsIfNeeded];
@@ -250,7 +249,12 @@
 - (XMNContentView *)messageContentV {
     if (!_messageContentV) {
         _messageContentV = [[XMNContentView alloc] init];
-        _messageContentV.maskView = self.messageContentMaskIV;
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f) {
+            _messageContentV.maskView = self.messageContentMaskIV;
+        }else {
+            _messageContentV.layer.mask = [CAShapeLayer layer];
+            _messageContentV.layer.mask.backgroundColor = [UIColor grayColor].CGColor;
+        }
     }
     return _messageContentV;
 }

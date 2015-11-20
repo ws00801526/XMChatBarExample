@@ -11,6 +11,7 @@
 		9305B1051BA6555600E0C96D /* UIImageView+XMWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305B1041BA6555600E0C96D /* UIImageView+XMWebImage.m */; };
 		9305B10D1BA6578D00E0C96D /* ChatListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305B1081BA6578D00E0C96D /* ChatListCell.m */; };
 		9305B10E1BA6578D00E0C96D /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305B10A1BA6578D00E0C96D /* ChatListController.m */; };
+		930F81C61BFF00A5008780F8 /* XMNChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 930F81C51BFF00A5008780F8 /* XMNChatController.m */; };
 		932167691BFDBECC000A521F /* XMNAVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 932167681BFDBECC000A521F /* XMNAVAudioPlayer.m */; };
 		9321676C1BFDBEF3000A521F /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 9321676B1BFDBEF3000A521F /* NSString+MD5.m */; };
 		9321676F1BFDBF42000A521F /* XMNChatViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9321676E1BFDBF42000A521F /* XMNChatViewModel.m */; };
@@ -20,7 +21,6 @@
 		9325A6F51BF4236B00978087 /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9325A6F41BF4236B00978087 /* SwipeView.m */; };
 		9335E2231B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E1E01B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m */; };
 		9335E2241B9EBD89000F4D99 /* chatBar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9335E1E11B9EBD89000F4D99 /* chatBar.xcassets */; };
-		9335E2251B9EBD89000F4D99 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E1E41B9EBD89000F4D99 /* ChatViewController.m */; };
 		9335E2261B9EBD89000F4D99 /* XMLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E1E61B9EBD89000F4D99 /* XMLocationController.m */; };
 		9335E2271B9EBD89000F4D99 /* face.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9335E1E71B9EBD89000F4D99 /* face.plist */; };
 		9335E2291B9EBD89000F4D99 /* XMFaceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E1EC1B9EBD89000F4D99 /* XMFaceManager.m */; };
@@ -75,6 +75,8 @@
 		9305B1081BA6578D00E0C96D /* ChatListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListCell.m; sourceTree = "<group>"; };
 		9305B1091BA6578D00E0C96D /* ChatListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListController.h; sourceTree = "<group>"; };
 		9305B10A1BA6578D00E0C96D /* ChatListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListController.m; sourceTree = "<group>"; };
+		930F81C41BFF00A5008780F8 /* XMNChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNChatController.h; sourceTree = "<group>"; };
+		930F81C51BFF00A5008780F8 /* XMNChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMNChatController.m; sourceTree = "<group>"; };
 		932167671BFDBECC000A521F /* XMNAVAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNAVAudioPlayer.h; sourceTree = "<group>"; };
 		932167681BFDBECC000A521F /* XMNAVAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMNAVAudioPlayer.m; sourceTree = "<group>"; };
 		9321676A1BFDBEF3000A521F /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
@@ -90,8 +92,6 @@
 		9335E1DF1B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
 		9335E1E01B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		9335E1E11B9EBD89000F4D99 /* chatBar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = chatBar.xcassets; sourceTree = "<group>"; };
-		9335E1E31B9EBD89000F4D99 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		9335E1E41B9EBD89000F4D99 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		9335E1E51B9EBD89000F4D99 /* XMLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLocationController.h; sourceTree = "<group>"; };
 		9335E1E61B9EBD89000F4D99 /* XMLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLocationController.m; sourceTree = "<group>"; };
 		9335E1E71B9EBD89000F4D99 /* face.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = face.plist; sourceTree = "<group>"; };
@@ -246,10 +246,10 @@
 		9335E1E21B9EBD89000F4D99 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9335E1E31B9EBD89000F4D99 /* ChatViewController.h */,
-				9335E1E41B9EBD89000F4D99 /* ChatViewController.m */,
 				9335E1E51B9EBD89000F4D99 /* XMLocationController.h */,
 				9335E1E61B9EBD89000F4D99 /* XMLocationController.m */,
+				930F81C41BFF00A5008780F8 /* XMNChatController.h */,
+				930F81C51BFF00A5008780F8 /* XMNChatController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -610,7 +610,7 @@
 				9321676F1BFDBF42000A521F /* XMNChatViewModel.m in Sources */,
 				9335E2231B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				9321676C1BFDBEF3000A521F /* NSString+MD5.m in Sources */,
-				9335E2251B9EBD89000F4D99 /* ChatViewController.m in Sources */,
+				930F81C61BFF00A5008780F8 /* XMNChatController.m in Sources */,
 				93A8EF3D1BFB048700050752 /* XMNContentView.m in Sources */,
 				9335E23C1B9EBD89000F4D99 /* XMProgressHUD.m in Sources */,
 				93A8EF371BFB048700050752 /* XMNChatImageMessageCell.m in Sources */,
@@ -788,7 +788,7 @@
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = XMChatBarExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -807,7 +807,7 @@
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = XMChatBarExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

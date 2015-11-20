@@ -7,7 +7,7 @@
 //
 
 #import "ChatListController.h"
-#import "ChatViewController.h"
+#import "XMNChatController.h"
 
 #import "ChatListCell.h"
 
@@ -77,11 +77,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ChatViewController *chatC;
+    XMNChatController *chatC;
     if (indexPath.row == self.dataArray.count - 1) {
-        chatC =[[ChatViewController alloc] initWithChatType:XMNMessageChatGroup];
+        chatC =[[XMNChatController alloc] initWithChatType:XMNMessageChatGroup];
     }else{
-        chatC = [[ChatViewController alloc] init];
+        chatC = [[XMNChatController alloc] init];
     }
     chatC.chatterName = self.dataArray[indexPath.row][@"nickName"];
     chatC.chatterThumb = self.dataArray[indexPath.row][@"thumb"];

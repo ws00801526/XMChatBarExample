@@ -9,7 +9,7 @@
 #import "RootViewController.h"
 #import "AppDelegate.h"
 
-#import "ChatViewController.h"
+#import "XMNChatController.h"
 
 @interface RootViewController ()
 
@@ -39,7 +39,7 @@
 }
 
 - (void)buttonAction{
-    ChatViewController *chatC =[[ChatViewController alloc] init];
+    XMNChatController *chatC =[[XMNChatController alloc] init];
     chatC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatC animated:YES];
     chatC.hidesBottomBarWhenPushed = NO;
