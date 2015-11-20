@@ -31,7 +31,7 @@ XMLocationController  | 选择地理位置的controller
 
 [Helpers类名] | 作用
 ----- | -----
-XMAVAudioPlayer | 录音播放工具,可以播放录音,停止播放录音
+XMNAVAudioPlayer | 录音播放工具,可以播放录音,停止播放录音
 XMFaceManager  | 表情管理,可以获取所有的表情名称,以及对应图片名
 
 [Views类名]() | 作用
@@ -50,8 +50,7 @@ XMFaceManager  | 表情管理,可以获取所有的表情名称,以及对应图�
 [PonyChatUI](https://github.com/PonyGroup/PonyChatUIV2) | 一个很好的聊天界面布局,作者还未完成,期待作者的更多功能
 VoiceLib | 一款第三方录音类库,使用方便
 [Masonry](https://github.com/SnapKit/Masonry) | 第三方的代码自动布局
-AsyncDisplayKit | PonyChatUI需要的 第三方类库
-
+[SwipeView](https://github.com/nicklockwood/SwipeView)  | nicklockwood大神的
 
 ####4. 感谢
 感谢[UUChatTableView](https://github.com/ZhipingYang/UUChatTableView),[PonyChatUI](https://github.com/PonyGroup/PonyChatUIV2)  这是一个学习过程中写的,如果有什么问题,可以[问我](https://github.com/ws00801526/XMChatBarExample/issues),或者发送我的邮箱3057600441@qq.com
@@ -60,16 +59,26 @@ AsyncDisplayKit | PonyChatUI需要的 第三方类库
 
 ####5. 更新
 
-#####V1.1
-1. 去除了PonyChatUI的依赖,因为该类库依赖于AsyncDisplayKit,本人不太熟悉,所以重新参照PonyChatUI重新写了个ChatViewController
-2. 加入了pods 工程,因为不少小伙伴下载后缺少pods工程无法打开,这次特地一起上传了上来
-3. 使用方法请参考,ChatViewController,也可以直接使用,没有继承下拉加载更多消息
 
-#####V1.2.1
-增加pod使用方法
-pod XMChatBar
+#####V1.3.0
+
+1. 重写了XMNChatMessageCell
+2. 使用了ViewModel管理数据,简化了CHatViewController
+3. 重写了XMVAudioPlayer,修复了之前版本有语音Cell 导致的问题  -- 增加了简单的本地文件缓存,可以将网络MP3缓存至本地
+4. 使用了maskView 解决背景问题,所以目前只支持8.0以上版本
+
 
 #####V1.2.2
 1. 修复一个头像拉伸的bug
 2. 增加了一个ChatListController ,demo测试,可以让大家参考下
 3. ChatViewController 分成了XMChatTypeSingle,XMChatTypeGroup两种,默认XMChatTypeSingle
+
+#####V1.2.1
+增加pod使用方法
+pod XMChatBar
+
+#####V1.1
+1. 去除了PonyChatUI的依赖,因为该类库依赖于AsyncDisplayKit,本人不太熟悉,所以重新参照PonyChatUI重新写了个ChatViewController
+2. 加入了pods 工程,因为不少小伙伴下载后缺少pods工程无法打开,这次特地一起上传了上来
+3. 使用方法请参考,ChatViewController,也可以直接使用,没有继承下拉加载更多消息
+
