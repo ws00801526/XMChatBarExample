@@ -46,6 +46,7 @@ typedef NS_ENUM(NSUInteger, XMNMessageType){
  */
 typedef NS_ENUM(NSUInteger, XMNMessageSendState){
     XMNMessageSendSuccess = 0 /**< 消息发送成功 */,
+    XMNMessageSendStateSending, /**< 消息发送中 */
     XMNMessageSendFail /**< 消息发送失败 */,
 };
 
@@ -65,6 +66,15 @@ typedef NS_ENUM(NSUInteger, XMNVoiceMessageState){
     XMNVoiceMessageStateDownloading,/**< 正在下载中 */
     XMNVoiceMessageStatePlaying,/**< 正在播放 */
     XMNVoiceMessageStateCancel,/**< 播放被取消 */
+};
+
+
+/**
+ *  XMNChatMessageCell menu对应action类型
+ */
+typedef NS_ENUM(NSUInteger, XMNChatMessageCellMenuActionType) {
+    XMNChatMessageCellMenuActionTypeCopy, /**< 复制 */
+    XMNChatMessageCellMenuActionTypeRelay, /**< 转发 */
 };
 
 
@@ -125,6 +135,5 @@ static NSString *const kXMNMessageConfigurationVoiceSecondsKey = @"com.XMFraker.
  *  地理位置消息内容的key
  */
 static NSString *const kXMNMessageConfigurationLocationKey = @"com.XMFraker.kXMNMessageConfigurationGroupKey";
-
 
 #endif /* XMNChatUntiles_h */

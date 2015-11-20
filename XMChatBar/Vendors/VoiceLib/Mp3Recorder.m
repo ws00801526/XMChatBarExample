@@ -13,7 +13,6 @@
 @interface Mp3Recorder()<AVAudioRecorderDelegate>
 @property (nonatomic, strong) AVAudioSession *session;
 @property (nonatomic, strong) AVAudioRecorder *recorder;
-@property (nonatomic, strong) NSString *path;
 @end
 
 @implementation Mp3Recorder
@@ -24,7 +23,6 @@
 {
     if (self = [super init]) {
         _delegate = delegate;
-        _path = [self mp3Path];
     }
     return self;
 }
@@ -64,12 +62,6 @@
         NSLog(@"Error creating session: %@", [sessionError description]);
     else
         [_session setActive:YES error:nil];
-}
-
-#pragma mark - Public Methods
-- (void)setSavePath:(NSString *)path
-{
-    self.path = path;
 }
 
 - (void)startRecord
@@ -169,7 +161,7 @@
         mp3FilePath = nil;
     }
     @finally {
-        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
+        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: nil];
         NSLog(@"MP3转换结束");
         if (_delegate && [_delegate respondsToSelector:@selector(endConvertWithMP3FileName:)]) {
             [_delegate endConvertWithMP3FileName:mp3FilePath];

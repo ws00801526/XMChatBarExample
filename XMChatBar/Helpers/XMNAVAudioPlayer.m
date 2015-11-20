@@ -37,6 +37,11 @@ NSString *const kXMNAudioDataKey;
 @implementation XMNAVAudioPlayer
 @synthesize cachePath = _cachePath;
 
++ (void)initialize {
+    //配置播放器配置
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error: nil];
+}
+
 + (instancetype)sharePlayer{
     static dispatch_once_t onceToken;
     static id shareInstance;
@@ -173,9 +178,6 @@ NSString *const kXMNAudioDataKey;
     if (![[[NSString stringWithFormat:@"%@_%ld",self.URLString,self.index] MD5String] isEqualToString:audioURLMD5String]) {
         return;
     }
-    
-    //配置播放器配置
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error: nil];
 
     NSError *audioPlayerError;
     _audioPlayer = [[AVAudioPlayer alloc] initWithData:audioData error:&audioPlayerError];
