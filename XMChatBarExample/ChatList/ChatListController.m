@@ -11,7 +11,6 @@
 
 #import "ChatListCell.h"
 
-#import "XMMessage.h"
 #import "Masonry.h"
 
 #import "UIImageView+XMWebImage.h"
@@ -80,7 +79,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ChatViewController *chatC;
     if (indexPath.row == self.dataArray.count - 1) {
-        chatC =[[ChatViewController alloc] initWithChatType:XMMessageChatGroup];
+        chatC =[[ChatViewController alloc] initWithChatType:XMNMessageChatGroup];
     }else{
         chatC = [[ChatViewController alloc] init];
     }
