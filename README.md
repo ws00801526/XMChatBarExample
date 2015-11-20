@@ -60,12 +60,11 @@ VoiceLib | 一款第三方录音类库,使用方便
 ####5. 更新
 
 
-#####V1.3.0
+#####V1.3.0 -> 强烈推荐更新至1.3.0  非常抱歉之前版本有不少bug
 
 1. 重写了XMNChatMessageCell
 2. 使用了ViewModel管理数据,简化了CHatViewController
 3. 重写了XMVAudioPlayer,修复了之前版本有语音Cell 导致的问题  -- 增加了简单的本地文件缓存,可以将网络MP3缓存至本地
-4. 使用了maskView 解决背景问题,所以目前只支持8.0以上版本
 
 
 #####V1.2.2
