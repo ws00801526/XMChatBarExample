@@ -10,4 +10,6 @@
 
 @interface UITableView (XMNCellRegister)
 
+- (void)registerXMNChatMessageCellClass;
+
 @end

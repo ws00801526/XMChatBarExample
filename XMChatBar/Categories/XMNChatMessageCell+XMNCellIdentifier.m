@@ -6,11 +6,9 @@
 //  Copyright © 2015年 xmfraker. All rights reserved.
 //
 
-#import "UITableViewCell+XMNCellIdentifier.h"
+#import "XMNChatMessageCell+XMNCellIdentifier.h"
 
-#import "XMNChatUntiles.h"
-
-@implementation UITableViewCell (XMNCellIdentifier)
+@implementation XMNChatMessageCell (XMNCellIdentifier)
 
 /**
  *  用来获取cellIdentifier
