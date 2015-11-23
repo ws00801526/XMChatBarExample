@@ -19,7 +19,7 @@
 
 NSString *const kXMNAudioDataKey;
 
-@interface XMNAVAudioPlayer () <AVAudioPlayerDelegate>
+@interface XMNAVAudioPlayer () <AVAudioPlayerDelegate,AVAudioSessionDelegate>
 {
     
     AVAudioPlayer *_audioPlayer;
@@ -40,6 +40,7 @@ NSString *const kXMNAudioDataKey;
 + (void)initialize {
     //配置播放器配置
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error: nil];
+    [[AVAudioSession sharedInstance] setDelegate:self];
 }
 
 + (instancetype)sharePlayer{
@@ -58,12 +59,6 @@ NSString *const kXMNAudioDataKey;
         UIApplication *app = [UIApplication sharedApplication];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:app];
         
-        //开启红外感应
-        [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
-        if ([[UIDevice currentDevice] isProximityMonitoringEnabled]) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityStateChanged:) name:UIDeviceProximityStateDidChangeNotification object:nil];
-        }
-        
         _audioDataOperationQueue = [[NSOperationQueue alloc] init];
         _audioDataOperationQueue.name = @"com.XMFraker.XMNAVAudipPlayer.loadAudioDataQueue";
         
@@ -77,13 +72,9 @@ NSString *const kXMNAudioDataKey;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UIApplicationWillResignActiveNotification];
     
-    //删除近距离事件监听
-    [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
-    if ([[UIDevice currentDevice] isProximityMonitoringEnabled]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceProximityStateDidChangeNotification object:nil];
-    }
     [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
-
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceProximityStateDidChangeNotification object:nil];
+    
 }
 
 #pragma mark - Public Methods
@@ -186,6 +177,11 @@ NSString *const kXMNAudioDataKey;
         return;
     }
     
+    
+    //开启红外感应 !!! 有bug 暂时弃用
+//    [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityStateChanged:) name:UIDeviceProximityStateDidChangeNotification object:nil];
+    
     _audioPlayer.volume = 1.0f;
     _audioPlayer.delegate = self;
     [_audioPlayer prepareToPlay];
@@ -208,6 +204,11 @@ NSString *const kXMNAudioDataKey;
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     [self setAudioPlayerState:XMNVoiceMessageStateNormal];
+    
+//    //删除近距离事件监听
+//    [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceProximityStateDidChangeNotification object:nil];
+    
     //延迟一秒将audioPlayer 释放
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .2f * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self stopAudioPlayer];

@@ -34,6 +34,11 @@
 		9335E23C1B9EBD89000F4D99 /* XMProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335E21C1B9EBD89000F4D99 /* XMProgressHUD.m */; };
 		933E5A421B954C19008EEBA8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933E5A411B954C19008EEBA8 /* RootViewController.m */; };
 		9350F47D1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9350F47C1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.m */; };
+		935D231A1C02C9CE0021C066 /* XMNChatServerExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 935D23191C02C9CE0021C066 /* XMNChatServerExample.m */; };
+		935D231D1C02D1040021C066 /* UITableView+XMNCellRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 935D231C1C02D1040021C066 /* UITableView+XMNCellRegister.m */; };
+		935D23201C02D2000021C066 /* XMNChatMessageCell+XMNCellIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 935D231F1C02D2000021C066 /* XMNChatMessageCell+XMNCellIdentifier.m */; };
+		935D23231C02D84C0021C066 /* XMNSendImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 935D23221C02D84C0021C066 /* XMNSendImageView.m */; };
+		935D23261C02E4AA0021C066 /* XMNMessageStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 935D23251C02E4AA0021C066 /* XMNMessageStateManager.m */; };
 		93A8EF371BFB048700050752 /* XMNChatImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A8EF2A1BFB048700050752 /* XMNChatImageMessageCell.m */; };
 		93A8EF381BFB048700050752 /* XMNChatLocationMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A8EF2C1BFB048700050752 /* XMNChatLocationMessageCell.m */; };
 		93A8EF391BFB048700050752 /* XMNChatMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A8EF2E1BFB048700050752 /* XMNChatMessageCell.m */; };
@@ -118,6 +123,17 @@
 		9350F47A1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XMChatBarExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9350F47C1BB8E4BF0092EFB7 /* XMChatBarExampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XMChatBarExampleUITests.m; sourceTree = "<group>"; };
 		9350F47E1BB8E4BF0092EFB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		935D23171C02B9AE0021C066 /* XMNChatServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNChatServer.h; sourceTree = "<group>"; };
+		935D23181C02C9CE0021C066 /* XMNChatServerExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNChatServerExample.h; sourceTree = "<group>"; };
+		935D23191C02C9CE0021C066 /* XMNChatServerExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMNChatServerExample.m; sourceTree = "<group>"; };
+		935D231B1C02D1040021C066 /* UITableView+XMNCellRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+XMNCellRegister.h"; sourceTree = "<group>"; };
+		935D231C1C02D1040021C066 /* UITableView+XMNCellRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+XMNCellRegister.m"; sourceTree = "<group>"; };
+		935D231E1C02D2000021C066 /* XMNChatMessageCell+XMNCellIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMNChatMessageCell+XMNCellIdentifier.h"; sourceTree = "<group>"; };
+		935D231F1C02D2000021C066 /* XMNChatMessageCell+XMNCellIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XMNChatMessageCell+XMNCellIdentifier.m"; sourceTree = "<group>"; };
+		935D23211C02D84C0021C066 /* XMNSendImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNSendImageView.h; sourceTree = "<group>"; };
+		935D23221C02D84C0021C066 /* XMNSendImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMNSendImageView.m; sourceTree = "<group>"; };
+		935D23241C02E4AA0021C066 /* XMNMessageStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNMessageStateManager.h; sourceTree = "<group>"; };
+		935D23251C02E4AA0021C066 /* XMNMessageStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMNMessageStateManager.m; sourceTree = "<group>"; };
 		93A8EF291BFB048700050752 /* XMNChatImageMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNChatImageMessageCell.h; sourceTree = "<group>"; };
 		93A8EF2A1BFB048700050752 /* XMNChatImageMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMNChatImageMessageCell.m; sourceTree = "<group>"; };
 		93A8EF2B1BFB048700050752 /* XMNChatLocationMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNChatLocationMessageCell.h; sourceTree = "<group>"; };
@@ -237,6 +253,10 @@
 				9321676B1BFDBEF3000A521F /* NSString+MD5.m */,
 				9335E1DF1B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.h */,
 				9335E1E01B9EBD89000F4D99 /* UITableView+FDTemplateLayoutCell.m */,
+				935D231B1C02D1040021C066 /* UITableView+XMNCellRegister.h */,
+				935D231C1C02D1040021C066 /* UITableView+XMNCellRegister.m */,
+				935D231E1C02D2000021C066 /* XMNChatMessageCell+XMNCellIdentifier.h */,
+				935D231F1C02D2000021C066 /* XMNChatMessageCell+XMNCellIdentifier.m */,
 				9305B1031BA6555600E0C96D /* UIImageView+XMWebImage.h */,
 				9305B1041BA6555600E0C96D /* UIImageView+XMWebImage.m */,
 			);
@@ -261,6 +281,9 @@
 				932167681BFDBECC000A521F /* XMNAVAudioPlayer.m */,
 				9335E1EB1B9EBD89000F4D99 /* XMFaceManager.h */,
 				9335E1EC1B9EBD89000F4D99 /* XMFaceManager.m */,
+				935D23241C02E4AA0021C066 /* XMNMessageStateManager.h */,
+				935D23251C02E4AA0021C066 /* XMNMessageStateManager.m */,
+				935D23171C02B9AE0021C066 /* XMNChatServer.h */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -349,6 +372,8 @@
 				93A8EF341BFB048700050752 /* XMNChatVoiceMessageCell.m */,
 				93A8EF351BFB048700050752 /* XMNContentView.h */,
 				93A8EF361BFB048700050752 /* XMNContentView.m */,
+				935D23211C02D84C0021C066 /* XMNSendImageView.h */,
+				935D23221C02D84C0021C066 /* XMNSendImageView.m */,
 			);
 			path = XMNChatMessageCell;
 			sourceTree = "<group>";
@@ -385,6 +410,8 @@
 				9321FAE31B9D8D0F00921194 /* test_send2.png */,
 				933E5A401B954C19008EEBA8 /* RootViewController.h */,
 				933E5A411B954C19008EEBA8 /* RootViewController.m */,
+				935D23181C02C9CE0021C066 /* XMNChatServerExample.h */,
+				935D23191C02C9CE0021C066 /* XMNChatServerExample.m */,
 				9305B1061BA6578D00E0C96D /* ChatList */,
 				93D5A4671B8187500085D863 /* Main.storyboard */,
 				93D5A46A1B8187500085D863 /* Images.xcassets */,
@@ -597,8 +624,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				935D23201C02D2000021C066 /* XMNChatMessageCell+XMNCellIdentifier.m in Sources */,
 				93A8EF3C1BFB048700050752 /* XMNChatVoiceMessageCell.m in Sources */,
 				9305B1051BA6555600E0C96D /* UIImageView+XMWebImage.m in Sources */,
+				935D23261C02E4AA0021C066 /* XMNMessageStateManager.m in Sources */,
 				93D5A4631B8187500085D863 /* AppDelegate.m in Sources */,
 				9335E2291B9EBD89000F4D99 /* XMFaceManager.m in Sources */,
 				9335E2261B9EBD89000F4D99 /* XMLocationController.m in Sources */,
@@ -612,13 +641,16 @@
 				9321676C1BFDBEF3000A521F /* NSString+MD5.m in Sources */,
 				930F81C61BFF00A5008780F8 /* XMNChatController.m in Sources */,
 				93A8EF3D1BFB048700050752 /* XMNContentView.m in Sources */,
+				935D231A1C02C9CE0021C066 /* XMNChatServerExample.m in Sources */,
 				9335E23C1B9EBD89000F4D99 /* XMProgressHUD.m in Sources */,
 				93A8EF371BFB048700050752 /* XMNChatImageMessageCell.m in Sources */,
 				9335E2371B9EBD89000F4D99 /* XMChatMoreItem.m in Sources */,
+				935D231D1C02D1040021C066 /* UITableView+XMNCellRegister.m in Sources */,
 				9335E2381B9EBD89000F4D99 /* XMChatMoreView.m in Sources */,
 				9335E2361B9EBD89000F4D99 /* XMChatFaceView.m in Sources */,
 				933E5A421B954C19008EEBA8 /* RootViewController.m in Sources */,
 				9335E2351B9EBD89000F4D99 /* XMChatBar.m in Sources */,
+				935D23231C02D84C0021C066 /* XMNSendImageView.m in Sources */,
 				9305B10E1BA6578D00E0C96D /* ChatListController.m in Sources */,
 				93A8EF391BFB048700050752 /* XMNChatMessageCell.m in Sources */,
 				93D5A4601B8187500085D863 /* main.m in Sources */,

@@ -55,6 +55,7 @@ typedef NS_ENUM(NSUInteger, XMNMessageSendState){
  */
 typedef NS_ENUM(NSUInteger, XMNMessageReadState) {
     XMNMessageUnRead = 0 /**< 消息未读 */,
+    XMNMessageReading /**< 正在接收 */,
     XMNMessageReaded /**< 消息已读 */,
 };
 

@@ -9,11 +9,13 @@
 #import "XMNChatController.h"
 
 #import "UITableView+FDTemplateLayoutCell.h"
+#import "UITableView+XMNCellRegister.h"
+#import "XMNChatMessageCell+XMNCellIdentifier.h"
 
 #define kSelfName @"XMFraker"
 #define kSelfThumb @"http://img1.touxiang.cn/uploads/20131114/14-065809_117.jpg"
 
-@interface XMNChatController () <XMChatBarDelegate,XMNAVAudioPlayerDelegate,XMNChatMessageCellDelegate>
+@interface XMNChatController () <XMChatBarDelegate,XMNAVAudioPlayerDelegate,XMNChatMessageCellDelegate,XMNChatViewModelDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) XMChatBar *chatBar;
@@ -30,7 +32,7 @@
 
 - (instancetype)initWithChatType:(XMNMessageChat)messageChatType{
     if ([super init]) {
-        self.messageChatType = messageChatType;
+        _messageChatType = messageChatType;
     }
     return self;
 }
@@ -40,6 +42,7 @@
     
     [XMNAVAudioPlayer sharePlayer].delegate = self;
     self.chatViewModel = [[XMNChatViewModel alloc] initWithParentVC:self];
+    self.chatViewModel.delegate = self;
     
     self.view.backgroundColor = [UIColor colorWithRed:234.0f/255.0f green:234/255.0f blue:234/255.f alpha:1.0f];
     
@@ -53,10 +56,12 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+
     [super viewWillDisappear:animated];
     [[XMNAVAudioPlayer sharePlayer] stopAudioPlayer];
     [XMNAVAudioPlayer sharePlayer].index = NSUIntegerMax;
     [XMNAVAudioPlayer sharePlayer].URLString = nil;
+    
 }
 
 #pragma mark - XMChatBarDelegate
@@ -158,8 +163,46 @@
     NSLog(@"messageCell :%@ willDoAction :%@",messageCell,action);
 }
 
-#pragma mark - XMNAVAudioPlayerDelegate
+#pragma mark - XMNChatViewModelDelegate
 
+- (NSString *)chatterNickname {
+    return self.chatterName;
+}
+
+- (NSString *)chatterHeadAvator {
+    return self.chatterThumb;
+}
+
+- (void)messageReadStateChanged:(XMNMessageReadState)readState withProgress:(CGFloat)progress forIndex:(NSUInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    XMNChatMessageCell *messageCell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if (![self.tableView.visibleCells containsObject:messageCell]) {
+        return;
+    }
+    messageCell.messageReadState = readState;
+}
+
+- (void)messageSendStateChanged:(XMNMessageSendState)sendState withProgress:(CGFloat)progress forIndex:(NSUInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    XMNChatMessageCell *messageCell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if (![self.tableView.visibleCells containsObject:messageCell]) {
+        return;
+    }
+    if (messageCell.messageType == XMNMessageTypeImage) {
+        [(XMNChatImageMessageCell *)messageCell setUploadProgress:progress];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        messageCell.messageSendState = sendState;
+    });
+}
+
+- (void)reloadAfterReceiveMessage:(NSDictionary *)message {
+    [self.tableView reloadData];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatViewModel.messageCount - 1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+}
+
+#pragma mark - XMNAVAudioPlayerDelegate
 
 - (void)audioPlayerStateDidChanged:(XMNVoiceMessageState)audioPlayerState forIndex:(NSUInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -169,14 +212,14 @@
     });
 }
 
-
 #pragma mark - Private Methods
 
 - (void)addMessage:(NSDictionary *)message {
-    [self.chatViewModel appendMessage:message];
+    [self.chatViewModel addMessage:message];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatViewModel.messageCount - 1 inSection:0];
     [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    [self.chatViewModel sendMessage:message];
 }
 
 #pragma mark - Getters
@@ -189,7 +232,7 @@
         _tableView.delegate = self.chatViewModel;
         _tableView.dataSource = self.chatViewModel;
         
-        [XMNChatMessageCell registerCellClassForTableView:_tableView];
+        [_tableView registerXMNChatMessageCellClass];
         
         _tableView.backgroundColor = self.view.backgroundColor;
         

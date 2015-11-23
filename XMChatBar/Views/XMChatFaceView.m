@@ -125,7 +125,7 @@
 - (void)setupEmojiFaces{
     
     self.maxRows = 3;
-    self.columnPerRow = 7;
+    self.columnPerRow = [UIScreen mainScreen].bounds.size.width > 320 ? 8 : 7;
     
     //计算每一页最多显示多少个表情  - 1(删除按钮)
     NSInteger pageItemCount = self.itemsPerPage - 1;

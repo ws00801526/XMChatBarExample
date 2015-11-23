@@ -131,7 +131,6 @@
     
     CGSize textSize = [self.textView sizeThatFits:CGSizeMake(CGRectGetWidth(textViewFrame), 1000.0f)];
     
-    NSLog(@"this is textSize  :%@",NSStringFromCGSize(textSize));
     CGFloat offset = 10;
     textView.scrollEnabled = (textSize.height + 0.1 > kMaxHeight-offset);
     textViewFrame.size.height = MAX(34, MIN(kMaxHeight, textSize.height));
@@ -195,8 +194,6 @@
 #pragma mark - XMChatMoreViewDelegate & XMChatMoreViewDataSource
 
 - (void)moreView:(XMChatMoreView *)moreView selectIndex:(XMChatMoreItemType)itemType{
-//    NSLog(@"you click index = %ld",index);
-    
     switch (itemType) {
         case XMChatMoreItemAlbum:
         {
