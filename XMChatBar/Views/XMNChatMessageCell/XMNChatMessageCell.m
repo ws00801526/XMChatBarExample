@@ -15,13 +15,12 @@
 #import "XMNChatLocationMessageCell.h"
 
 #import "Masonry.h"
+#import <objc/runtime.h>
 
 #import "UIImageView+XMWebImage.h"
 
 
 @interface XMNChatMessageCell ()
-
-@property (nonatomic, strong) UIMenuController *menuController;
 
 @end
 
@@ -195,50 +194,21 @@
 #pragma mark - Public Methods
 
 - (void)configureCellWithData:(id)data {
+    
     self.nicknameL.text = data[kXMNMessageConfigurationNicknameKey];
     [self.headIV setImageWithUrlString:data[kXMNMessageConfigurationAvatarKey]];
     
-    if (self.messageOwner == XMNMessageOwnerSelf) {
-        self.messageReadStateIV.hidden = YES;
-        if (data[kXMNMessageConfigurationSendStateKey] && [data[kXMNMessageConfigurationSendStateKey] integerValue] == XMNMessageSendFail) {
-            self.messageSendStateIV.hidden = NO;
-        }else {
-            self.messageSendStateIV.hidden = YES;
-        }
-    }else if (self.messageOwner == XMNMessageOwnerOther) {
-        self.messageSendStateIV.hidden = YES;
-        if (self.messageType == XMNMessageTypeVoice) {
-            if (data[kXMNMessageConfigurationReadStateKey]  && [data[kXMNMessageConfigurationReadStateKey] integerValue] == XMNMessageReaded) {
-                self.messageReadStateIV.hidden = YES;
-            }else {
-                self.messageReadStateIV.hidden = NO;
-            }
-        }else {
-            self.messageReadStateIV.hidden = YES;
-        }
+    if (data[kXMNMessageConfigurationReadStateKey]) {
+        self.messageReadState = [data[kXMNMessageConfigurationReadStateKey] integerValue];
     }
+    if (data[kXMNMessageConfigurationSendStateKey]) {
+        self.messageSendState = [data[kXMNMessageConfigurationSendStateKey] integerValue];
+    }
+    
 }
 
 #pragma mark - Private Methods
 
-
-//以下两个方法必须有
-/*
- *  让UIView成为第一responser
- */
-- (BOOL)canBecomeFirstResponder{
-    return YES;
-}
-
-/*
- *  根据action,判断UIMenuController是否显示对应aciton的title
- */
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
-    if (action == @selector(menuRelayAction) || action == @selector(menuCopyAction)) {
-        return YES;
-    }
-    return NO;
-}
 
 
 - (void)handleTap:(UITapGestureRecognizer *)tap {
@@ -254,34 +224,30 @@
     }
 }
 
-- (void)handleLongPress:(UILongPressGestureRecognizer *)longPressGes {
-    if (longPressGes.state == UIGestureRecognizerStateBegan) {
-        CGPoint longPressPoint = [longPressGes locationInView:self.contentView];
-        if (!CGRectContainsPoint(self.messageContentV.frame, longPressPoint)) {
-            return;
-        }
-        //首先自己成为第一responser
-        [self becomeFirstResponder];
-        //!!!此处使用self.superview.superview 获得到cell所在的tableView,不是很严谨,有哪位知道更加好的方法请告知
-        CGRect targetRect = [self convertRect:self.messageContentV.frame toView:self.superview.superview];
-        [self.menuController setTargetRect:targetRect inView:self.superview.superview];
-        [self.menuController setMenuVisible:YES animated:YES];
+#pragma mark - Setters
+
+- (void)setMessageSendState:(XMNMessageSendState)messageSendState {
+    _messageSendState = messageSendState;
+    if (self.messageOwner == XMNMessageOwnerOther) {
+        self.messageSendStateIV.hidden = YES;
     }
+    self.messageSendStateIV.messageSendState = messageSendState;
 }
 
-
-- (void)menuCopyAction {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(messageCell:withActionType:)]) {
-        [self.delegate messageCell:self withActionType: XMNChatMessageCellMenuActionTypeCopy];
+- (void)setMessageReadState:(XMNMessageReadState)messageReadState {
+    _messageReadState = messageReadState;
+    if (self.messageOwner == XMNMessageOwnerSelf) {
+        self.messageSendStateIV.hidden = YES;
+    }
+    switch (_messageReadState) {
+        case XMNMessageUnRead:
+            self.messageReadStateIV.hidden = NO;
+            break;
+        default:
+            self.messageReadStateIV.hidden = YES;
+            break;
     }
 }
-
-- (void)menuRelayAction {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(messageCell:withActionType:)]) {
-        [self.delegate messageCell:self withActionType: XMNChatMessageCellMenuActionTypeRelay];
-    }
-}
-
 
 #pragma mark - Getters
 
@@ -320,10 +286,9 @@
     return _messageReadStateIV;
 }
 
-- (UIImageView *)messageSendStateIV {
+- (XMNSendImageView *)messageSendStateIV {
     if (!_messageSendStateIV) {
-        _messageSendStateIV = [[UIImageView alloc] init];
-        _messageSendStateIV.backgroundColor = [UIColor greenColor];
+        _messageSendStateIV = [[XMNSendImageView alloc] init];
     }
     return _messageSendStateIV;
 }
@@ -370,107 +335,89 @@
 }
 
 
+@end
+
+
+
+#pragma mark - XMNChatMessageCellMenuActionCategory
+
+NSString * const kXMNChatMessageCellMenuControllerKey;
+
+@interface XMNChatMessageCell (XMNChatMessageCellMenuAction)
+
+@property (nonatomic, strong, readonly) UIMenuController *menuController;
+
+@end
+
+@implementation XMNChatMessageCell (XMNChatMessageCellMenuAction)
+
+#pragma mark - Private Methods
+
+//以下两个方法必须有
+/*
+ *  让UIView成为第一responser
+ */
+- (BOOL)canBecomeFirstResponder{
+    return YES;
+}
+
+/*
+ *  根据action,判断UIMenuController是否显示对应aciton的title
+ */
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    if (action == @selector(menuRelayAction) || action == @selector(menuCopyAction)) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)longPressGes {
+    if (longPressGes.state == UIGestureRecognizerStateBegan) {
+        CGPoint longPressPoint = [longPressGes locationInView:self.contentView];
+        if (!CGRectContainsPoint(self.messageContentV.frame, longPressPoint)) {
+            return;
+        }
+        [self becomeFirstResponder];
+        //!!!此处使用self.superview.superview 获得到cell所在的tableView,不是很严谨,有哪位知道更加好的方法请告知
+        CGRect targetRect = [self convertRect:self.messageContentV.frame toView:self.superview.superview];
+        [self.menuController setTargetRect:targetRect inView:self.superview.superview];
+        [self.menuController setMenuVisible:YES animated:YES];
+    }
+}
+
+
+- (void)menuCopyAction {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(messageCell:withActionType:)]) {
+        [self.delegate messageCell:self withActionType: XMNChatMessageCellMenuActionTypeCopy];
+    }
+}
+
+- (void)menuRelayAction {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(messageCell:withActionType:)]) {
+        [self.delegate messageCell:self withActionType: XMNChatMessageCellMenuActionTypeRelay];
+    }
+}
+
+#pragma mark - Getters
+
+
 - (UIMenuController *)menuController{
-    if (!_menuController) {
-        _menuController = [UIMenuController sharedMenuController];
+    UIMenuController *menuController = objc_getAssociatedObject(self,&kXMNChatMessageCellMenuControllerKey);
+    if (!menuController) {
+        menuController = [UIMenuController sharedMenuController];
         UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(menuCopyAction)];
         UIMenuItem *shareItem = [[UIMenuItem alloc] initWithTitle:@"转发" action:@selector(menuRelayAction)];
         if (self.messageType == XMNMessageTypeText) {
-            [_menuController setMenuItems:@[copyItem,shareItem]];
+            [menuController setMenuItems:@[copyItem,shareItem]];
         }else{
-            [_menuController setMenuItems:@[shareItem]];
+            [menuController setMenuItems:@[shareItem]];
         }
-        [_menuController setArrowDirection:UIMenuControllerArrowDown];
+        [menuController setArrowDirection:UIMenuControllerArrowDown];
+        objc_setAssociatedObject(self, &kXMNChatMessageCellMenuControllerKey, menuController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    return _menuController;
+    return menuController;
 }
 
 
-#pragma mark - Class Methods
-
-+ (NSString *)cellIdentifierForMessageConfiguration:(NSDictionary *)messageConfiguration {
-    XMNMessageType messageType = [messageConfiguration[kXMNMessageConfigurationTypeKey] integerValue];
-    XMNMessageOwner messageOwner = [messageConfiguration[kXMNMessageConfigurationOwnerKey] integerValue];
-    XMNMessageChat messageChat = [messageConfiguration[kXMNMessageConfigurationGroupKey] integerValue];
-    NSString *identifierKey = @"XMNChatMessageCell";
-    NSString *ownerKey;
-    NSString *typeKey;
-    NSString *groupKey;
-    switch (messageOwner) {
-        case XMNMessageOwnerSystem:
-            ownerKey = @"OwnerSystem";
-            break;
-        case XMNMessageOwnerOther:
-            ownerKey = @"OwnerOther";
-            break;
-        case XMNMessageOwnerSelf:
-            ownerKey = @"OwnerSelf";
-            break;
-        default:
-            NSAssert(NO, @"Message Owner Unknow");
-            break;
-    }
-    switch (messageType) {
-        case XMNMessageTypeVoice:
-            typeKey = @"VoiceMessage";
-            break;
-        case XMNMessageTypeImage:
-            typeKey = @"ImageMessage";
-            break;
-        case XMNMessageTypeLocation:
-            typeKey = @"LocationMessage";
-            break;
-        case XMNMessageTypeSystem:
-            typeKey = @"SystemMessage";
-            break;
-        case XMNMessageTypeText:
-            typeKey = @"TextMessage";
-            break;
-        default:
-            NSAssert(NO, @"Message Type Unknow");
-            break;
-    }
-    switch (messageChat) {
-        case XMNMessageChatGroup:
-            groupKey = @"GroupCell";
-            break;
-        case XMNMessageChatSingle:
-            groupKey = @"SingleCell";
-            break;
-        default:
-            groupKey = @"";
-            break;
-    }
-    
-    return [NSString stringWithFormat:@"%@_%@_%@_%@",identifierKey,ownerKey,typeKey,groupKey];
-}
-
-
-+ (void)registerCellClassForTableView:(UITableView *)tableView {
-    
-    [tableView registerClass:[XMNChatImageMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSelf_ImageMessage_GroupCell"];
-    [tableView registerClass:[XMNChatImageMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSelf_ImageMessage_SingleCell"];
-    [tableView registerClass:[XMNChatImageMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerOther_ImageMessage_GroupCell"];
-    [tableView registerClass:[XMNChatImageMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerOther_ImageMessage_SingleCell"];
-    
-    [tableView registerClass:[XMNChatLocationMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSelf_LocationMessage_GroupCell"];
-    [tableView registerClass:[XMNChatLocationMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSelf_LocationMessage_SingleCell"];
-    [tableView registerClass:[XMNChatLocationMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerOther_LocationMessage_GroupCell"];
-    [tableView registerClass:[XMNChatLocationMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerOther_LocationMessage_SingleCell"];
-    
-    [tableView registerClass:[XMNChatVoiceMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSelf_VoiceMessage_GroupCell"];
-    [tableView registerClass:[XMNChatVoiceMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSelf_VoiceMessage_SingleCell"];
-    [tableView registerClass:[XMNChatVoiceMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerOther_VoiceMessage_GroupCell"];
-    [tableView registerClass:[XMNChatVoiceMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerOther_VoiceMessage_SingleCell"];
-    
-    [tableView registerClass:[XMNChatTextMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSelf_TextMessage_GroupCell"];
-    [tableView registerClass:[XMNChatTextMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSelf_TextMessage_SingleCell"];
-    [tableView registerClass:[XMNChatTextMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerOther_TextMessage_GroupCell"];
-    [tableView registerClass:[XMNChatTextMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerOther_TextMessage_SingleCell"];
-
-    [tableView registerClass:[XMNChatSystemMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSystem_SystemMessage_"];
-    [tableView registerClass:[XMNChatSystemMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSystem_SystemMessage_SingleCell"];
-    [tableView registerClass:[XMNChatSystemMessageCell class] forCellReuseIdentifier:@"XMNChatMessageCell_OwnerSystem_SystemMessage_GroupCell"];
-
-}
 @end
+

@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "XMNSendImageView.h"
 #import "XMNContentView.h"
 #import "XMNChatUntiles.h"
 
@@ -48,7 +49,7 @@
 /**
  *  显示消息发送状态的UIImageView -> 用于消息发送不成功时显示
  */
-@property (nonatomic, strong) UIImageView *messageSendStateIV;
+@property (nonatomic, strong) XMNSendImageView *messageSendStateIV;
 
 /**
  *  messageContentV的背景层
@@ -73,22 +74,21 @@
  */
 @property (nonatomic, assign) XMNMessageChat messageChatType;
 
+
+/**
+ *  消息发送状态,当状态为XMNMessageSendFail或XMNMessageSendStateSending时,XMNMessageSendStateIV显示
+ */
+@property (nonatomic, assign) XMNMessageSendState messageSendState;
+
+/**
+ *  消息阅读状态,当状态为XMNMessageUnRead时,XMNMessageReadStateIV显示
+ */
+@property (nonatomic, assign) XMNMessageReadState messageReadState;
+
+
 #pragma mark - Public Methods
 
 - (void)setup;
 - (void)configureCellWithData:(id)data;
-
-#pragma mark - Class Methods
-
-/**
- *  用来获取cellIdentifier
- *
- *  @param messageConfiguration 消息类型,需要传入两个key
- *  kXMNMessageConfigurationTypeKey     代表消息的类型
- *  kXMNMessageConfigurationOwnerKey    代表消息的所有者
- */
-+ (NSString *)cellIdentifierForMessageConfiguration:(NSDictionary *)messageConfiguration;
-
-+ (void)registerCellClassForTableView:(UITableView *)tableView;
 
 @end

@@ -10,6 +10,6 @@
 
 @interface XMNChatImageMessageCell : XMNChatMessageCell
 
-- (void)imageProgressAnimationWithBlock:(void(^)(UIView *progressView, UILabel *progressLabel))uploadBlock;
+- (void)setUploadProgress:(CGFloat)uploadProgress;
 
 @end

@@ -69,13 +69,25 @@
 
 }
 
-- (void)imageProgressAnimationWithBlock:(void (^)(UIView *progressView, UILabel *label))uploadBlock {
-    
-    [self.messageContentV addSubview:self.messageProgressView];
-    [self.messageProgressView setFrame:self.messageImageView.bounds];
-    [self.messageProgressLabel setFrame:CGRectMake(0, self.messageProgressView.bounds.size.height/2 - 8, self.messageProgressView.bounds.size.width, 16)];
-    __weak __typeof(&*self) wself = self;
-    uploadBlock(wself.messageProgressView,wself.messageProgressLabel);
+
+#pragma mark - Setters
+
+- (void)setUploadProgress:(CGFloat)uploadProgress {
+    [self setMessageSendState:XMNMessageSendStateSending];
+    [self.messageProgressView setFrame:CGRectMake(0, 0, self.messageImageView.bounds.size.width, self.messageImageView.bounds.size.height * (1 - uploadProgress))];
+    [self.messageProgressLabel setText:[NSString stringWithFormat:@"%.0f%%",uploadProgress * 100]];
+}
+
+- (void)setMessageSendState:(XMNMessageSendState)messageSendState {
+    [super setMessageSendState:messageSendState];
+    if (messageSendState == XMNMessageSendStateSending) {
+        if (!self.messageProgressView.superview) {
+            [self.messageContentV addSubview:self.messageProgressView];
+        }
+        [self.messageProgressLabel setFrame:CGRectMake(0, self.messageImageView.bounds.size.height/2 - 8, self.messageImageView.bounds.size.width, 16)];
+    }else {
+        [self.messageProgressView removeFromSuperview];
+    }
     
 }
 
@@ -96,7 +108,7 @@
         _messageProgressView = [[UIView alloc] init];
         _messageProgressView.backgroundColor = [UIColor colorWithRed:.0f green:.0f blue:.0f alpha:.3f];
         _messageProgressView.translatesAutoresizingMaskIntoConstraints = NO;
-        
+        _messageProgressView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         UILabel *progressLabel = [[UILabel alloc] init];
         progressLabel.font = [UIFont systemFontOfSize:14.0f];
         progressLabel.textColor = [UIColor whiteColor];

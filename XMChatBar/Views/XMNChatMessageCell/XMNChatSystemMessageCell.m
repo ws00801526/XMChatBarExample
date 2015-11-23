@@ -31,7 +31,6 @@
         make.width.lessThanOrEqualTo(@([UIApplication sharedApplication].keyWindow.frame.size.width/5*3));
         make.centerX.equalTo(self.contentView.mas_centerX);
         
-//        make.edges.equalTo(self.contentView).with.insets(UIEdgeInsetsMake(8, 120, 8, 120));
     }];
     
 }
@@ -40,6 +39,7 @@
 
 - (void)setup {
     
+    self.backgroundColor = [UIColor clearColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.contentView addSubview:self.systemMessageContentV];
 
