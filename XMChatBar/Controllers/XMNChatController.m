@@ -113,6 +113,7 @@
     locationMessageDict[kXMNMessageConfigurationGroupKey] = @(self.messageChatType);
     locationMessageDict[kXMNMessageConfigurationNicknameKey] = kSelfName;
     locationMessageDict[kXMNMessageConfigurationAvatarKey] = kSelfThumb;
+    locationMessageDict[kXMNMessageConfigurationLocationKey]=locationText;
     [self addMessage:locationMessageDict];
     
 }
