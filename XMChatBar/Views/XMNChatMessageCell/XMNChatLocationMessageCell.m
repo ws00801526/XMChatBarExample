@@ -53,7 +53,7 @@
 
 - (void)configureCellWithData:(id)data {
     [super configureCellWithData:data];
-
+    _locationAddressL.text=data[kXMNMessageConfigurationLocationKey];
 }
 
 #pragma mark - Getters
