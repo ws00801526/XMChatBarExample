@@ -135,6 +135,6 @@ static NSString *const kXMNMessageConfigurationVoiceSecondsKey = @"com.XMFraker.
 /**
  *  地理位置消息内容的key
  */
-static NSString *const kXMNMessageConfigurationLocationKey = @"com.XMFraker.kXMNMessageConfigurationGroupKey";
+static NSString *const kXMNMessageConfigurationLocationKey = @"com.XMFraker.kXMNMessageConfigurationLocationKey";
 
 #endif /* XMNChatUntiles_h */
