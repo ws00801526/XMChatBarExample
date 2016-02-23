@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, XMFunctionViewShowType){
  */
 @interface XMChatBar : UIView
 
+@property (assign, nonatomic) CGFloat superViewHeight;
 
 @property (weak, nonatomic) id<XMChatBarDelegate> delegate;
 

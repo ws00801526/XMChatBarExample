@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BcT-cc-a9j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BcT-cc-a9j">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--Item-->
@@ -10,7 +10,7 @@
             <objects>
                 <navigationController id="Olp-eR-VzG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="CXB-g5-joA"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O5M-x7-Y4b">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="O5M-x7-Y4b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -37,7 +37,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUV-s2-Que" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-858" y="645"/>
+            <point key="canvasLocation" x="-802" y="695"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="We5-Ys-Z9d">
@@ -48,7 +48,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hhE-aK-Lvq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ug2-iT-DVn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

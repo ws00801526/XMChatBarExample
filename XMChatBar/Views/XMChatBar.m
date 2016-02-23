@@ -30,7 +30,6 @@
 
 @property (strong, nonatomic) UITextView *textView;
 
-@property (assign, nonatomic, readonly) CGFloat screenHeight;
 @property (assign, nonatomic, readonly) CGFloat bottomHeight;
 @property (strong, nonatomic, readonly) UIViewController *rootViewController;
 
@@ -137,8 +136,7 @@
     
     CGRect addBarFrame = self.frame;
     addBarFrame.size.height = textViewFrame.size.height+offset;
-    addBarFrame.origin.y = self.screenHeight - self.bottomHeight - addBarFrame.size.height;
-//    self.frame = addBarFrame;
+    addBarFrame.origin.y = self.superViewHeight - self.bottomHeight - addBarFrame.size.height;
     [self setFrame:addBarFrame animated:NO];
     if (textView.scrollEnabled) {
         [textView scrollRangeToVisible:NSMakeRange(textView.text.length - 2, 1)];
@@ -255,7 +253,7 @@
         }
         self.inputText = @"";
         self.textView.text = @"";
-        [self setFrame:CGRectMake(0, self.screenHeight - self.bottomHeight - kMinHeight, self.frame.size.width, kMinHeight) animated:NO];
+        [self setFrame:CGRectMake(0, self.superViewHeight - self.bottomHeight - kMinHeight, self.frame.size.width, kMinHeight) animated:NO];
         [self showViewWithType:XMFunctionViewShowFace];
     }else{
         self.textView.text = [self.textView.text stringByAppendingString:faceName];
@@ -362,14 +360,14 @@
         {
             self.inputText = self.textView.text;
             self.textView.text = nil;
-            [self setFrame:CGRectMake(0, self.screenHeight - kMinHeight, self.frame.size.width, kMinHeight) animated:NO];
+            [self setFrame:CGRectMake(0, self.superViewHeight - kMinHeight, self.frame.size.width, kMinHeight) animated:NO];
             [self.textView resignFirstResponder];
         }
             break;
         case XMFunctionViewShowMore:
         case XMFunctionViewShowFace:
             self.inputText = self.textView.text;
-            [self setFrame:CGRectMake(0, self.screenHeight - kFunctionViewHeight - self.textView.frame.size.height - 10, self.frame.size.width, self.textView.frame.size.height + 10) animated:NO];
+            [self setFrame:CGRectMake(0, self.superViewHeight - kFunctionViewHeight - self.textView.frame.size.height - 10, self.frame.size.width, self.textView.frame.size.height + 10) animated:NO];
             [self.textView resignFirstResponder];
             [self textViewDidChange:self.textView];
             break;
@@ -418,11 +416,11 @@
        
         [self.superview addSubview:self.faceView];
         [UIView animateWithDuration:.3 animations:^{
-            [self.faceView setFrame:CGRectMake(0, self.screenHeight - kFunctionViewHeight, self.frame.size.width, kFunctionViewHeight)];
+            [self.faceView setFrame:CGRectMake(0, self.superViewHeight - kFunctionViewHeight, self.frame.size.width, kFunctionViewHeight)];
         } completion:nil];
     }else{
         [UIView animateWithDuration:.3 animations:^{
-            [self.faceView setFrame:CGRectMake(0, self.screenHeight, self.frame.size.width, kFunctionViewHeight)];
+            [self.faceView setFrame:CGRectMake(0, self.superViewHeight, self.frame.size.width, kFunctionViewHeight)];
         } completion:^(BOOL finished) {
             [self.faceView removeFromSuperview];
         }];
@@ -437,11 +435,11 @@
     if (show) {
         [self.superview addSubview:self.moreView];
         [UIView animateWithDuration:.3 animations:^{
-            [self.moreView setFrame:CGRectMake(0, self.screenHeight - kFunctionViewHeight, self.frame.size.width, kFunctionViewHeight)];
+            [self.moreView setFrame:CGRectMake(0, self.superViewHeight - kFunctionViewHeight, self.frame.size.width, kFunctionViewHeight)];
         } completion:nil];
     }else{
         [UIView animateWithDuration:.3 animations:^{
-            [self.moreView setFrame:CGRectMake(0, self.screenHeight, self.frame.size.width, kFunctionViewHeight)];
+            [self.moreView setFrame:CGRectMake(0, self.superViewHeight, self.frame.size.width, kFunctionViewHeight)];
         } completion:^(BOOL finished) {
             [self.moreView removeFromSuperview];
         }];
@@ -469,7 +467,7 @@
     }
     self.inputText = @"";
     self.textView.text = @"";
-    [self setFrame:CGRectMake(0, self.screenHeight - self.bottomHeight - kMinHeight, self.frame.size.width, kMinHeight) animated:NO];
+    [self setFrame:CGRectMake(0, self.superViewHeight - self.bottomHeight - kMinHeight, self.frame.size.width, kMinHeight) animated:NO];
     [self showViewWithType:XMFunctionViewShowKeyboard];
 }
 
@@ -500,7 +498,7 @@
 
 - (XMChatFaceView *)faceView{
     if (!_faceView) {
-        _faceView = [[XMChatFaceView alloc] initWithFrame:CGRectMake(0, self.screenHeight , self.frame.size.width, kFunctionViewHeight)];
+        _faceView = [[XMChatFaceView alloc] initWithFrame:CGRectMake(0, self.superViewHeight , self.frame.size.width, kFunctionViewHeight)];
         _faceView.delegate = self;
         _faceView.backgroundColor = self.backgroundColor;
     }
@@ -509,7 +507,7 @@
 
 - (XMChatMoreView *)moreView{
     if (!_moreView) {
-        _moreView = [[XMChatMoreView alloc] initWithFrame:CGRectMake(0, self.screenHeight , self.frame.size.width, kFunctionViewHeight)];
+        _moreView = [[XMChatMoreView alloc] initWithFrame:CGRectMake(0, self.superViewHeight, self.frame.size.width, kFunctionViewHeight)];
         _moreView.delegate = self;
         _moreView.dataSource = self;
         _moreView.backgroundColor = self.backgroundColor;
@@ -583,10 +581,6 @@
         [_faceButton sizeToFit];
     }
     return _faceButton;
-}
-
-- (CGFloat)screenHeight{
-    return [[UIApplication sharedApplication] keyWindow].bounds.size.height;
 }
 
 - (CGFloat)bottomHeight{
