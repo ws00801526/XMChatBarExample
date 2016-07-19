@@ -1,7 +1,7 @@
 ##仿微信聊天输入框
 
 -----
-XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片,地理位置发送
+XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片
 
 
 ------
@@ -9,6 +9,30 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片,�
 #### 重要提示
 有几个兄弟在使用过程中碰到chatBar不显示,或者位置错乱的问题,是因为使用了IQKeyboardManager这个类库,这个会有一定冲突
 
+
+#### v1.4.0版本 工程全部重构了,去除pods集成的Masonry依赖,增加以下第三方框架
+
+
+第三方库 | 说明
+----- | -----
+[XMNPhotoPicker,XMNPhotoBrowser](https://github.com/ws00801526/XMNPhotoPickerFramework) | 基于YYWebImage封装的第三方图片选择框架,图片浏览框架
+[FBKVOController](https://github.com/facebook/KVOController) | facebook的kvo框架
+[XMNAudio](https://github.com/ws00801526/XMNAudio) | 基于lame,libopencore封装的 录音,播放框架,可支持播放本地,网络音频文件,可播放 amr,MP3文件
+[YYText](https://github.com/ibireme/YYText)  |  ibireme大神的文字处理框架,强烈支持
+
+#### 一. 目前功能
+	1. 发送普通文字消息
+	2. 发送图片消息
+	3. 发送语音消息,播放网络语音文件
+	4. 支持新版QQ表情,老版QQ表情选择
+	5. 直接图片点击大图预览
+	6. 发送表情以gif动图显示
+	
+#### 二. TODO
+	1. 增加地理位置消息
+	2. 增加名片消息
+	3. 表情管理系统,增加GIF表情
+	4. 选择相册,拍照功能
 
 ####1. 截图
 
@@ -22,53 +46,14 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片,�
 
 ####2. 使用说明
 
-1. 下载XMNChatExample,拖动XMChatBar 目录到自己的工程 或者可以通过`pod XMChatBar`安装
-2. 最主要的是看XMNChatController
-3. 模拟XMNChatServerExample 写一个自己的 发送服务器管理manager,并且在XMNChatViewModel中修改chatServer为自己写的manager
-4. 修改XMNChatController 构造自己合适的message结构 传入chatViewModel
-5. 需要注意的
-	* UIImageView+XMWebImage 是一个最简单的异步下载网络图片,没有缓存,推荐大家换成SD或者其他带缓存类库
-	* XMNAVAudioPlayer 是一个带有简单本地文件缓存的音频播放
+1. 下载github上工程, 参考示例Example
 
-
-####3. 相关类说明,介绍
-
-你可以实例化一个XMChatBar 添加到你想要的View上,参考demo中实例即可,pod工程github没有上传,你可以下载demo后 执行`pod install` 或者 `pod install --verbose --no-repo-update`安装即可
-
---------
-[Controllers类名] | 作用
------ | -----
-XMLocationController  | 选择地理位置的controller
-
-[Helpers类名] | 作用
------ | -----
-XMNAVAudioPlayer | 录音播放工具,可以播放录音,停止播放录音
-XMFaceManager  | 表情管理,可以获取所有的表情名称,以及对应图片名
-
-[Views类名]() | 作用
------ | -----
-[XMChatBar] | 聊天输入框
-[XMChatMoreView] | 更多view,用来显示选择图片,拍照等按钮
-[XMChatFaceView] | 显示表情view,用来选择表情
-[XMChatMoreItem] | moreView的itemView
-[XMProgressHUD]  | 录音HUD
-
-
-####4. 使用到的第三方类库
-
-第三方库 | 说明
------ | -----
-[PonyChatUI](https://github.com/PonyGroup/PonyChatUIV2) | 一个很好的聊天界面布局,作者还未完成,期待作者的更多功能
-VoiceLib | 一款第三方录音类库,使用方便
-[Masonry](https://github.com/SnapKit/Masonry) | 第三方的代码自动布局
-[SwipeView](https://github.com/nicklockwood/SwipeView)  | nicklockwood大神的
-
-####5. 感谢
-感谢[UUChatTableView](https://github.com/ZhipingYang/UUChatTableView),[PonyChatUI](https://github.com/PonyGroup/PonyChatUIV2)  这是一个学习过程中写的,如果有什么问题,可以[问我](https://github.com/ws00801526/XMChatBarExample/issues),或者发送我的邮箱3057600441@qq.com
+####3. 感谢
+这是一个学习过程中写的,如果有什么问题,可以[问我](https://github.com/ws00801526/XMChatBarExample/issues),或者发送我的邮箱3057600441@qq.com
 本示例中用到的图片来自QQ,微信,请尊重版权
 
 
-####6. 更新
+####4. 更新
 
 
 #####V1.3.0 -> 强烈推荐更新至1.3.0  非常抱歉之前版本有不少bug

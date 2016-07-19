@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1ez-IE-YWK" customClass="XMNChatExpressionView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6sK-2i-4ZJ">
+                    <rect key="frame" x="-1" y="180" width="377" height="35"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQO-fv-ncT">
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="64u-xg-qwh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UG8-1B-HiN">
+                            <rect key="frame" x="60" y="0.0" width="258" height="35"/>
+                        </scrollView>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSe-Fa-cwN">
+                            <rect key="frame" x="318" y="-1" width="60" height="37"/>
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="fHf-3U-o10"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="发送">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="KSe-Fa-cwN" firstAttribute="leading" secondItem="UG8-1B-HiN" secondAttribute="trailing" id="5H8-fj-jsU"/>
+                        <constraint firstItem="FQO-fv-ncT" firstAttribute="leading" secondItem="6sK-2i-4ZJ" secondAttribute="leading" id="5eD-FA-v0l"/>
+                        <constraint firstAttribute="height" constant="35" id="Jn1-Hz-xxn"/>
+                        <constraint firstItem="KSe-Fa-cwN" firstAttribute="top" secondItem="6sK-2i-4ZJ" secondAttribute="top" constant="-1" id="PBt-es-0uB"/>
+                        <constraint firstItem="UG8-1B-HiN" firstAttribute="top" secondItem="6sK-2i-4ZJ" secondAttribute="top" id="WpE-EW-7Ak"/>
+                        <constraint firstAttribute="bottom" secondItem="FQO-fv-ncT" secondAttribute="bottom" id="dLU-LL-3Ya"/>
+                        <constraint firstAttribute="bottom" secondItem="KSe-Fa-cwN" secondAttribute="bottom" constant="-1" id="hcw-30-1Kf"/>
+                        <constraint firstAttribute="trailing" secondItem="KSe-Fa-cwN" secondAttribute="trailing" constant="-1" id="kFQ-zk-R6e"/>
+                        <constraint firstAttribute="bottom" secondItem="UG8-1B-HiN" secondAttribute="bottom" id="pf3-UL-Pgc"/>
+                        <constraint firstItem="UG8-1B-HiN" firstAttribute="leading" secondItem="FQO-fv-ncT" secondAttribute="trailing" id="sxy-r5-hmF"/>
+                        <constraint firstItem="FQO-fv-ncT" firstAttribute="top" secondItem="6sK-2i-4ZJ" secondAttribute="top" id="uwL-AM-hmi"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                            <color key="value" red="0.93333333333333335" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="K3g-Ho-gr0">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="777-yT-i5C">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="1ez-IE-YWK" id="lC1-84-ueS"/>
+                        <outlet property="delegate" destination="1ez-IE-YWK" id="eSA-2X-fIj"/>
+                    </connections>
+                </collectionView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="16W-C1-KtF">
+                    <rect key="frame" x="152" y="151" width="71" height="37"/>
+                    <color key="pageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </pageControl>
+            </subviews>
+            <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="K3g-Ho-gr0" secondAttribute="trailing" id="DgI-Zk-IZH"/>
+                <constraint firstItem="K3g-Ho-gr0" firstAttribute="leading" secondItem="1ez-IE-YWK" secondAttribute="leading" id="Ped-Ml-bo0"/>
+                <constraint firstItem="6sK-2i-4ZJ" firstAttribute="leading" secondItem="1ez-IE-YWK" secondAttribute="leading" constant="-1" id="Pmh-5q-pZm"/>
+                <constraint firstItem="6sK-2i-4ZJ" firstAttribute="top" secondItem="K3g-Ho-gr0" secondAttribute="bottom" id="Wd2-dG-LMU"/>
+                <constraint firstAttribute="bottom" secondItem="6sK-2i-4ZJ" secondAttribute="bottom" id="dcB-YS-P0C"/>
+                <constraint firstItem="K3g-Ho-gr0" firstAttribute="top" secondItem="1ez-IE-YWK" secondAttribute="top" id="evj-m8-NMC"/>
+                <constraint firstItem="16W-C1-KtF" firstAttribute="centerX" secondItem="1ez-IE-YWK" secondAttribute="centerX" id="fTF-LW-7y9"/>
+                <constraint firstItem="6sK-2i-4ZJ" firstAttribute="top" secondItem="16W-C1-KtF" secondAttribute="bottom" constant="-8" id="jmF-Lq-C0N"/>
+                <constraint firstAttribute="trailing" secondItem="6sK-2i-4ZJ" secondAttribute="trailing" constant="-1" id="pja-7l-zjd"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bottomView" destination="6sK-2i-4ZJ" id="LUN-co-YtY"/>
+                <outlet property="collectionView" destination="K3g-Ho-gr0" id="GAR-0c-8Xx"/>
+                <outlet property="pageControl" destination="16W-C1-KtF" id="U8V-zF-E8n"/>
+                <outlet property="scrollView" destination="UG8-1B-HiN" id="KV8-jU-qXA"/>
+                <outlet property="sendButton" destination="KSe-Fa-cwN" id="IZ4-ya-fBs"/>
+                <outlet property="sendButtonTConstraint" destination="kFQ-zk-R6e" id="Zsp-mS-y8z"/>
+                <outlet property="settingButton" destination="FQO-fv-ncT" id="eNv-4V-o8E"/>
+            </connections>
+            <point key="canvasLocation" x="348.5" y="-47.5"/>
+        </view>
+    </objects>
+</document>

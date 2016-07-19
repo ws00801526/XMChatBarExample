@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view tag="1" contentMode="scaleAspectFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" id="ktR-tP-Fsq" customClass="XMNChatImageMessageView">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="62"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhv-Nn-732" customClass="YYAnimatedImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="62"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="w4A-EC-QJa"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Dhv-Nn-732" firstAttribute="top" secondItem="ktR-tP-Fsq" secondAttribute="top" id="3OU-sN-eun"/>
+                <constraint firstItem="Dhv-Nn-732" firstAttribute="leading" secondItem="ktR-tP-Fsq" secondAttribute="leading" id="R1p-Vb-JGf"/>
+                <constraint firstAttribute="bottom" secondItem="Dhv-Nn-732" secondAttribute="bottom" id="Rse-60-ufH"/>
+                <constraint firstAttribute="trailing" secondItem="Dhv-Nn-732" secondAttribute="trailing" id="kvp-vY-3JL"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="translatesAutoresizingMaskIntoConstraints" value="NO"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="imageView" destination="Dhv-Nn-732" id="jnB-KO-i2E"/>
+            </connections>
+            <point key="canvasLocation" x="152" y="212"/>
+        </view>
+    </objects>
+</document>

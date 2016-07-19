@@ -1,0 +1,49 @@
+//
+//  XMNChat.pch
+//  XMNChatFramework
+//
+//  Created by XMFraker on 16/5/31.
+//  Copyright © 2016年 XMFraker. All rights reserved.
+//
+
+#ifndef XMNChat_pch
+#define XMNChat_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "XMNChatConfiguration.h"
+
+/**
+ *  加载XMNChat.bundle中的图片资源
+ *
+ *  @param imageName 图片名称
+ *
+ *  @return UIImage
+ */
+#define XMNCHAT_LOAD_IMAGE(imageName) [UIImage imageWithContentsOfFile:[[NSBundle bundleWithPath:[[NSBundle bundleWithIdentifier:@"com.XMFraker.XMNChatFramework"] pathForResource:@"XMNChat" ofType:@"bundle"]] pathForResource:([imageName stringByAppendingFormat:@"@%dx",(int)[UIScreen mainScreen].scale]) ofType:@"png"]] ? : [UIImage imageWithContentsOfFile:[[NSBundle bundleWithPath:[[NSBundle bundleWithIdentifier:@"com.XMFraker.XMNChatFramework"] pathForResource:@"XMNChat" ofType:@"bundle"]] pathForResource:([imageName stringByAppendingFormat:@"@2x"]) ofType:@"png"]]
+
+
+#if DEBUG
+#define XMNLog(FORMAT,...) fprintf(stderr,"com.XMFraker.XMNLog\n--------------------\n%s:%d\t%s\n--------------------\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#else
+#define XMNLog(FORMAT,...);
+#endif
+
+//界面相关
+#define SCREEN_WIDTH  CGRectGetWidth([UIScreen mainScreen].bounds)
+#define SCREEN_HEIGHT CGRectGetHeight([UIScreen mainScreen].bounds)
+
+#define iOS7Later ([UIDevice currentDevice].systemVersion.floatValue >= 7.0f)
+#define iOS8Later ([UIDevice currentDevice].systemVersion.floatValue >= 8.0f)
+#define iOS9Later ([UIDevice currentDevice].systemVersion.floatValue >= 9.0f)
+
+#define iPhone5 (([[UIScreen mainScreen] bounds].size.height == 568) ? YES : NO)
+#define iPhone6 (667 == [[UIScreen mainScreen] bounds].size.height ? YES : NO)
+#define iPhonePlus (736 == [[UIScreen mainScreen] bounds].size.height ? YES : NO)
+
+// 获取RGB颜色
+#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define RGB(r,g,b) RGBA(r,g,b,1.0f)
+
+#endif /* XMNChat_pch */

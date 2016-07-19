@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="oQU-Pa-xFw" customClass="XMNChatOtherView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1uW-py-Aqj">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="188"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6i5-xL-dqI">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="oQU-Pa-xFw" id="eqo-7w-uGp"/>
+                        <outlet property="delegate" destination="oQU-Pa-xFw" id="MZ1-Zy-Cdx"/>
+                    </connections>
+                </collectionView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="tKg-EP-mBB">
+                    <rect key="frame" x="152" y="178" width="71" height="37"/>
+                    <color key="pageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </pageControl>
+            </subviews>
+            <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="tKg-EP-mBB" firstAttribute="centerX" secondItem="oQU-Pa-xFw" secondAttribute="centerX" id="FXN-bT-ZGY"/>
+                <constraint firstItem="1uW-py-Aqj" firstAttribute="leading" secondItem="oQU-Pa-xFw" secondAttribute="leading" id="Jrj-O6-Qt9"/>
+                <constraint firstItem="tKg-EP-mBB" firstAttribute="top" secondItem="1uW-py-Aqj" secondAttribute="bottom" constant="-10" id="Xwg-L8-xiG"/>
+                <constraint firstAttribute="trailing" secondItem="1uW-py-Aqj" secondAttribute="trailing" id="ZIH-Y7-5Rn"/>
+                <constraint firstAttribute="bottom" secondItem="tKg-EP-mBB" secondAttribute="bottom" id="laD-uq-J6X"/>
+                <constraint firstItem="1uW-py-Aqj" firstAttribute="top" secondItem="oQU-Pa-xFw" secondAttribute="top" id="tLS-L4-N5u"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionView" destination="1uW-py-Aqj" id="Pm7-00-u7b"/>
+                <outlet property="pageControl" destination="tKg-EP-mBB" id="iJ0-lz-yZ7"/>
+            </connections>
+            <point key="canvasLocation" x="348.5" y="-47.5"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="b3Q-WV-hVS" customClass="XMNChatBar">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80e-IA-6on">
+                    <rect key="frame" x="343" y="8" width="28" height="28"/>
+                    <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                    <state key="normal" image="chat_bar_more_normal"/>
+                    <state key="selected" image="chat_bar_input_normal"/>
+                    <connections>
+                        <action selector="handleButtonAction:" destination="b3Q-WV-hVS" eventType="touchUpInside" id="foz-JO-Ilh"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yO9-bS-ebx">
+                    <rect key="frame" x="307" y="8" width="28" height="28"/>
+                    <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                    <state key="normal" image="chat_bar_face_normal"/>
+                    <state key="selected" image="chat_bar_input_normal"/>
+                    <connections>
+                        <action selector="handleButtonAction:" destination="b3Q-WV-hVS" eventType="touchUpInside" id="Kwk-1j-5rH"/>
+                    </connections>
+                </button>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jov-wJ-Jcl" customClass="YYTextView">
+                    <rect key="frame" x="40" y="4" width="259" height="36"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize_">
+                            <real key="value" value="16"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                            <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUy-0e-JKE">
+                    <rect key="frame" x="40" y="4" width="259" height="36"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <state key="normal" title="按住 说话">
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted" title="松开 结束">
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G69-LX-Pf6">
+                    <rect key="frame" x="4" y="8" width="28" height="28"/>
+                    <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                    <state key="normal" image="chat_bar_voice_normal"/>
+                    <state key="selected" image="chat_bar_input_normal"/>
+                    <connections>
+                        <action selector="handleButtonAction:" destination="b3Q-WV-hVS" eventType="touchUpInside" id="O5d-wF-BHi"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="yO9-bS-ebx" secondAttribute="bottom" constant="8" id="6gu-ey-l9I"/>
+                <constraint firstItem="Jov-wJ-Jcl" firstAttribute="top" secondItem="b3Q-WV-hVS" secondAttribute="top" constant="4" id="Csi-0X-eEt"/>
+                <constraint firstItem="Jov-wJ-Jcl" firstAttribute="leading" secondItem="aUy-0e-JKE" secondAttribute="leading" id="FQ2-Pj-fSR"/>
+                <constraint firstAttribute="bottom" secondItem="G69-LX-Pf6" secondAttribute="bottom" constant="8" id="ObZ-1w-soQ"/>
+                <constraint firstItem="Jov-wJ-Jcl" firstAttribute="leading" secondItem="G69-LX-Pf6" secondAttribute="trailing" constant="8" id="Ojk-ZO-24I"/>
+                <constraint firstItem="80e-IA-6on" firstAttribute="leading" secondItem="yO9-bS-ebx" secondAttribute="trailing" constant="8" id="ZEY-U3-Jeo"/>
+                <constraint firstAttribute="trailing" secondItem="80e-IA-6on" secondAttribute="trailing" constant="4" id="bnf-Cl-NHo"/>
+                <constraint firstAttribute="bottom" secondItem="Jov-wJ-Jcl" secondAttribute="bottom" constant="4" id="ePk-TW-Uvc"/>
+                <constraint firstItem="Jov-wJ-Jcl" firstAttribute="top" secondItem="aUy-0e-JKE" secondAttribute="top" id="l56-wf-frT"/>
+                <constraint firstAttribute="bottom" secondItem="80e-IA-6on" secondAttribute="bottom" constant="8" id="lZI-8m-CL8"/>
+                <constraint firstItem="Jov-wJ-Jcl" firstAttribute="bottom" secondItem="aUy-0e-JKE" secondAttribute="bottom" id="mya-YY-qip"/>
+                <constraint firstItem="yO9-bS-ebx" firstAttribute="leading" secondItem="Jov-wJ-Jcl" secondAttribute="trailing" constant="8" id="nmD-CK-b8K"/>
+                <constraint firstItem="Jov-wJ-Jcl" firstAttribute="trailing" secondItem="aUy-0e-JKE" secondAttribute="trailing" id="u1V-ID-VRt"/>
+                <constraint firstItem="G69-LX-Pf6" firstAttribute="leading" secondItem="b3Q-WV-hVS" secondAttribute="leading" constant="4" id="xVF-QR-X7F"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="faceButton" destination="yO9-bS-ebx" id="z6a-Bp-9DE"/>
+                <outlet property="otherButton" destination="80e-IA-6on" id="331-XH-sgb"/>
+                <outlet property="textView" destination="Jov-wJ-Jcl" id="w0s-z6-R7O"/>
+                <outlet property="voiceButton" destination="G69-LX-Pf6" id="hAz-2c-VcF"/>
+                <outlet property="voiceRecordButton" destination="aUy-0e-JKE" id="acN-aY-qLa"/>
+            </connections>
+            <point key="canvasLocation" x="337.5" y="128"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chat_bar_face_normal" width="24" height="24"/>
+        <image name="chat_bar_input_normal" width="24" height="24"/>
+        <image name="chat_bar_more_normal" width="24" height="24"/>
+        <image name="chat_bar_voice_normal" width="24" height="24"/>
+    </resources>
+</document>
