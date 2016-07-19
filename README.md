@@ -6,9 +6,11 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片
 
 ------
 
-#### 重要提示
-有几个兄弟在使用过程中碰到chatBar不显示,或者位置错乱的问题,是因为使用了IQKeyboardManager这个类库,这个会有一定冲突
+#### 重要提示,关于demo缺少XMNChat.framework运行部起来问题,请参考下列截图
 
+![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_1.png)
+![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_2.png)
+![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_3.png)
 
 #### v1.4.0版本 工程全部重构了,去除pods集成的Masonry依赖,增加以下第三方框架
 
@@ -34,7 +36,7 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片
 	3. 表情管理系统,增加GIF表情
 	4. 选择相册,拍照功能
 
-####1. 截图
+####. 截图
 
 ![](http://7xlt1j.com1.z0.glb.clouddn.com/XMChatBarScreenShot_3.gif)
 
@@ -44,16 +46,17 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片
 ![](http://7xlt1j.com1.z0.glb.clouddn.com/XMChatBarScreenShot_2.png)
 
 
-####2. 使用说明
+#### 使用说明
 
 1. 下载github上工程, 参考示例Example
+2. 录音支持MP3,amr两种格式,如不需要MP3 - 可删除lame.framework 减小包体积
 
-####3. 感谢
+#### 感谢
 这是一个学习过程中写的,如果有什么问题,可以[问我](https://github.com/ws00801526/XMChatBarExample/issues),或者发送我的邮箱3057600441@qq.com
 本示例中用到的图片来自QQ,微信,请尊重版权
 
 
-####4. 更新
+#### 更新
 
 
 #####V1.3.0 -> 强烈推荐更新至1.3.0  非常抱歉之前版本有不少bug

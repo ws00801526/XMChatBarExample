@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		97067D8C1CFECC190069198B /* XMNChatTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 97067D8B1CFECC190069198B /* XMNChatTestServer.m */; };
-		973760091D3DDD0F00BD3787 /* XMNChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973760081D3DDD0F00BD3787 /* XMNChat.framework */; };
-		9737600A1D3DDD0F00BD3787 /* XMNChat.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 973760081D3DDD0F00BD3787 /* XMNChat.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		97B650261D3E1FC100F3478A /* XMNChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973760081D3DDD0F00BD3787 /* XMNChat.framework */; };
+		97B650271D3E1FC100F3478A /* XMNChat.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 973760081D3DDD0F00BD3787 /* XMNChat.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		97C1A30F1CCE031A000E546C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C1A30E1CCE031A000E546C /* main.m */; };
 		97C1A3121CCE031A000E546C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C1A3111CCE031A000E546C /* AppDelegate.m */; };
 		97C1A3151CCE031A000E546C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C1A3141CCE031A000E546C /* ViewController.m */; };
@@ -21,14 +21,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9762B2C41CD085E400A050D4 /* CopyFiles */ = {
+		97B650281D3E1FC100F3478A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9737600A1D3DDD0F00BD3787 /* XMNChat.framework in CopyFiles */,
+				97B650271D3E1FC100F3478A /* XMNChat.framework in Embed Frameworks */,
 			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -57,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				973760091D3DDD0F00BD3787 /* XMNChat.framework in Frameworks */,
+				97B650261D3E1FC100F3478A /* XMNChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +121,7 @@
 				97C1A3061CCE031A000E546C /* Sources */,
 				97C1A3071CCE031A000E546C /* Frameworks */,
 				97C1A3081CCE031A000E546C /* Resources */,
-				9762B2C41CD085E400A050D4 /* CopyFiles */,
+				97B650281D3E1FC100F3478A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
