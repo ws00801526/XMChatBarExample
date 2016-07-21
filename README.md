@@ -51,6 +51,11 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片
 1. 下载github上工程, 参考示例Example
 2. 录音支持MP3,amr两种格式,如不需要MP3 - 可删除lame.framework 减小包体积
 
+
+![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_useage_1.png)
+![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_useage_2.png)
+
+
 #### 感谢
 这是一个学习过程中写的,如果有什么问题,可以[问我](https://github.com/ws00801526/XMChatBarExample/issues),或者发送我的邮箱3057600441@qq.com
 本示例中用到的图片来自QQ,微信,请尊重版权
