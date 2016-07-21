@@ -1579,7 +1579,7 @@
 					"$(PROJECT_DIR)/XMNChatFramework/Vendors/XMNAudio/Vendors/lame_mp3",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = /Users/XMFraker/Desktop/iOS/demospace/XMChatBarExample/XMNChatFramework/XMNChatFramework/XMNChat.pch;
+				GCC_PREFIX_HEADER = "${PROJECT_DIR}/XMNChatFramework/XMNChat.pch";
 				INFOPLIST_FILE = XMNChatFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1609,7 +1609,7 @@
 					"$(PROJECT_DIR)/XMNChatFramework/Vendors/XMNAudio/Vendors/lame_mp3",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = /Users/XMFraker/Desktop/iOS/demospace/XMChatBarExample/XMNChatFramework/XMNChatFramework/XMNChat.pch;
+				GCC_PREFIX_HEADER = "${PROJECT_DIR}/XMNChatFramework/XMNChat.pch";
 				INFOPLIST_FILE = XMNChatFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
