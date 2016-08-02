@@ -9,7 +9,9 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片
 #### 重要提示,关于demo缺少XMNChat.framework运行部起来问题,请参考下列截图
 
 ![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_1.png)
+
 ![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_2.png)
+
 ![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_3.png)
 
 #### v1.4.0版本 工程全部重构了,去除pods集成的Masonry依赖,增加以下第三方框架
@@ -42,7 +44,6 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片
 
 ![](http://7xlt1j.com1.z0.glb.clouddn.com/XMChatBarScreenShot_1.png)
 
-
 ![](http://7xlt1j.com1.z0.glb.clouddn.com/XMChatBarScreenShot_2.png)
 
 
@@ -53,8 +54,8 @@ XMChatBar是一个仿微信的输入框,可以输入文字,表情,选择图片
 
 
 ![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_useage_1.png)
-![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_useage_2.png)
 
+![](http://7xlt1j.com1.z0.glb.clouddn.com/XMNChat_useage_2.png)
 
 #### 感谢
 这是一个学习过程中写的,如果有什么问题,可以[问我](https://github.com/ws00801526/XMChatBarExample/issues),或者发送我的邮箱3057600441@qq.com
