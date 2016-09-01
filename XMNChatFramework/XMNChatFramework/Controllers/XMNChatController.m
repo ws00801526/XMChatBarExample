@@ -240,23 +240,22 @@
     
     if (viewType == XMNChatShowingFaceView) {
         
-        [self.chatBar.textView becomeFirstResponder];
         self.chatBar.textView.inputView = self.faceView;
         self.chatBar.textView.extraAccessoryViewHeight = kXMNChatViewHeight;
         [self.chatBar.textView reloadInputViews];
+        [self.chatBar.textView becomeFirstResponder];
     }
     
     if (viewType == XMNChatShowingOtherView) {
 
-        [self.chatBar.textView becomeFirstResponder];
         self.chatBar.textView.inputView = self.otherView;
         self.chatBar.textView.extraAccessoryViewHeight = kXMNChatViewHeight;
         [self.chatBar.textView reloadInputViews];
+        [self.chatBar.textView becomeFirstResponder];
     }
     
     if (viewType == XMNChatShowingKeyboard) {
         
-        [self.chatBar.textView becomeFirstResponder];
         CGSize sizeThatShouldFitTheContent = [self.chatBar.textView sizeThatFits:self.chatBar.textView.frame.size];
         CGFloat constant = MAX(44.f, MIN(sizeThatShouldFitTheContent.height + 8 + 8,kXMNChatBarMaxHeight));
         //每次textView的文本改变后 修改chatBar的高度
@@ -266,7 +265,8 @@
         [self.chatBar.textView setSelectedRange:NSMakeRange(self.chatBar.textView.text.length - 1, 0)];
         self.chatBar.textView.inputView = nil;
         [self.chatBar.textView reloadInputViews];
-    }
+        [self.chatBar.textView becomeFirstResponder];
+    }    
 }
 
 #pragma mark - UITableViewDelegate
@@ -332,7 +332,7 @@
     textView.scrollEnabled = chatBarHeight>=kXMNChatBarMaxHeight;
     
     //重置chatBar上button状态
-    [self.chatBar resetButtonState];
+//    [self.chatBar resetButtonState];
     return YES;
 }
 
@@ -357,6 +357,12 @@
         return NO;
     }
     return YES;
+}
+
+- (void)textViewDidEndEditing:(YYTextView *)textView {
+    
+    /** 用户不在输入文字时, 重置按钮状态 */
+    [self.chatBar resetButtonState];
 }
 
 #pragma mark - Setters

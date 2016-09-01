@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80e-IA-6on">
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80e-IA-6on">
                     <rect key="frame" x="343" y="8" width="28" height="28"/>
                     <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
                     <state key="normal" image="chat_bar_more_normal"/>
@@ -20,7 +20,7 @@
                         <action selector="handleButtonAction:" destination="b3Q-WV-hVS" eventType="touchUpInside" id="foz-JO-Ilh"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yO9-bS-ebx">
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yO9-bS-ebx">
                     <rect key="frame" x="307" y="8" width="28" height="28"/>
                     <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
                     <state key="normal" image="chat_bar_face_normal"/>
@@ -29,7 +29,7 @@
                         <action selector="handleButtonAction:" destination="b3Q-WV-hVS" eventType="touchUpInside" id="Kwk-1j-5rH"/>
                     </connections>
                 </button>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jov-wJ-Jcl" customClass="YYTextView">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jov-wJ-Jcl" customClass="YYTextView">
                     <rect key="frame" x="40" y="4" width="259" height="36"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <userDefinedRuntimeAttributes>
@@ -41,7 +41,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUy-0e-JKE">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUy-0e-JKE">
                     <rect key="frame" x="40" y="4" width="259" height="36"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                     <state key="normal" title="按住 说话">
@@ -88,7 +88,7 @@
                 <outlet property="voiceButton" destination="G69-LX-Pf6" id="hAz-2c-VcF"/>
                 <outlet property="voiceRecordButton" destination="aUy-0e-JKE" id="acN-aY-qLa"/>
             </connections>
-            <point key="canvasLocation" x="337.5" y="128"/>
+            <point key="canvasLocation" x="-17.5" y="346"/>
         </view>
     </objects>
     <resources>
