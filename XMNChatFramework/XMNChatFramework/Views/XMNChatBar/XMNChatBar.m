@@ -84,7 +84,7 @@
     if (aButton == self.voiceButton) {
         self.textView.hidden = self.voiceButton.selected;
         self.voiceRecordButton.hidden = !self.voiceButton.selected;
-        viewType = !aButton.selected ? XMNChatShowingKeyboard : XMNChatShowingNoneView;
+        viewType = !aButton.selected ? XMNChatShowingKeyboard : XMNChatShowingVoiceView;
     }
     
     if (aButton == self.faceButton) {

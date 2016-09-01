@@ -49,6 +49,7 @@
     [self setupGestures];
     
     /** 首次出现让tableView滚动到底部 */
+    [self.tableView reloadData];
     [self.tableView setContentOffset:CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX)];
 }
 
@@ -166,6 +167,10 @@
     
     CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     self.chatBarBConstraint.constant = -([UIScreen mainScreen].bounds.size.height - keyboardFrame.origin.y);
+    
+    /** 增加监听键盘大小变化通知,并且让tableView 滚动到最底部 */
+    [self.view layoutIfNeeded];
+    [self scrollBottom:YES];
 }
 
 - (void)handleOtherItemAction:(NSNotification *)notification {
@@ -231,7 +236,7 @@
     
     self.showingViewType = viewType;
     
-    if (viewType == XMNChatShowingNoneView) {
+    if (viewType == XMNChatShowingNoneView || viewType == XMNChatShowingVoiceView) {
         [self.chatBar.textView endEditing:YES];
         [self.chatBar.textView resignFirstResponder];
         self.chatBarBConstraint.constant =.0f;
@@ -330,9 +335,6 @@
     CGFloat chatBarHeight = MAX(44.f, MIN(sizeThatShouldFitTheContent.height + 8 + 8,kXMNChatBarMaxHeight));
     
     textView.scrollEnabled = chatBarHeight>=kXMNChatBarMaxHeight;
-    
-    //重置chatBar上button状态
-//    [self.chatBar resetButtonState];
     return YES;
 }
 
@@ -362,7 +364,9 @@
 - (void)textViewDidEndEditing:(YYTextView *)textView {
     
     /** 用户不在输入文字时, 重置按钮状态 */
-    [self.chatBar resetButtonState];
+    if (self.showingViewType == XMNChatShowingNoneView) {
+        [self.chatBar resetButtonState];
+    }
 }
 
 #pragma mark - Setters

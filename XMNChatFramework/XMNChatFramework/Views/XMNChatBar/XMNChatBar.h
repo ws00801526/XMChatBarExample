@@ -28,7 +28,5 @@
 
 - (void)resetButtonState;
 
-- (void)resetButtonStateWithShowingView:(XMNChatBarShowingView)viewType;
-
 @end
 

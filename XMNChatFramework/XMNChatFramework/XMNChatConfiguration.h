@@ -92,6 +92,10 @@ typedef NS_ENUM(NSUInteger, XMNChatExpressionType) {
 typedef NS_ENUM(NSUInteger, XMNChatBarShowingView) {
     /** 默认不显示任何view */
     XMNChatShowingNoneView = 0,
+    
+    /** 新增显示 录音界面 */
+    XMNChatShowingVoiceView,
+    
     /** 显示了表情选择视图 */
     XMNChatShowingFaceView,
     /** 显示了其他视图 */
