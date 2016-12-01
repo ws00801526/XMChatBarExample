@@ -68,7 +68,7 @@
     
     YYTextLayout *layout = [YYTextLayout layoutWithContainer:container text:one];
     self.textLabel.textLayout = layout;
-    self.contentSize  = CGSizeMake(MIN(MIN(layout.textBoundingSize.width + 36, kXMNMessageViewMaxWidth), self.textLabel.textLayout.textBoundingSize.width + 36), layout.rowCount * [(YYTextLinePositionSimpleModifier *)self.textLabel.linePositionModifier fixedLineHeight]);
+    self.contentSize  = CGSizeMake(MIN(MIN(layout.textBoundingSize.width + 36, kXMNMessageViewMaxWidth), self.textLabel.textLayout.textBoundingSize.width + 36), layout.rowCount * [(YYTextLinePositionSimpleModifier *)self.textLabel.linePositionModifier fixedLineHeight] );
     /// 2. 添加高亮点击事件
     
     //    [one yy_setTextHighlightRange:one.yy_rangeOfAll

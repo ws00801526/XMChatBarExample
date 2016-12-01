@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,12 +16,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UQV-7O-9fq" id="H00-Is-rnX">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="45" placeholderIntrinsicHeight="45" translatesAutoresizingMaskIntoConstraints="NO" id="to0-ia-9I4" customClass="YYAnimatedImageView">
                         <rect key="frame" x="16" y="8" width="45" height="45"/>
-                        <color key="backgroundColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="45" id="FWb-Qz-KkC"/>
                             <constraint firstAttribute="width" constant="45" id="IFR-ui-bki"/>
@@ -34,7 +38,7 @@
                             <constraint firstAttribute="height" constant="18" id="OXt-K9-H9R"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nkt-aV-tPw">
@@ -56,7 +60,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="0.0" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="gaf-5L-mE5" firstAttribute="top" secondItem="to0-ia-9I4" secondAttribute="top" id="1If-1l-8cZ"/>
                     <constraint firstItem="gaf-5L-mE5" firstAttribute="leading" secondItem="to0-ia-9I4" secondAttribute="trailing" constant="12" id="2ig-7m-MPk"/>
@@ -74,7 +78,7 @@
                     <constraint firstItem="zY4-fZ-XTH" firstAttribute="top" secondItem="Nkt-aV-tPw" secondAttribute="top" id="w3D-gx-bg5"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="0.0" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="avatarImageView" destination="to0-ia-9I4" id="Lj8-gf-yhM"/>
                 <outlet property="backgroundImageView" destination="Nkt-aV-tPw" id="BDk-XI-TuR"/>
@@ -85,7 +89,7 @@
                 <outlet property="nickNameLabel" destination="gaf-5L-mE5" id="UTo-3n-LJH"/>
                 <outlet property="nicknameHConstraint" destination="OXt-K9-H9R" id="eFF-D2-dFc"/>
             </connections>
-            <point key="canvasLocation" x="61.5" y="244"/>
+            <point key="canvasLocation" x="-65" y="110"/>
         </tableViewCell>
     </objects>
 </document>

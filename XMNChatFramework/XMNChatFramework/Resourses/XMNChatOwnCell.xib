@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,12 +16,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="146"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZPu-gt-K4V" id="BLM-L9-mfi">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="146"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="145.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="45" placeholderIntrinsicHeight="45" translatesAutoresizingMaskIntoConstraints="NO" id="lOB-Vl-q8F">
                         <rect key="frame" x="314" y="8" width="45" height="45"/>
-                        <color key="backgroundColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="gzR-Hv-kbp"/>
                             <constraint firstAttribute="height" constant="45" id="omH-8W-uvE"/>
@@ -34,11 +38,11 @@
                             <constraint firstAttribute="height" constant="20" id="bPT-NJ-kZf"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ws-X0-EGN">
-                        <rect key="frame" x="106" y="29" width="200" height="109"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9ws-X0-EGN">
+                        <rect key="frame" x="106" y="28" width="200" height="110"/>
                     </imageView>
                     <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HPi-0w-UjU" customClass="XMNChatStateView">
                         <rect key="frame" x="70" y="63" width="20" height="20"/>
@@ -56,7 +60,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="Gd7-uj-9Yg" firstAttribute="leading" secondItem="BLM-L9-mfi" secondAttribute="leadingMargin" constant="16" id="1tx-n1-0QO"/>
                     <constraint firstItem="epc-SN-tc9" firstAttribute="top" secondItem="9ws-X0-EGN" secondAttribute="top" id="8VL-yM-Jvi"/>
@@ -74,7 +78,7 @@
                     <constraint firstItem="epc-SN-tc9" firstAttribute="leading" secondItem="HPi-0w-UjU" secondAttribute="trailing" constant="16" id="y7T-z8-usK"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="0.0" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="avatarImageView" destination="lOB-Vl-q8F" id="wMV-MR-PEy"/>
                 <outlet property="backgroundImageView" destination="9ws-X0-EGN" id="zQI-2q-ECd"/>
@@ -85,7 +89,7 @@
                 <outlet property="nickNameLabel" destination="Gd7-uj-9Yg" id="aCP-fd-53K"/>
                 <outlet property="nicknameHConstraint" destination="bPT-NJ-kZf" id="e72-2z-RZi"/>
             </connections>
-            <point key="canvasLocation" x="195.5" y="203"/>
+            <point key="canvasLocation" x="-2" y="116"/>
         </tableViewCell>
     </objects>
 </document>

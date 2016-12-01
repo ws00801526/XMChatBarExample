@@ -32,11 +32,12 @@
 
 #pragma mark - Override Methods
 
-- (void)layoutSubviews {
-    
-    [super layoutSubviews];
-    self.messageContentView.maskView.frame = self.messageContentView.bounds;
-}
+//- (void)layoutSubviews {
+//
+////    self.messageContentView.maskView.frame = self.messageContentView.bounds;
+//    [super layoutSubviews];
+//    
+//}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     
@@ -89,6 +90,9 @@
     self.messageContentViewWConstraint.constant = [self.messageView intrinsicContentSize].width;
     self.messageContentViewHConstraint.constant = [self.messageView intrinsicContentSize].height;
     [self.messageStateView setMessageState:aMessage.state];
+
+    /** 修复 iOS10 +  layoutSubview  计算contentSize 不准确问题 */
+    self.messageContentView.maskView.frame = CGRectMake(0, 0, self.messageContentViewWConstraint.constant, self.messageContentViewHConstraint.constant + 15.f);
 
     [self setNeedsLayout];
     [self layoutIfNeeded];

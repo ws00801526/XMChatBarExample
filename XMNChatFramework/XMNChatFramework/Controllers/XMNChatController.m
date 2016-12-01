@@ -170,7 +170,7 @@
     
     /** 增加监听键盘大小变化通知,并且让tableView 滚动到最底部 */
     [self.view layoutIfNeeded];
-    [self scrollBottom:YES];
+    [self scrollBottom:NO];
 }
 
 - (void)handleOtherItemAction:(NSNotification *)notification {

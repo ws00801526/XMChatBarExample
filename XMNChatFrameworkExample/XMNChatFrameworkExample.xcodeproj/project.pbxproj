@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		97067D8C1CFECC190069198B /* XMNChatTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 97067D8B1CFECC190069198B /* XMNChatTestServer.m */; };
-		97B650261D3E1FC100F3478A /* XMNChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973760081D3DDD0F00BD3787 /* XMNChat.framework */; };
-		97B650271D3E1FC100F3478A /* XMNChat.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 973760081D3DDD0F00BD3787 /* XMNChat.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		97C1A30F1CCE031A000E546C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C1A30E1CCE031A000E546C /* main.m */; };
 		97C1A3121CCE031A000E546C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C1A3111CCE031A000E546C /* AppDelegate.m */; };
 		97C1A3151CCE031A000E546C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C1A3141CCE031A000E546C /* ViewController.m */; };
@@ -18,6 +16,8 @@
 		97C1A31D1CCE031A000E546C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C1A31B1CCE031A000E546C /* LaunchScreen.storyboard */; };
 		97C608681CFBD9F800357DDB /* XMNChatTestVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C608671CFBD9F800357DDB /* XMNChatTestVM.m */; };
 		97C608761CFC33C400357DDB /* test01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C608751CFC33C400357DDB /* test01@2x.png */; };
+		97D31F121DF05CB3006BA6E4 /* XMNChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D31F111DF05CB3006BA6E4 /* XMNChat.framework */; };
+		97D31F131DF05CB3006BA6E4 /* XMNChat.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 97D31F111DF05CB3006BA6E4 /* XMNChat.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,7 +27,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				97B650271D3E1FC100F3478A /* XMNChat.framework in Embed Frameworks */,
+				97D31F131DF05CB3006BA6E4 /* XMNChat.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -37,7 +37,6 @@
 /* Begin PBXFileReference section */
 		97067D8A1CFECC190069198B /* XMNChatTestServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNChatTestServer.h; sourceTree = "<group>"; };
 		97067D8B1CFECC190069198B /* XMNChatTestServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMNChatTestServer.m; sourceTree = "<group>"; };
-		973760081D3DDD0F00BD3787 /* XMNChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = XMNChat.framework; path = "/Users/XMFraker/Library/Developer/Xcode/DerivedData/XMNChatFrameworkWorkspace-bbfohaqxhasxaybdzdnvjxrqcckx/Build/Products/Debug-iphoneos/XMNChat.framework"; sourceTree = "<absolute>"; };
 		97C1A30A1CCE031A000E546C /* XMNChatFrameworkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XMNChatFrameworkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97C1A30E1CCE031A000E546C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		97C1A3101CCE031A000E546C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +50,7 @@
 		97C608661CFBD9F800357DDB /* XMNChatTestVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMNChatTestVM.h; sourceTree = "<group>"; };
 		97C608671CFBD9F800357DDB /* XMNChatTestVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMNChatTestVM.m; sourceTree = "<group>"; };
 		97C608751CFC33C400357DDB /* test01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test01@2x.png"; sourceTree = "<group>"; };
+		97D31F111DF05CB3006BA6E4 /* XMNChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = XMNChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97B650261D3E1FC100F3478A /* XMNChat.framework in Frameworks */,
+				97D31F121DF05CB3006BA6E4 /* XMNChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,7 +68,7 @@
 		97C1A3011CCE031A000E546C = {
 			isa = PBXGroup;
 			children = (
-				973760081D3DDD0F00BD3787 /* XMNChat.framework */,
+				97D31F111DF05CB3006BA6E4 /* XMNChat.framework */,
 				97C1A30C1CCE031A000E546C /* XMNChatFrameworkExample */,
 				97C1A30B1CCE031A000E546C /* Products */,
 			);
@@ -143,6 +143,7 @@
 				TargetAttributes = {
 					97C1A3091CCE031A000E546C = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 55595GTKJN;
 					};
 				};
 			};
@@ -301,6 +302,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 55595GTKJN;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = XMNChatFrameworkExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -314,6 +316,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 55595GTKJN;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = XMNChatFrameworkExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

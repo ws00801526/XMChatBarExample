@@ -157,6 +157,7 @@ dispatch_semaphore_signal(_lock);
     }
     if (range) *range = selectedRange;
     
+    
     return YES;
 }
 @end
